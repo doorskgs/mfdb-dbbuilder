@@ -17,6 +17,7 @@ from builder_pipe.process.fileformats.JSONLinesSaver import JSONLinesSaver
 from builder_pipe.process.fileformats.XMLParser import XMLParser
 from process.bulkfileproducer.BulkFileProducer import BulkFileProducer
 from process.fileformats.SDFParser import SDFParser
+from builder_pipe.process.Debug import Debug
 
 number = namedtuple('autoincrement', 'n')
 number.n = 0
@@ -37,25 +38,28 @@ with pipe_builder() as pb:
         BulkFileProducer("bulkfiles", produces=((str,"chebi_dump"), (str,"hmdb_dump"), (str,"lipmaps_dump"))),
 
         SDFParser("chebi_raw", consumes="chebi_dump", produces="raw_chebi"),
-        XMLParser("hmdb_raw", consumes="hmdb_dump", produces="raw_hmdb"),
-        SDFParser("lipmaps_raw", consumes="lipmaps_dump", produces="raw_lipmaps"),
 
-        LipidMapsParser("lipmaps", consumes="raw_lipmaps", produces="edb_dump"),
-        ChebiParser("chebi", consumes="raw_chebi", produces="edb_dump"),
-        HMDBParser("hmdb", consumes="raw_hmdb", produces="edb_dump"),
+        Debug("debug", consumes=(dict, "raw_chebi")),
 
-        # serialize to universal formats
-        JSONLinesSaver("edb_dump_json", consumes="edb_dump"),
-        CSVSaver("edb_dump", consumes="edb_dump"),
-        LocalEDBSaver("edb_pgsql", consumes="edb_dump", produces="edb_pkey"),
+        # XMLParser("hmdb_raw", consumes="hmdb_dump", produces="raw_hmdb"),
+        # SDFParser("lipmaps_raw", consumes="lipmaps_dump", produces="raw_lipmaps"),
+        #
+        # LipidMapsParser("lipmaps", consumes="raw_lipmaps", produces="edb_dump"),
+        # ChebiParser("chebi", consumes="raw_chebi", produces="edb_dump"),
+        # HMDBParser("hmdb", consumes="raw_hmdb", produces="edb_dump"),
+        #
+        # # serialize to universal formats
+        # JSONLinesSaver("edb_dump_json", consumes="edb_dump"),
+        # CSVSaver("edb_dump", consumes="edb_dump"),
+        # LocalEDBSaver("edb_pgsql", consumes="edb_dump", produces="edb_pkey"),
     ])
 
     pipe = pb.get_app()
 
 t1 = time.time()
 
-draw_pipes_network(pipe, filename='bulk_download', show_queues=False)
+#draw_pipes_network(pipe, filename='bulk_download', show_queues=False)
 #debug_pipes(pipe)
-#future = asyncio.run(pipe.start_flow(debug=True))
+future = asyncio.run(pipe.start_flow(verbose=True, debug=True))
 
 print("Finished!", time.time() - t1)

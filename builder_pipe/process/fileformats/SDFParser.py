@@ -11,4 +11,4 @@ class SDFParser(Process):
         # y = IntWrap(data.val * MN, True)
         # y.__DATAID__ = data.__DATAID__
         #yield y
-        pass
+        yield {}
