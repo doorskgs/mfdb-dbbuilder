@@ -5,6 +5,7 @@ from collections import namedtuple
 
 from eme.pipe import pipe_builder, Concurrent, debug_pipes, draw_pipes_network, DTYPES
 
+from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.process import EDBSerializer
 from builder_pipe.process.bulkparsers.ChebiParser import ChebiParser
 from builder_pipe.process.bulkparsers.HMDBParser import HMDBParser
@@ -37,16 +38,18 @@ with pipe_builder() as pb:
     pb.add_processes([
         BulkFileProducer("bulkfiles", produces=((str,"chebi_dump"), (str,"hmdb_dump"), (str,"lipmaps_dump"))),
 
-        SDFParser("chebi_raw", consumes="chebi_dump", produces="raw_chebi"),
+        #SDFParser("sdf_chebi", consumes="chebi_dump", produces="raw_chebi"),
+        XMLParser("xml_hmdb", consumes="hmdb_dump", produces="raw_hmdb"),
 
-        Debug("debug", consumes=(dict, "raw_chebi")),
+        #ChebiParser("chebi", consumes="raw_chebi", produces="edb_dump"),
+        HMDBParser("hmdb", consumes="raw_hmdb", produces="edb_dump"),
 
-        # XMLParser("hmdb_raw", consumes="hmdb_dump", produces="raw_hmdb"),
+        Debug("debug", consumes=(dict, "raw_hmdb")),
+        #Debug("debug", consumes=(MetaboliteExternal, "edb_dump")),
+
         # SDFParser("lipmaps_raw", consumes="lipmaps_dump", produces="raw_lipmaps"),
         #
         # LipidMapsParser("lipmaps", consumes="raw_lipmaps", produces="edb_dump"),
-        # ChebiParser("chebi", consumes="raw_chebi", produces="edb_dump"),
-        # HMDBParser("hmdb", consumes="raw_hmdb", produces="edb_dump"),
         #
         # # serialize to universal formats
         # JSONLinesSaver("edb_dump_json", consumes="edb_dump"),

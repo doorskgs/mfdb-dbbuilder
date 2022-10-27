@@ -1,11 +1,9 @@
 from eme.pipe.elems.AbstractData import AbstractData
 
+from core.views.MetaboliteConsistent import MetaboliteConsistent
 
-class MetaboliteExternal(AbstractData):
 
-    def __init__(self, edb_id, edb_source):
-        self.edb_id = edb_id
-        self.edb_source = edb_source
+class MetaboliteExternal(MetaboliteConsistent, AbstractData):
 
     @property
     def __DATAID__(self):

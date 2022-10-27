@@ -1,4 +1,3 @@
-import gzip
 import os.path
 
 import requests
@@ -34,7 +33,7 @@ class BulkFileProducer(Producer):
 
                 uncompress_hierarchy(fn)
 
-            yield fn, (str, f'{edb_source}_dump')
+            yield check_end_filename, (str, f'{edb_source}_dump')
         self.mark_finished()
 
 

@@ -36,9 +36,9 @@ with pipe_builder() as pb:
     pb.add_processes([
         BulkFileProducer("bulkfiles", produces=((str,"chebi_dump"), (str,"hmdb_dump"), (str,"lipmaps_dump"))),
 
-        SDFParser("chebi_raw", consumes="chebi_dump", produces="raw_chebi"),
-        XMLParser("hmdb_raw", consumes="hmdb_dump", produces="raw_hmdb"),
-        SDFParser("lipmaps_raw", consumes="lipmaps_dump", produces="raw_lipmaps"),
+        SDFParser("sdf_chebi", consumes="chebi_dump", produces="raw_chebi"),
+        XMLParser("xml_hmdb", consumes="hmdb_dump", produces="raw_hmdb"),
+        SDFParser("sdf_lipmaps", consumes="lipmaps_dump", produces="raw_lipmaps"),
 
         LipidMapsParser("lipmaps", consumes="raw_lipmaps", produces="edb_dump"),
         ChebiParser("chebi", consumes="raw_chebi", produces="edb_dump"),

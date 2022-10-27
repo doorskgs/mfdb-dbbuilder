@@ -1,14 +1,58 @@
-from eme.pipe import Process
+import gzip
+import os.path
+from typing import TextIO
 
+from eme.pipe import Process
 
 
 class SDFParser(Process):
     consumes = str, "filename"
     produces = dict, "sdf_row"
 
-    async def produce(self, data: str):
-        # MN  = self.cfg.get('test.multiply', cast=float, default=1)
-        # y = IntWrap(data.val * MN, True)
-        # y.__DATAID__ = data.__DATAID__
-        #yield y
-        yield {}
+    async def produce(self, fn: str):
+        _, ext = os.path.splitext(fn)
+
+        stop_at = self.cfg.get('debug.stop_after', -1, cast=int)
+
+        if ext == '.gz':
+            # .sdf.gz can be parsed iteratively
+            fh_stream: TextIO = gzip.open(fn, 'rt', encoding='utf8')
+        else:
+            fh_stream: TextIO = open(fn, 'r', encoding='utf8')
+
+        buffer = {}
+        state = None
+        nparsed = 0
+
+        for line in fh_stream:
+            line = line.rstrip('\n')
+
+            if line.startswith('$$$$'):
+                # parsed New entry, clean buffer
+                yield buffer
+                nparsed += 1
+
+                state = None
+                buffer = {}
+
+                if stop_at != -1 and nparsed > stop_at and self.app.debug:
+                    print(f"{self.__PROCESSID__}: stopping early")
+                    break
+                continue
+            elif not line:
+                continue
+            elif line.startswith('> <'):
+                state = line[3:-1]
+            else:
+                if state in buffer:
+                    # there are multiple entries in buffer, create a list
+                    val = buffer[state]
+
+                    if isinstance(val, list):
+                        buffer[state].append(line)
+                    else:
+                        buffer[state] = [val, line]
+                else:
+                    buffer[state] = line
+
+        fh_stream.close()
