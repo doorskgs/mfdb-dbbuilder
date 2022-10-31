@@ -3,7 +3,7 @@
   <head>
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
     <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-graph.min.js"></script>
-    <script src="flow.js"></script>
+    <script src="spike.js"></script>
     <style>
       html, body, #container {
         width: 100%;
@@ -47,7 +47,7 @@
       /* Edge styles */
       const labels = chart.edges().labels();
       labels.enabled(true);
-      labels.format('{%dtype_id}: {%dtype}');
+      labels.format('{%dtype}');
       labels.fontSize(13);
 
       /* Node groups */

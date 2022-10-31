@@ -1,6 +1,6 @@
 from eme.pipe import Process
 
-from .utils.parsinglib import strip_attr, force_list, flatten
+from .utils.parsinglib import strip_attr, force_list, flatten, remap_keys
 from .utils.edb_specific import split_pubchem_ids, map_to_edb_format, EDB_ATTR, flatten_hmdb_hierarchies
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 
@@ -11,11 +11,14 @@ class LipidMapsParser(Process):
 
     async def produce(self, data: dict):
         _mapping = self.cfg.conf['attribute_mapping']
-        important_attr = self.cfg.get('settings.hmdb_attr_etc', cast=set)
+        important_attr = self.cfg.get('settings.lipidmaps_attr_etc', cast=set)
 
-        for k in list(data):
-            new_k = _mapping[k] if k in _mapping else k.lower()
-            data[new_k] = data.pop(k)
+        remap_keys(data, _mapping)
+
+        # convert to lower keys
+        for k in list(data.keys()):
+            if k and k[1].isupper():
+                data[k.lower()] = data.pop(k, None)
 
         # flattens lists of len=1
         data, etc = map_to_edb_format(data, important_attr=important_attr, edb_format=None)
@@ -37,4 +40,3 @@ class LipidMapsParser(Process):
 
         data['edb_source'] = 'lipmaps'
         yield MetaboliteExternal(**data)
-

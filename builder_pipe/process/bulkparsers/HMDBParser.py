@@ -1,6 +1,6 @@
 from eme.pipe import Process
 
-from .utils.parsinglib import strip_attr, force_list, flatten
+from .utils.parsinglib import strip_attr, force_list, flatten, remap_keys
 from .utils.edb_specific import split_pubchem_ids, map_to_edb_format, EDB_ATTR, flatten_hmdb_hierarchies
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 
@@ -13,8 +13,7 @@ class HMDBParser(Process):
         _mapping = self.cfg.conf['attribute_mapping']
         important_attr = self.cfg.get('settings.hmdb_attr_etc', cast=set)
 
-        for k in set(data) & set(_mapping):
-            data[_mapping[k]] = data.pop(k)
+        remap_keys(data, _mapping)
 
         # flattens multi-level HMDB specific XML attributes into a list
         flatten_hmdb_hierarchies(data)

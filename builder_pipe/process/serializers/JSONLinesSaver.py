@@ -1,5 +1,6 @@
 from eme.pipe import Process
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
+from builder_pipe.dtypes.Metabolite import Metabolite
 
 
 
@@ -7,7 +8,7 @@ class JSONLinesSaver(Process):
     """
     CSV & TSV parser
     """
-    consumes = MetaboliteExternal, "edb_obj"
+    consumes = ((MetaboliteExternal, "edb_obj"), (Metabolite, "edb_obj"))
     produces = str, "filename"
 
     async def produce(self, data: dict):

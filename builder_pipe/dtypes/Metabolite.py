@@ -9,3 +9,7 @@ class Metabolite(AbstractData):
     @property
     def __DATAID__(self):
         return self.meta_id
+
+    @classmethod
+    def to_serialize(cls):
+        return []

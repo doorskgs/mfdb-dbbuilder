@@ -7,8 +7,6 @@ from eme.pipe import pipe_builder, Concurrent, debug_pipes, draw_pipes_network, 
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 
-from builder_pipe.process import EDBSerializer
-from builder_pipe.process.bulkparsers.ChebiParser import ChebiParser
 from builder_pipe.process.bulkparsers.HMDBParser import HMDBParser
 from builder_pipe.process.bulkparsers.LipidmapsParser import LipidMapsParser
 from builder_pipe.process.database.LocalEDBSaver import LocalEDBSaver
@@ -19,31 +17,46 @@ from builder_pipe.process.serializers.JSONLinesSaver import JSONLinesSaver
 from builder_pipe.process.fileformats.XMLParser import XMLParser
 from process.fileformats.SDFParser import SDFParser
 from builder_pipe.process.Debug import Debug
+from builder_pipe.utils import downloads
 
 
+DUMP_DIR = '../db_dumps/'
+BULK_URL = 'https://www.lipidmaps.org/files/?file=LMSD&ext=sdf.zip'
+BULK_FILE = os.path.join(DUMP_DIR, 'lipidmaps.sdf')
 
-DTYPES_EDB_DUMPS: DTYPES = ((dict, "edb_chebi"), (dict, "edb_hmdb"), (dict, "edb_lipmaps"))
+
+if not os.path.exists(BULK_FILE):
+    bulk_zip = os.path.join(DUMP_DIR, 'LMSD.sdf.zip')
+
+    if not os.path.exists(bulk_zip):
+        # download file first
+        print(f"Downloading Lipidmaps dump file...")
+        downloads.download_file(BULK_URL, bulk_zip)
+
+    downloads.uncompress_hierarchy(bulk_zip)
+    os.rename(os.path.join(DUMP_DIR, 'structures.sdf'), BULK_FILE)
+
+    os.unlink(bulk_zip)
 
 
 with pipe_builder() as pb:
     pb.cfg_path = os.path.join(os.path.dirname(__file__), 'config')
+    pb.set_runner('serial')
 
     pb.add_processes([
-        #Debug("debug", consumes=(dict, "raw_hmdb")),
-        #Debug("debug", consumes=(MetaboliteExternal, "edb_dump")),
+        SDFParser("sdf_lipmaps", consumes="lipmaps_dump", produces="raw_lipmaps"),
+
+        LipidMapsParser("lipmaps", consumes="raw_lipmaps", produces="edb_dump"),
+
+        #CSVSaver("edb_csv", consumes=("edb_dump", "edb_dump")),
+        LocalEDBSaver("db_dump", consumes=("edb_dump", "edb_dump"))
     ])
+    app = pb.build_app()
 
-    pipe = pb.get_app()
+app.start_flow(BULK_FILE, (str, "lipmaps_dump"), debug=True, verbose=False)
 
-pipe.start_flow()
-
-t1 = time.time()
 
 #draw_pipes_network(pipe, filename='spike', show_queues=True)
 #debug_pipes(pipe)
-pipe.start_flow(verbose=True)
-asyncio.run(pipe.run_processes())
+asyncio.run(app.run())
 
-#future = asyncio.run(pipe.start_flow(verbose=False, debug=False))
-
-print("Finished!", time.time() - t1)

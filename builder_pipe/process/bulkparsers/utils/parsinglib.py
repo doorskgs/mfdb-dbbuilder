@@ -85,6 +85,21 @@ def force_list(r, key, f=None):
         else:
             r[key] = [v]
 
+def remap_keys(v, _mapping: dict):
+    for k in set(v) & set(_mapping):
+        new_key = _mapping[k]
+        val = v.pop(k)
+
+        if new_key not in v:
+            # best effort to keep things scalar
+            v[new_key] = val
+        else:
+            # if multiple values found, extend it to be a list
+            if not isinstance(v[new_key], list):
+                v[new_key] = [v[new_key]]
+            else:
+                v[new_key].append(val)
+
 """
 
 def force_flatten_extra_refs(r, _SPEC_REF_ATTR: set, ex_attr=None, _except: tuple=None):

@@ -2,7 +2,8 @@ import gzip
 import os.path
 from typing import TextIO
 
-from eme.pipe import Process
+from eme.pipe import Process, DTYPE, AbstractData
+from eme.pipe.elems.data_types import repr_dtype
 
 
 class SDFParser(Process):
