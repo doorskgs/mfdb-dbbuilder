@@ -14,40 +14,38 @@ from builder_pipe.process.Debug import Debug
 from builder_pipe.utils import downloads
 
 
-DUMP_DIR = '../db_dumps/'
+DUMP_DIR = 'db_dumps/'
 BULK_URL = 'https://hmdb.ca/system/downloads/current/hmdb_metabolites.zip'
 BULK_FILE = os.path.join(DUMP_DIR, 'hmdb_metabolites.xml')
 
-if not os.path.exists(BULK_FILE):
-    bulk_zip = os.path.join(DUMP_DIR, os.path.basename(BULK_URL))
 
-    if not os.path.exists(bulk_zip):
-        # download file first
-        print(f"Downloading HMDB dump file...")
-        downloads.download_file(BULK_URL, bulk_zip)
+def build_pipe():
 
-    downloads.uncompress_hierarchy(bulk_zip)
-    os.unlink(bulk_zip)
+    if not os.path.exists(BULK_FILE):
+        bulk_zip = os.path.join(DUMP_DIR, os.path.basename(BULK_URL))
 
+        if not os.path.exists(bulk_zip):
+            # download file first
+            print(f"Downloading HMDB dump file...")
+            downloads.download_file(BULK_URL, bulk_zip)
 
-with pipe_builder() as pb:
-    pb.cfg_path = os.path.join(os.path.dirname(__file__), 'config')
-    pb.set_runner('serial')
-
-    pb.add_processes([
-        XMLParser("xml_hmdb", consumes="hmdb_dump", produces="raw_hmdb"),
-
-        HMDBParser("hmdb", consumes="raw_hmdb", produces="edb_dump"),
-
-        #CSVSaver("edb_csv", consumes=("edb_dump", "edb_dump")),
-        LocalEDBSaver("db_dump", consumes=("edb_dump", "edb_dump"))
-    ])
-    app = pb.build_app()
-
-app.start_flow(BULK_FILE, (str, "hmdb_dump"), debug=True, verbose=False)
+        downloads.uncompress_hierarchy(bulk_zip)
+        os.unlink(bulk_zip)
 
 
-#draw_pipes_network(pipe, filename='spike', show_queues=True)
-#debug_pipes(pipe)
-asyncio.run(app.run())
+    with pipe_builder() as pb:
+        pb.cfg_path = os.path.join(os.path.dirname(__file__), 'config')
+        pb.set_runner('serial')
 
+        pb.add_processes([
+            XMLParser("xml_hmdb", consumes="hmdb_dump", produces="raw_hmdb"),
+
+            HMDBParser("hmdb", consumes="raw_hmdb", produces="edb_dump"),
+
+            #CSVSaver("edb_csv", consumes=("edb_dump", "edb_dump")),
+            LocalEDBSaver("db_dump", consumes=("edb_dump", "edb_dump"), edb_source='hmdb')
+        ])
+        app = pb.build_app()
+
+    app.start_flow(BULK_FILE, (str, "hmdb_dump"), debug=False, verbose=False)
+    return app

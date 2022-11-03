@@ -1,7 +1,8 @@
 from eme.pipe import Process
+from metabolite_index import COMMON_ATTRIBUTES
 
-from .utils.parsinglib import strip_attr, force_list, flatten, remap_keys
-from .utils.edb_specific import split_pubchem_ids, map_to_edb_format, EDB_ATTR, flatten_hmdb_hierarchies
+from .utils.parsinglib import strip_attr, force_list, flatten, remap_keys, handle_quotes
+from .utils.edb_specific import split_pubchem_ids, map_to_edb_format, flatten_hmdb_hierarchies
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 
 
@@ -21,7 +22,7 @@ class LipidMapsParser(Process):
                 data[k.lower()] = data.pop(k, None)
 
         # flattens lists of len=1
-        data, etc = map_to_edb_format(data, important_attr=important_attr, edb_format=None)
+        data, etc = map_to_edb_format(data, important_attr=important_attr, edb_format=None, exclude_etc=set('null'))
 
         strip_attr(data, 'chebi_id', 'CHEBI:')
         strip_attr(data, 'chebi_id_alt', 'CHEBI:')
@@ -31,11 +32,12 @@ class LipidMapsParser(Process):
 
         force_list(data, 'chebi_id_alt')
         force_list(data, 'names')
+        handle_quotes(data, 'names')
 
         split_pubchem_ids(data)
 
         if self.app.debug:
-            _except = set(data.keys()) - EDB_ATTR - {'attr_etc', 'attr_mul', 'edb_id_etc', 'attr_other', "names"}
+            _except = set(data.keys()) - COMMON_ATTRIBUTES - {'attr_mul', 'edb_id_etc', 'attr_other', "names"}
             assert not _except, "extra attributes found: "+str(_except)
 
         data['edb_source'] = 'lipmaps'

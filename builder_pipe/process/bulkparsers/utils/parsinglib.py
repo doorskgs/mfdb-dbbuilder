@@ -97,8 +97,26 @@ def remap_keys(v, _mapping: dict):
             # if multiple values found, extend it to be a list
             if not isinstance(v[new_key], list):
                 v[new_key] = [v[new_key]]
+
+            if isinstance(val, list):
+                v[new_key].extend(val)
             else:
                 v[new_key].append(val)
+
+def handle_quotes(me, k):
+    """
+    Replaces problematic characters for json serialization
+    "
+    :param me:
+    :param k:
+    :return:
+    """
+    if k in me:
+        if isinstance(me[k], list):
+            me[k] = list(map(lambda x: x.replace('"', '”').replace('\t', ' '), me[k]))
+        else:
+            me[k] = me[k].replace('"', '”').replace('\t', ' ')
+
 
 """
 

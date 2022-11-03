@@ -21,19 +21,20 @@ class XMLParser(Process):
         context = iter(context)
 
         ev_1, xroot = next(context)
-        i = 0
         nparsed = 0
 
         for ev_2, xmeta in context:
             # Úgy még sosem volt, hogy valahogy ne lett volna
-            yield parse_xml_recursive(context)
+            r = parse_xml_recursive(context)
+            if r is not None:
+                yield r
 
-            nparsed += 1
+                nparsed += 1
 
-            if nparsed > stop_at:
-                if stop_at != -1 and nparsed > stop_at and self.app.debug:
-                    print(f"{self.__PROCESSID__}: stopping early")
-                    break
+                if nparsed > stop_at:
+                    if stop_at != -1 and nparsed > stop_at and self.app.debug:
+                        print(f"{self.__PROCESSID__}: stopping early")
+                        break
 
 
 def parse_xml_recursive(context, cur_elem=None, tag_path=None, has_xmlns=True):
