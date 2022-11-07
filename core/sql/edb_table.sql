@@ -32,5 +32,5 @@ CREATE {table_opts}TABLE {table_name} (
 
     {extra_columns}
 
-    PRIMARY KEY (edb_id)
+    PRIMARY KEY (edb_id, edb_source)
 )

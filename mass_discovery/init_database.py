@@ -54,9 +54,9 @@ def fill_secondary_table():
 def create_db(table_name):
     SQL = "DROP TABLE IF EXISTS {table_name};\n"
 
-    with open('../sql/edb_table.sql') as fh:
+    with open('core/sql/edb_table.sql') as fh:
         SQL += fh.read()
-    with open(f'../sql/{table_name}_extra_attr.sql') as fh:
+    with open(f'core/sql/{table_name}_extra_attr.sql') as fh:
         extra_cols = fh.read()
 
     SQL = SQL.format(
@@ -69,7 +69,7 @@ def create_db(table_name):
 
 def create_secondary():
     SQL = "DROP TABLE IF EXISTS {table_name};\n"
-    with open('../sql/add_secondary.sql') as fh:
+    with open('core/sql/add_secondary.sql') as fh:
         SQL += fh.read()
     SQL = SQL.format(
         table_name="secondary_id",

@@ -3,8 +3,7 @@ import os
 
 from eme.pipe import pipe_builder, Concurrent, debug_pipes, draw_pipes_network, DTYPES
 
-from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
-from builder_pipe.process.bulkparsers.ChebiParser import ChebiParser
+from builder_pipe.process.bulkparsers.PubchemParser import PubchemParser
 from builder_pipe.process.database.LocalEDBSaver import LocalEDBSaver
 from builder_pipe.process.serializers.CSVParser import CSVParser
 from builder_pipe.process.serializers.CSVSaver import CSVSaver
@@ -16,32 +15,28 @@ from builder_pipe.utils import downloads
 
 
 DUMP_DIR = 'db_dumps/'
-BULK_URL = 'https://ftp.ebi.ac.uk/pub/databases/chebi/SDF/ChEBI_complete.sdf.gz'
-BULK_FILE = os.path.join(DUMP_DIR, 'ChEBI_complete.sdf.gz')
+BULK_FILE = os.path.join(DUMP_DIR, 'PubChem_compound_cache_midb_struct_records.sdf.gz')
 
 
 def build_pipe():
 
     if not os.path.exists(BULK_FILE):
         # download file first
-        print(f"Downloading Chebi dump file...")
-        downloads.download_file(BULK_URL, BULK_FILE)
-
+        raise Exception("Please manually download pubchem bulk file. See our website for recommended Search IDs")
 
     with pipe_builder() as pb:
         pb.cfg_path = os.path.join(os.path.dirname(__file__), 'config')
         pb.set_runner('serial')
 
         pb.add_processes([
-            SDFParser("sdf_chebi", consumes="chebi_dump", produces="raw_chebi"),
+            SDFParser("sdf_pubchem", consumes="pubchem_dump", produces="raw_pubchem"),
 
-            ChebiParser("chebi", consumes="raw_chebi", produces="edb_dump"),
+            PubchemParser("pubchem", consumes="raw_pubchem", produces="edb_dump"),
 
             #CSVSaver("edb_csv", consumes=("edb_dump", "edb_dump")),
-            #LocalEDBSaver("db_dump", consumes=("edb_dump", "edb_dump"), edb_source='chebi'),
-            Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
+            LocalEDBSaver("db_dump", consumes=("edb_dump", "edb_dump"), edb_source='pubchem')
         ])
         app = pb.build_app()
 
-    app.start_flow(BULK_FILE, (str, "chebi_dump"), debug=False, verbose=False)
+    app.start_flow(BULK_FILE, (str, "pubchem_dump"), debug=False, verbose=False)
     return app

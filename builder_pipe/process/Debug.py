@@ -5,4 +5,5 @@ class Debug(Consumer):
     consumes = object
 
     async def consume(self, data, dtype):
-        print(f"   [{self.__PROCESSID__}] Consumed", dtype, repr(data))
+        if self.app.debug and self.app.verbose:
+            print(f"   [{self.__PROCESSID__}] Consumed", dtype, repr(data))

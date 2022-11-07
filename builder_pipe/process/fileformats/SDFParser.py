@@ -4,11 +4,12 @@ from typing import TextIO
 
 from eme.pipe import Process, DTYPE, AbstractData
 from eme.pipe.elems.data_types import repr_dtype
+from metabolite_index.edb_formatting import MultiDict
 
 
 class SDFParser(Process):
     consumes = str, "filename"
-    produces = dict, "sdf_row"
+    produces = MultiDict, "sdf_row"
 
     async def produce(self, fn: str):
         _, ext = os.path.splitext(fn)
@@ -21,7 +22,7 @@ class SDFParser(Process):
         else:
             fh_stream: TextIO = open(fn, 'r', encoding='utf8')
 
-        buffer = {}
+        buffer = MultiDict()
         state = None
         nparsed = 0
 
@@ -34,7 +35,7 @@ class SDFParser(Process):
                 nparsed += 1
 
                 state = None
-                buffer = {}
+                buffer = MultiDict()
 
                 if stop_at != -1 and nparsed > stop_at and self.app.debug:
                     print(f"{self.__PROCESSID__}: stopping early")
@@ -45,15 +46,6 @@ class SDFParser(Process):
             elif line.startswith('> <'):
                 state = line[3:-1]
             else:
-                if state in buffer:
-                    # there are multiple entries in buffer, create a list
-                    val = buffer[state]
-
-                    if isinstance(val, list):
-                        buffer[state].append(line)
-                    else:
-                        buffer[state] = [val, line]
-                else:
-                    buffer[state] = line
+                buffer.append(state, line)
 
         fh_stream.close()

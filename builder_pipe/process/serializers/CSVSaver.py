@@ -53,8 +53,8 @@ class CSVSaver(Process):
 
         for field in dtype_cls.to_json():
             view[field] = json.dumps(view[field])
+        view['edb_id'] = data.edb_id
 
         self.writer[dtype].writerow(view)
 
         yield ".csv"
-
