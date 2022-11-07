@@ -40,3 +40,19 @@ def build_pipe():
 
     app.start_flow(BULK_FILE, (str, "pubchem_dump"), debug=False, verbose=False)
     return app
+if __name__ == "__main__":
+    import sys
+    from builder_pipe.utils.ding import dingdingding
+
+    app = build_pipe()
+
+    mute = len(sys.argv) > 1 and 'mute' in sys.argv[1:]
+    app.debug = len(sys.argv) > 1 and 'debug' in sys.argv[1:]
+    app.verbose = len(sys.argv) > 1 and 'verbose' in sys.argv[1:]
+
+    # draw_pipes_network(pipe, filename='spike', show_queues=True)
+    # debug_pipes(pipe)
+    asyncio.run(app.run())
+
+    if not app.debug and not mute:
+        dingdingding()

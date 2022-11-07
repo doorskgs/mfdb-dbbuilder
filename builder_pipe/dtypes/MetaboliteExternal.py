@@ -1,10 +1,11 @@
 from eme.pipe.elems.AbstractData import AbstractData
 
-from core import SUPPORTED_DB
 from metabolite_index import MetaboliteConsistent
 
+from builder_pipe.dtypes.CSVSerializable import CSVSerializable
 
-class MetaboliteExternal(MetaboliteConsistent, AbstractData):
+
+class MetaboliteExternal(MetaboliteConsistent, CSVSerializable, AbstractData):
 
     @property
     def __DATAID__(self):

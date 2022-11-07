@@ -3,32 +3,28 @@ import json
 import re
 
 from eme.pipe import Process, DTYPE, DTYPES
-import psycopg2
 
-from builder_pipe.dtypes.Metabolite import Metabolite
-from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
-from core.dal.dbconn import connect_db
+# from builder_pipe.dtypes.Metabolite import Metabolite
+# from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
+from builder_pipe.db import connect_db, disconnect_db
+from builder_pipe.dtypes.CSVSerializable import CSVSerializable
 
-
-def clean_csv_value(value) -> str:
-    if value is None:
-        return r'\N'
-    return str(value).replace('\n', '\\n')
 
 
 class LocalEDBSaver(Process):
     """
     CSV & TSV parser
     """
-    consumes = ((MetaboliteExternal, "edb_obj"), (Metabolite, "edb_obj"))
+    consumes = CSVSerializable
     produces = int, "inserted"
 
-    table_name = "edb_tmp"
+    table_name: str
     CSEP = chr(16)
 
-    def __init__(self, *args, edb_source: str, **kwargs):
+    def __init__(self, *args, edb_source: str, table_name: str, **kwargs):
         super().__init__(*args, **kwargs)
         self.edb_source = edb_source
+        self.table_name = table_name
 
     def initialize(self):
         self.conn, self.cur = connect_db(self.cfg)
@@ -40,13 +36,13 @@ class LocalEDBSaver(Process):
         self.to_insert = 0
         self.inserted = 0
 
-        self.cur.execute(f"DELETE FROM edb_tmp WHERE edb_source = '{self.edb_source}'")
+        self.cur.execute(f"DELETE FROM {self.table_name} WHERE edb_source = '{self.edb_source}'")
         self.conn.commit()
 
         if self.app.debug:
             # validate if obj class and SQL are in agreement
             _sqlcolumns = self.get_columns()
-            _sercolumns = list(MetaboliteExternal.to_serialize())
+            _sercolumns = list(self.consumes[0].to_serialize())
 
             assert _sqlcolumns == _sercolumns, 'Insertable columns do not match with SQL:\nSER:'+ repr(_sercolumns) + '\nSQL:' + repr(_sqlcolumns)
 
@@ -56,10 +52,9 @@ class LocalEDBSaver(Process):
 
         self._insert()
 
-        self.cur.close()
-        self.conn.close()
+        disconnect_db(self.conn, self.cur)
 
-    async def consume(self, data: MetaboliteExternal | Metabolite, dtype: DTYPES):
+    async def consume(self, data: CSVSerializable, dtype: DTYPES):
         self.batch.write(self.CSEP.join(self.prepare_data(data)) + '\n')
         self.to_insert += 1
         self.inserted += 1
@@ -89,10 +84,10 @@ class LocalEDBSaver(Process):
 
                     raise e
 
-    async def produce(self, data: tuple[str, str], dtype: DTYPE):
+    async def produce(self, data: tuple[str, str]):
         yield 1
 
-    def prepare_data(self, data: MetaboliteExternal):
+    def prepare_data(self, data: CSVSerializable):
         l = []
         tjs = set(data.to_json())
 
@@ -104,8 +99,12 @@ class LocalEDBSaver(Process):
                 # else:
                 val = json.dumps(val)
                 #val = val.replace('"', '\"')
+            elif isinstance(val, (tuple, set, list)):
+                val = '{'+','.join(map(str, val))+'}'
+            elif val is None:
+                val = r'\N'
             else:
-                val = clean_csv_value(val)
+                val = str(val).replace('\n', '\\n')
             l.append(val)
 
         # if self.app.debug and self.app.verbose:
@@ -124,9 +123,9 @@ class LocalEDBSaver(Process):
         self.app.print_progress(self.inserted)
 
     def get_columns(self):
-        self.cur.execute("""
+        self.cur.execute(f"""
         SELECT column_name FROM information_schema.columns
-        WHERE table_schema = 'public' AND table_name   = 'edb_tmp'
+        WHERE table_schema = 'public' AND table_name = '{self.table_name}'
         ORDER BY ordinal_position ;""")
 
         return [f[0] for f in self.cur.fetchall()]
@@ -135,8 +134,10 @@ class LocalEDBSaver(Process):
         _batch_raw = self.batch.getvalue().split('\n')
         _batch = []
 
+        dtype_cls, dtype_id = dtype
+
         _len = len(dtype[0].to_serialize())
-        _headers = list(MetaboliteExternal.to_serialize())
+        _headers = list(dtype_cls.to_serialize())
 
         for _raw in _batch_raw:
             if not _raw:
@@ -147,20 +148,13 @@ class LocalEDBSaver(Process):
             assert _len == len(_row_flat)
 
         return _batch
-        #
-        # while _batch_flat != []:
-        #     _batch.append(_batch_flat[:_len])
-        #     _batch_flat = _batch_flat[_len:]
-        #
-        #
-        # return [) for _row in _batch]
 
     def _debug_invalid_char_error(self, e, data, dtype):
         print("\n")
         _char = e.diag.message_detail.split(' ')[3]
         _char_str = bytes.fromhex(_char[2:]).decode('utf8')
         # COPY edb_tmp, line 2, column names:
-        pattern = re.compile(r'.* COPY edb_tmp, line (\d), column ([a-zA-Z0-9]*): .*')
+        pattern = re.compile(r'.* COPY [a-zA-Z0-9_]*, line (\d), column ([a-zA-Z0-9]*): .*')
         g = pattern.match(e.diag.context.replace('\n', ' '))
         lineno, col = g.groups()
 

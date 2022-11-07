@@ -21,7 +21,7 @@ BULK_URL = 'https://hmdb.ca/system/downloads/current/hmdb_metabolites.zip'
 BULK_FILE = os.path.join(DUMP_DIR, 'hmdb_metabolites.xml')
 
 
-def build_pipe():
+def build_pipe(debug=False, verbose=False):
 
     if not os.path.exists(BULK_FILE):
         bulk_zip = os.path.join(DUMP_DIR, os.path.basename(BULK_URL))
@@ -51,4 +51,24 @@ def build_pipe():
         app = pb.build_app()
 
     app.start_flow(BULK_FILE, (str, "hmdb_dump"), debug=False, verbose=False)
+    app.debug = debug
+    app.verbose = verbose
+
     return app
+
+if __name__ == "__main__":
+    import sys
+    from builder_pipe.utils.ding import dingdingding
+
+    app = build_pipe()
+
+    mute = len(sys.argv) > 1 and 'mute' in sys.argv[1:]
+    app.debug = len(sys.argv) > 1 and 'debug' in sys.argv[1:]
+    app.verbose = len(sys.argv) > 1 and 'verbose' in sys.argv[1:]
+
+    # draw_pipes_network(pipe, filename='spike', show_queues=True)
+    # debug_pipes(pipe)
+    asyncio.run(app.run())
+
+    if not app.debug and not mute:
+        dingdingding()

@@ -23,7 +23,9 @@ class LipidMapsParser(Process):
                 data[k.lower()] = data.pop(k, None)
 
         # flattens lists of len=1
-        data, etc = map_to_edb_format(data, important_attr=important_attr, edb_format=None, exclude_etc=set('null'))
+        data, etc = map_to_edb_format(data, important_attr=important_attr)
+        if 'null' in data:
+            data.drop('null', None)
 
         preprocess(data)
 

@@ -2,16 +2,16 @@ import csv
 import json
 
 from eme.pipe import Process, DTYPE
+from eme.pipe.elems.data_types import iterate_dtypes
 
-from builder_pipe.dtypes.Metabolite import Metabolite
-from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
+from builder_pipe.dtypes.CSVSerializable import CSVSerializable
 
 
 class CSVSaver(Process):
     """
     CSV & TSV parser
     """
-    consumes = ((MetaboliteExternal, "edb_obj"), (Metabolite, "edb_obj"))
+    consumes = CSVSerializable
     produces = str, "filename"
 
     writer: dict[DTYPE, csv.DictWriter] = {}
@@ -20,8 +20,9 @@ class CSVSaver(Process):
     def initialize(self):
         csv_file = self.cfg.get('files.csv_file')
 
-        for dtype in self.consumes:
+        for dtype in iterate_dtypes(self.consumes):
             dtype_cls, dtype_id = dtype
+
             fieldnames = dtype_cls.to_serialize()
 
             quotes = self.cfg.get('dialect.quotes')
@@ -39,20 +40,25 @@ class CSVSaver(Process):
         for dtype, fh in self.fh.items():
             fh.close()
 
-    async def produce(self, data: MetaboliteExternal, dtype: DTYPE):
+    async def produce(self, data: CSVSerializable, dtype: DTYPE=None):
         # MN  = self.cfg.get('test.multiply', cast=float, default=1)
         # y = IntWrap(data.val * MN, True)
         # y.__DATAID__ = data.__DATAID__
         #yield y
+        if dtype is None:
+            dtype = self.consumes
 
         if dtype not in self.writer:
             raise Exception("Unexpected DTYPE:", dtype)
 
+        dtype_cls, dtype_id = dtype
+
         view = data.as_dict
-        dtype_cls: MetaboliteExternal | Metabolite = dtype[0]
 
         for field in dtype_cls.to_json():
             view[field] = json.dumps(view[field])
+
+        # todo: make this general? idk
         view['edb_id'] = data.edb_id
 
         self.writer[dtype].writerow(view)

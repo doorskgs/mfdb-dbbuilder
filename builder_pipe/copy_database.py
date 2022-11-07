@@ -1,7 +1,7 @@
-from builder_pipe.dtypes.Metabolite import Metabolite
+import os
+
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
-from core import SUPPORTED_BULK, SUPPORTED_DB
-from core.dal.dbconn import connect_db, disconnect_db
+from builder_pipe.db import connect_db, disconnect_db, SUPPORTED_DB
 from eme.entities import load_settings
 
 _SQL_FKEY = """
@@ -23,29 +23,14 @@ FROM {table_from}
     """
     return SQL
 
-def fill_secondary_table():
-    print("@TODO: secondary IDs (chebi, hmdb) fill")
-
-    # SQL = """
-    # INSERT INTO secondary_id
-    #   SELECT 'chebi_id' as "db_tag", unnest(chebi_id_alt) as "secondary_id", chebi_id as "primary_id"
-    #   FROM chebi_data
-    # """
-    #
-    # sess.execute("""
-    # INSERT INTO secondary_id
-    #   SELECT 'hmdb_id' as "db_tag", unnest(hmdb_id_alt) as "secondary_id", hmdb_id as "primary_id"
-    #   FROM hmdb_data
-    # """)
-    pass
 
 
 def create_db(table_name):
     SQL = "DROP TABLE IF EXISTS {table_name};\n"
 
-    with open('core/sql/edb_table.sql') as fh:
+    with open('sql/edb_table.sql') as fh:
         SQL += fh.read()
-    with open(f'core/sql/{table_name}_extra_attr.sql') as fh:
+    with open(f'sql/{table_name}_extra_attr.sql') as fh:
         extra_cols = fh.read()
 
     SQL = SQL.format(
@@ -54,15 +39,6 @@ def create_db(table_name):
         extra_columns=extra_cols
     )
 
-    return SQL
-
-def create_secondary():
-    SQL = "DROP TABLE IF EXISTS {table_name};\n"
-    with open('core/sql/add_secondary.sql') as fh:
-        SQL += fh.read()
-    SQL = SQL.format(
-        table_name="secondary_id",
-    )
     return SQL
 
 
@@ -110,19 +86,17 @@ def execute(cur, sql):
 
 
 def main():
-    cfg = load_settings('config/db_dump.ini')
+    cfg = load_settings(os.path.dirname(__file__)+'/config/db_dump.ini')
     conn, cur = connect_db(cfg)
 
     # SCHEMA:
     print("Creating tables...")
     execute(cur, create_db("edb"))
     #execute(cur, create_db("mdb"))
-    execute(cur, create_secondary())
 
     # INSERT:
     print("Copying tables...")
     execute(cur, copy_from_tmp_table("edb_tmp", "edb"))
-    execute(cur, fill_secondary_table())
 
     # INDEXES:
     print("Adding indexes and foreign keys...")

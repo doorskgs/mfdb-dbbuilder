@@ -5,8 +5,7 @@ from eme.entities import load_settings
 import numpy as np
 import matplotlib.pyplot as plt
 
-from core import SUPPORTED_BULK, SUPPORTED_DB
-from core.dal.dbconn import connect_db, disconnect_db
+from builder_pipe.db import connect_db, disconnect_db
 
 
 # ------------------------------------- #
@@ -85,7 +84,7 @@ def plot_frequencies(pubchem_ids):
 
 
 def main():
-    cfg = load_settings('builder_pipe/config/db_dump.ini')
+    cfg = load_settings('../../config/db_dump.ini')
 
     conn, cur = connect_db(cfg)
     cur.execute(f"""

@@ -1,7 +1,8 @@
+import os
+
 from builder_pipe.dtypes.Metabolite import Metabolite
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
-from core import SUPPORTED_BULK, SUPPORTED_DB
-from core.dal.dbconn import connect_db, disconnect_db
+from builder_pipe.db import connect_db, disconnect_db
 from eme.entities import load_settings
 
 _SQL_FKEY = """
@@ -54,9 +55,9 @@ def fill_secondary_table():
 def create_db(table_name):
     SQL = "DROP TABLE IF EXISTS {table_name};\n"
 
-    with open('core/sql/edb_table.sql') as fh:
+    with open('sql/edb_table.sql') as fh:
         SQL += fh.read()
-    with open(f'core/sql/{table_name}_extra_attr.sql') as fh:
+    with open(f'sql/{table_name}_extra_attr.sql') as fh:
         extra_cols = fh.read()
 
     SQL = SQL.format(
@@ -69,7 +70,7 @@ def create_db(table_name):
 
 def create_secondary():
     SQL = "DROP TABLE IF EXISTS {table_name};\n"
-    with open('core/sql/add_secondary.sql') as fh:
+    with open('sql/add_secondary.sql') as fh:
         SQL += fh.read()
     SQL = SQL.format(
         table_name="secondary_id",
@@ -121,7 +122,7 @@ def execute(cur, sql):
 
 
 def main():
-    cfg = load_settings('config/db_dump.ini')
+    cfg = load_settings(os.path.dirname(__file__)+'/config/db_dump.ini')
     conn, cur = connect_db(cfg)
 
     # SCHEMA:

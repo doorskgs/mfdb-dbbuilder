@@ -21,7 +21,7 @@ class PubchemParser(Process):
         preprocess(data)
         #sids = split_pubchem_ids(data)
 
-        data, etc = map_to_edb_format(data, important_attr=important_attr, edb_format=None, exclude_etc={None})
+        data, etc = map_to_edb_format(data, important_attr=important_attr)
 
         if self.app.debug:
             assert_edb_dict(data)

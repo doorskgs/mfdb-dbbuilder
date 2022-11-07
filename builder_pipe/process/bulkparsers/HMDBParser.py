@@ -26,7 +26,7 @@ class HMDBParser(Process):
         preprocess(data)
 
         # flattens lists of len=1
-        data, etc = map_to_edb_format(data, important_attr=important_attr, edb_format=None, exclude_etc={None})
+        data, etc = map_to_edb_format(data, important_attr=important_attr)
 
         #remove_obvious_secondary_ids(data)
         # split_pubchem_ids(data)
