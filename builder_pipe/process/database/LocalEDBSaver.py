@@ -67,19 +67,23 @@ class LocalEDBSaver(Process):
                 try:
                     self._insert()
                 except Exception as e:
-                    print("-------------------------------------------------")
+                    print("\n-------------------------------------------------\n")
+
                     if hasattr(e, 'pgcode') and e.pgcode == '22P02':
                         if '0x' in e.diag.message_detail:
                             self._debug_invalid_char_error(e, data, dtype)
                             exit()
-                        else:
-                            _batch = self.debug_batch(dtype)
-
-                            with open('error.txt', 'w', encoding='utf8') as fh:
-                                for b in _batch:
-                                    fh.write(json.dumps(b))
-                                    fh.write('\n')
-                            print("Batch with error saved in error.txt")
+                        elif e.diag.message_detail.startswith('Escape sequence'):
+                            self._debug_invalid_escape_error(e, data, dtype)
+                            exit()
+                        # else:
+                        #     _batch = self.debug_batch(dtype)
+                        #
+                        #     with open('error.txt', 'w', encoding='utf8') as fh:
+                        #         for b in _batch:
+                        #             fh.write(json.dumps(b))
+                        #             fh.write('\n')
+                        #     print("Batch with error saved in error.txt")
 
                     raise e
 
@@ -93,13 +97,9 @@ class LocalEDBSaver(Process):
         for attr in data.to_serialize():
             val = getattr(data, attr)
             if attr in tjs:
-                # if attr =='names':
-                #     val = "{}"
-                # else:
                 val = json.dumps(val)
-                #val = val.replace('"', '\"')
             elif isinstance(val, (tuple, set, list)):
-                val = '{'+','.join(map(lambda x: f"'{x}'", val))+'}'
+                val = '{'+','.join(map(lambda x: str(x), val))+'}'
             elif val is None:
                 val = r'\N'
             else:
@@ -147,7 +147,6 @@ class LocalEDBSaver(Process):
         return _batch
 
     def _debug_invalid_char_error(self, e, data, dtype):
-        print("\n")
         _char = e.diag.message_detail.split(' ')[3]
         _char_str = bytes.fromhex(_char[2:]).decode('utf8')
         # COPY edb_tmp, line 2, column names:
@@ -167,3 +166,12 @@ class LocalEDBSaver(Process):
                 # if _char_str in _v:
                 print(f'  #{i}:  {_v}')
         # print("Latest batched rows:")
+
+    def _debug_invalid_escape_error(self, e, data, dtype):
+        _char = e.diag.message_detail[16:]
+
+        print(f"Invalid escape character: {_char}")
+        _batch = self.debug_batch(dtype)
+
+        for _b in _batch:
+            print('   ', _b)

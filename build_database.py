@@ -54,8 +54,6 @@ if __name__ == "__main__":
     for proc in procs:
         proc.join()
 
-    copy_database()
-
     if not do_pubchem:
         # gathers pubchem IDs for later mass download
         list_pubchem()

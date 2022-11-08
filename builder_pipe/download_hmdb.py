@@ -1,19 +1,13 @@
 import asyncio
 import os
 
-from eme.pipe import pipe_builder, Concurrent, debug_pipes, draw_pipes_network, DTYPES
-from metabolite_index.edb_formatting import MultiDict
+from eme.pipe import pipe_builder
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.dtypes.SecondaryID import SecondaryID
 from builder_pipe.process.bulkparsers.HMDBParser import HMDBParser
 from builder_pipe.process.database.LocalEDBSaver import LocalEDBSaver
-from builder_pipe.process.serializers.CSVParser import CSVParser
-from builder_pipe.process.serializers.CSVSaver import CSVSaver
-from builder_pipe.process.serializers.JSONLinesParser import JSONLinesParser
-from builder_pipe.process.serializers.JSONLinesSaver import JSONLinesSaver
 from builder_pipe.process.fileformats.XMLFastParser import XMLFastParser
-from builder_pipe.process.Debug import Debug
 from builder_pipe.utils import downloads
 
 
@@ -56,12 +50,11 @@ def build_pipe():
         ])
         app = pb.build_app()
 
-    app.start_flow(BULK_FILE, (str, "hmdb_dump"), debug=False, verbose=False)
+    app.start_flow(BULK_FILE, (str, "hmdb_dump"))
 
     return app
 
 if __name__ == "__main__":
-    import sys
     from builder_pipe.utils.ding import dingdingding
 
     app = build_pipe()

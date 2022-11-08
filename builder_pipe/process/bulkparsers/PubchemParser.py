@@ -1,9 +1,9 @@
 from eme.pipe import Process
-from metabolite_index.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict
+from metabolite_index.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict, \
+    replace_esc
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.process.bulkparsers.utils import assert_edb_dict
-
 
 class PubchemParser(Process):
     consumes = MultiDict, "edb_obj"
@@ -20,6 +20,15 @@ class PubchemParser(Process):
         molfile = data.pop(None, None)
 
         remap_keys(data, _mapping)
+
+        # some records lack names
+        if 'names' not in data:
+            data['names'] = []
+        # replace \ character in smiles
+        if isinstance(data['smiles'], list):
+            data['smiles'] = list(map(replace_esc, data['smiles']))
+        else:
+            data['smiles'] = replace_esc(data['smiles'])
 
         preprocess(data)
         #sids = split_pubchem_ids(data)

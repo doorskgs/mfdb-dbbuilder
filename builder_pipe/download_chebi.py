@@ -1,18 +1,13 @@
 import asyncio
 import os
 
-from eme.pipe import pipe_builder, Concurrent, debug_pipes, draw_pipes_network, DTYPES
+from eme.pipe import pipe_builder
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.dtypes.SecondaryID import SecondaryID
 from builder_pipe.process.bulkparsers.ChebiParser import ChebiParser
 from builder_pipe.process.database.LocalEDBSaver import LocalEDBSaver
-from builder_pipe.process.serializers.CSVParser import CSVParser
-from builder_pipe.process.serializers.CSVSaver import CSVSaver
-from builder_pipe.process.serializers.JSONLinesParser import JSONLinesParser
-from builder_pipe.process.serializers.JSONLinesSaver import JSONLinesSaver
 from builder_pipe.process.fileformats.SDFParser import SDFParser
-from builder_pipe.process.Debug import Debug
 from builder_pipe.utils import downloads
 
 
@@ -52,7 +47,6 @@ def build_pipe():
     return app
 
 if __name__ == "__main__":
-    import sys
     from builder_pipe.utils.ding import dingdingding
 
     app = build_pipe()
