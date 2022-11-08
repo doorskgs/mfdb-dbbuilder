@@ -40,12 +40,11 @@ def build_pipe():
             # - Meta Entity -
             # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
             # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
-            # LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='chebi'),
+            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='chebi', table_name='edb_tmp'),
 
             # - Secondary IDs -
             #CSVSaver("2nd_csv", consumes=(SecondaryID, "2nd_id")),
             LocalEDBSaver("db_dump", consumes=(SecondaryID, "2nd_id"), edb_source='chebi', table_name='secondary_id'),
-
         ])
         app = pb.build_app()
 

@@ -47,7 +47,6 @@ class LocalEDBSaver(Process):
             assert _sqlcolumns == _sercolumns, 'Insertable columns do not match with SQL:\nSER:'+ repr(_sercolumns) + '\nSQL:' + repr(_sqlcolumns)
 
     def dispose(self):
-        #self.app.print_progress(self.inserted)
         print("\nDisposing EDB Saver")
 
         self._insert()
@@ -100,7 +99,7 @@ class LocalEDBSaver(Process):
                 val = json.dumps(val)
                 #val = val.replace('"', '\"')
             elif isinstance(val, (tuple, set, list)):
-                val = '{'+','.join(map(str, val))+'}'
+                val = '{'+','.join(map(lambda x: f"'{x}'", val))+'}'
             elif val is None:
                 val = r'\N'
             else:
@@ -119,8 +118,6 @@ class LocalEDBSaver(Process):
         # reset
         self.batch = io.StringIO()
         self.to_insert = 0
-
-        self.app.print_progress(self.inserted)
 
     def get_columns(self):
         self.cur.execute(f"""
@@ -145,7 +142,7 @@ class LocalEDBSaver(Process):
             _row_flat = _raw.split(self.CSEP)
             _batch.append(dict(zip(_headers, _row_flat)))
 
-            assert _len == len(_row_flat)
+            assert _len == len(_row_flat), f"L_SER: {_len}; L_ROW: {len(_row_flat)}"
 
         return _batch
 

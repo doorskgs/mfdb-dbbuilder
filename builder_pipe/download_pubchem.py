@@ -3,6 +3,7 @@ import os
 
 from eme.pipe import pipe_builder, Concurrent, debug_pipes, draw_pipes_network, DTYPES
 
+from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.process.bulkparsers.PubchemParser import PubchemParser
 from builder_pipe.process.database.LocalEDBSaver import LocalEDBSaver
 from builder_pipe.process.serializers.CSVParser import CSVParser
@@ -33,8 +34,10 @@ def build_pipe():
 
             PubchemParser("pubchem", consumes="raw_pubchem", produces="edb_dump"),
 
-            #CSVSaver("edb_csv", consumes=("edb_dump", "edb_dump")),
-            LocalEDBSaver("db_dump", consumes=("edb_dump", "edb_dump"), edb_source='pubchem')
+            # - Meta Entity -
+            # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
+            # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
+            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='pubchem', table_name='edb_tmp'),
         ])
         app = pb.build_app()
 
@@ -46,9 +49,9 @@ if __name__ == "__main__":
 
     app = build_pipe()
 
-    mute = len(sys.argv) > 1 and 'mute' in sys.argv[1:]
-    app.debug = len(sys.argv) > 1 and 'debug' in sys.argv[1:]
-    app.verbose = len(sys.argv) > 1 and 'verbose' in sys.argv[1:]
+    mute = True
+    app.debug = True
+    app.verbose = False
 
     # draw_pipes_network(pipe, filename='spike', show_queues=True)
     # debug_pipes(pipe)

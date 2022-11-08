@@ -43,9 +43,10 @@ def build_pipe():
 
             LipidMapsParser("lipmaps", consumes="raw_lipmaps", produces="edb_dump"),
 
-            #CSVSaver("edb_csv", consumes=("edb_dump", "edb_dump")),
-            LocalEDBSaver("db_dump", consumes=("edb_dump", "edb_dump"), edb_source='lipmaps'),
-            #Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump"))
+            # - Meta Entity -
+            # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
+            # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
+            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='lipmaps', table_name='edb_tmp'),
         ])
         app = pb.build_app()
 
@@ -59,9 +60,9 @@ if __name__ == "__main__":
 
     app = build_pipe()
 
-    mute = len(sys.argv) > 1 and 'mute' in sys.argv[1:]
-    app.debug = len(sys.argv) > 1 and 'debug' in sys.argv[1:]
-    app.verbose = len(sys.argv) > 1 and 'verbose' in sys.argv[1:]
+    mute = True
+    app.debug = True
+    app.verbose = False
 
     # draw_pipes_network(pipe, filename='spike', show_queues=True)
     # debug_pipes(pipe)

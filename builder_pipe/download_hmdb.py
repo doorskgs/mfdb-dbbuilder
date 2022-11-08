@@ -5,6 +5,7 @@ from eme.pipe import pipe_builder, Concurrent, debug_pipes, draw_pipes_network, 
 from metabolite_index.edb_formatting import MultiDict
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
+from builder_pipe.dtypes.SecondaryID import SecondaryID
 from builder_pipe.process.bulkparsers.HMDBParser import HMDBParser
 from builder_pipe.process.database.LocalEDBSaver import LocalEDBSaver
 from builder_pipe.process.serializers.CSVParser import CSVParser
@@ -21,7 +22,7 @@ BULK_URL = 'https://hmdb.ca/system/downloads/current/hmdb_metabolites.zip'
 BULK_FILE = os.path.join(DUMP_DIR, 'hmdb_metabolites.xml')
 
 
-def build_pipe(debug=False, verbose=False):
+def build_pipe():
 
     if not os.path.exists(BULK_FILE):
         bulk_zip = os.path.join(DUMP_DIR, os.path.basename(BULK_URL))
@@ -42,17 +43,20 @@ def build_pipe(debug=False, verbose=False):
         pb.add_processes([
             XMLFastParser("xml_hmdb", consumes="hmdb_dump", produces="raw_hmdb"),
 
-            HMDBParser("hmdb", consumes="raw_hmdb", produces="edb_dump"),
+            HMDBParser("hmdb", consumes="raw_hmdb", produces=("edb_dump", "2nd_id")),
 
-            #CSVSaver("edb_csv", consumes=("edb_dump", "edb_dump")),
-            LocalEDBSaver("db_dump", consumes=("edb_dump", "edb_dump"), edb_source='hmdb')
-            #Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump"))
+            # - Meta Entity -
+            # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
+            # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
+            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='hmdb', table_name='edb_tmp'),
+
+            # - Secondary IDs -
+            #CSVSaver("2nd_csv", consumes=(SecondaryID, "2nd_id")),
+            LocalEDBSaver("2nd_dump", consumes=(SecondaryID, "2nd_id"), edb_source='hmdb', table_name='secondary_id'),
         ])
         app = pb.build_app()
 
     app.start_flow(BULK_FILE, (str, "hmdb_dump"), debug=False, verbose=False)
-    app.debug = debug
-    app.verbose = verbose
 
     return app
 
@@ -62,9 +66,9 @@ if __name__ == "__main__":
 
     app = build_pipe()
 
-    mute = len(sys.argv) > 1 and 'mute' in sys.argv[1:]
-    app.debug = len(sys.argv) > 1 and 'debug' in sys.argv[1:]
-    app.verbose = len(sys.argv) > 1 and 'verbose' in sys.argv[1:]
+    mute = True
+    app.debug = False
+    app.verbose = False
 
     # draw_pipes_network(pipe, filename='spike', show_queues=True)
     # debug_pipes(pipe)

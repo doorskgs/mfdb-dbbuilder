@@ -10,6 +10,9 @@ ALTER TABLE {table_name} ADD CONSTRAINT fk_{prefix}{fk} FOREIGN KEY({fk}_id) REF
 _SQL_IDX = """CREATE INDEX ON {table_name} USING btree ({fk}_id);
 """
 
+_p = os.path.dirname(__file__)
+
+
 def copy_from_tmp_table(table_from, table_to):
     sr = MetaboliteExternal.to_serialize()
 
@@ -28,9 +31,9 @@ FROM {table_from}
 def create_db(table_name):
     SQL = "DROP TABLE IF EXISTS {table_name};\n"
 
-    with open('sql/edb_table.sql') as fh:
+    with open(_p+'/../sql/edb_table.sql') as fh:
         SQL += fh.read()
-    with open(f'sql/{table_name}_extra_attr.sql') as fh:
+    with open(f'{_p}/../sql/{table_name}_extra_attr.sql') as fh:
         extra_cols = fh.read()
 
     SQL = SQL.format(

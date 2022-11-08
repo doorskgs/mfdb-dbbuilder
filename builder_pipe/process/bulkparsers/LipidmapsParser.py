@@ -11,6 +11,9 @@ class LipidMapsParser(Process):
     consumes = MultiDict, "edb_obj"
     produces = MetaboliteExternal, "edb_record"
 
+    def initialize(self):
+        self.generated = 0
+
     async def produce(self, data: MultiDict):
         _mapping = self.cfg.conf['attribute_mapping']
         important_attr = self.cfg.get('settings.lipidmaps_attr_etc', cast=set)
@@ -34,5 +37,7 @@ class LipidMapsParser(Process):
         if self.app.debug:
             assert_edb_dict(data)
 
-        data['edb_source'] = 'lipmaps'
-        yield MetaboliteExternal(**data)
+        self.generated += 1
+        self.app.print_progress(self.generated)
+
+        yield MetaboliteExternal(edb_source='lipmaps', **data)

@@ -15,6 +15,9 @@ class ChebiParser(Process):
         (SecondaryID, "2ndid")
     )
 
+    def initialize(self):
+        self.generated = 0
+
     async def produce(self, data: dict):
         _mapping = self.cfg.conf['attribute_mapping']
         important_attr = self.cfg.get('settings.chebi_attr_etc', cast=set)
@@ -32,9 +35,12 @@ class ChebiParser(Process):
         if self.app.debug:
             assert_edb_dict(data)
 
-        if 'chebi_id_alt' in etc:
-            id2nd = list(map(lambda x: x.removeprefix("CHEBI:") ,force_list(etc['chebi_id_alt'])))
+        if 'chebi_id_alt' in etc and etc['chebi_id_alt']:
+            id2nd = list(map(lambda x: x.removeprefix("CHEBI:"), force_list(etc['chebi_id_alt'])))
 
             yield SecondaryID(edb_id=data['chebi_id'], secondary_ids=id2nd, edb_source='chebi'), self.produces[1]
+
+        self.generated += 1
+        self.app.print_progress(self.generated)
 
         yield MetaboliteExternal(edb_source='chebi', **data), self.produces[0]
