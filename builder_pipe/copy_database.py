@@ -1,7 +1,10 @@
 import os
 
+from metabolite_index import EDB_SOURCES
+from metabolite_index.attributes import EDB_SOURCES_OTHER
+
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
-from builder_pipe.db import connect_db, disconnect_db, SUPPORTED_DB
+from builder_pipe.db import connect_db, disconnect_db
 from eme.entities import load_settings
 
 _SQL_FKEY = """
@@ -103,7 +106,7 @@ def main():
 
     # INDEXES:
     print("Adding indexes and foreign keys...")
-    execute(cur, sql_add_indexes("edb", SUPPORTED_DB))
+    execute(cur, sql_add_indexes("edb", EDB_SOURCES + EDB_SOURCES_OTHER + {'inchi', 'inchikey', 'smiles'}))
     #execute(cur, sql_add_foreignkeys("edb", SUPPORTED_BULK))
 
     # CLEANUP

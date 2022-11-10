@@ -20,7 +20,7 @@ class MetaboliteExternal(MetaboliteConsistent, CSVSerializable, AbstractData):
         """
         return [
             'edb_id', 'edb_source',
-            'pubchem_id', 'chebi_id', 'hmdb_id', 'kegg_id', 'lipidmaps_id',
+            'pubchem_id', 'chebi_id', 'hmdb_id', 'kegg_id', 'lipmaps_id',
             'cas_id', 'chemspider_id', 'metlin_id', 'swisslipids_id',
             'smiles', 'inchi', 'inchikey', 'formula',
             'charge', 'mass', 'mi_mass',

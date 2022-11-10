@@ -1,3 +1,5 @@
+import math
+
 from eme.pipe import Process
 from metabolite_index import COMMON_ATTRIBUTES
 from metabolite_index.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict
@@ -34,6 +36,11 @@ class ChebiParser(Process):
 
         if self.app.debug:
             assert_edb_dict(data)
+
+        if math.isnan(data['mass']):
+            data['mass'] = None
+        if math.isnan(data['mi_mass']):
+            data['mi_mass'] = None
 
         if 'chebi_id_alt' in etc and etc['chebi_id_alt']:
             id2nd = list(map(lambda x: x.removeprefix("CHEBI:"), force_list(etc['chebi_id_alt'])))

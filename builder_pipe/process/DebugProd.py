@@ -12,7 +12,7 @@ class DebugProd(Process):
     async def produce(self, data: MultiDict):
         ff = [
             {'edb_source': 'pubchem', 'pubchem_id': '52925597', 'chebi_id': None,
-             'hmdb_id': None, 'kegg_id': None, 'lipidmaps_id': None, 'cas_id': None, 'chemspider_id': None,
+             'hmdb_id': None, 'kegg_id': None, 'lipmaps_id': None, 'cas_id': None, 'chemspider_id': None,
              'metlin_id': None, 'swisslipids_id': None,
              'smiles': 'CCCCCCCCCC=CCCCCCCCC(=O)OCC(COP(=O)(O)OCC(C(=O)O)N)OC(=O)CCCCCCCC=CCCCCCC',
              'inchi': '1S/C41H76NO10P/c1-3-5-7-9-11-13-15-17-18-19-21-22-24-26-28-30-32-39(43)49-34-37(35-50-53(47,48)51-36-38(42)41(45)46)52-40(44)33-31-29-27-25-23-20-16-14-12-10-8-6-4-2/h14,16,18-19,37-38H,3-13,15,17,20-36,42H2,1-2H3,(H,45,46)(H,47,48)/b16-14-,19-18-/t37-,38+/m1/s1',

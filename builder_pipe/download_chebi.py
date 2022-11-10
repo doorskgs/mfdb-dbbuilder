@@ -30,16 +30,16 @@ def build_pipe():
         pb.add_processes([
             SDFParser("sdf_chebi", consumes="chebi_dump", produces="raw_chebi"),
 
-            ChebiParser("chebi", consumes="raw_chebi", produces=("edb_dump", "2nd_id")),
+            #ChebiParser("chebi", consumes="raw_chebi", produces=("edb_dump", "2nd_id")),
 
             # - Meta Entity -
             # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
             # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
-            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='chebi', table_name='edb_tmp'),
+            #LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='chebi', table_name='edb_tmp'),
 
             # - Secondary IDs -
             #CSVSaver("2nd_csv", consumes=(SecondaryID, "2nd_id")),
-            LocalEDBSaver("db_dump", consumes=(SecondaryID, "2nd_id"), edb_source='chebi', table_name='secondary_id'),
+            #LocalEDBSaver("db_dump", consumes=(SecondaryID, "2nd_id"), edb_source='chebi', table_name='secondary_id'),
         ])
         app = pb.build_app()
 

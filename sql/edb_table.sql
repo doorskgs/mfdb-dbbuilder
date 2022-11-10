@@ -8,7 +8,7 @@ CREATE {table_opts}TABLE {table_name} (
     chebi_id VARCHAR(20),
     hmdb_id VARCHAR(20),
     kegg_id VARCHAR(20),
-    lipidmaps_id VARCHAR(20),
+    lipmaps_id VARCHAR(20),
 
     cas_id VARCHAR(20),
     chemspider_id VARCHAR(20),

@@ -1,12 +1,9 @@
 import psycopg2
 from eme.entities import SettingWrapper
-from metabolite_index import EDB_SOURCES
 
 SUPPORTED_BULK = [
     'chebi', 'hmdb', 'lipidmaps', 'pubchem'
 ]
-
-SUPPORTED_DB = EDB_SOURCES.copy()
 
 def connect_db(cfg: SettingWrapper):
     assert cfg is not None
