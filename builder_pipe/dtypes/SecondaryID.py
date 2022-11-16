@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from eme.pipe.elems.AbstractData import AbstractData
 
-from metabolite_index import MetaboliteConsistent
+from metabolite_index.consistency import MetaboliteConsistent
 
 from builder_pipe.dtypes.CSVSerializable import CSVSerializable
 

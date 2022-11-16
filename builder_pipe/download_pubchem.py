@@ -1,13 +1,13 @@
 import asyncio
 import os
 
+from eme.entities import load_config
 from eme.pipe import pipe_builder
+from eme.pipe.ProcessImpl import DBSaver as LocalEDBSaver
 
+from builder_pipe.db import connect_db, disconnect_db
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
-from builder_pipe.process.DebugProd import DebugProd
 from builder_pipe.process.bulkparsers.PubchemParser import PubchemParser
-from builder_pipe.process.database.LocalEDBSaver import LocalEDBSaver
-from builder_pipe.process.fileformats.CSVParser import CSVParser
 from builder_pipe.process.fileformats.SDFParser import SDFParser
 
 DUMP_DIR = 'db_dumps/'
@@ -15,7 +15,7 @@ DUMP_DIR = 'db_dumps/'
 BULK_FILE = os.path.join(DUMP_DIR, 'PubChem_compound_cache_midb_records.sdf.gz')
 
 
-def build_pipe():
+def build_pipe(conn):
 
     if not os.path.exists(BULK_FILE):
         # download file first
@@ -36,7 +36,7 @@ def build_pipe():
             # - Meta Entity -
             # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
             # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
-            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='pubchem', table_name='edb_tmp'),
+            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), table_name='edb_tmp', conn=conn),
         ])
         app = pb.build_app()
 
@@ -47,7 +47,13 @@ def build_pipe():
 if __name__ == "__main__":
     from builder_pipe.utils.ding import dingdingding
 
-    app = build_pipe()
+    conn = connect_db(load_config(os.path.dirname(__file__) + 'db.ini'))
+    cur = conn.cursor()
+    cur.execute(f"DELETE FROM edb WHERE edb_source = 'pubchem'")
+    conn.commit()
+    cur.close()
+
+    app = build_pipe(conn)
 
     mute = True
     app.debug = True
@@ -56,6 +62,8 @@ if __name__ == "__main__":
     # draw_pipes_network(pipe, filename='spike', show_queues=True)
     # debug_pipes(pipe)
     asyncio.run(app.run())
+
+    conn.close()
 
     if not app.debug and not mute:
         dingdingding()

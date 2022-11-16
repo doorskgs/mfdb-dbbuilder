@@ -1,12 +1,14 @@
 import asyncio
 import os
 
+from eme.entities import load_config
 from eme.pipe import pipe_builder
+from eme.pipe.ProcessImpl import DBSaver as LocalEDBSaver
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.dtypes.SecondaryID import SecondaryID
 from builder_pipe.process.bulkparsers.HMDBParser import HMDBParser
-from builder_pipe.process.database.LocalEDBSaver import LocalEDBSaver
+from builder_pipe.db import connect_db, disconnect_db
 from builder_pipe.process.fileformats.XMLFastParser import XMLFastParser
 from builder_pipe.utils import downloads
 
@@ -16,7 +18,8 @@ BULK_URL = 'https://hmdb.ca/system/downloads/current/hmdb_metabolites.zip'
 BULK_FILE = os.path.join(DUMP_DIR, 'hmdb_metabolites.xml')
 
 
-def build_pipe():
+
+def build_pipe(conn):
 
     if not os.path.exists(BULK_FILE):
         bulk_zip = os.path.join(DUMP_DIR, os.path.basename(BULK_URL))
@@ -42,11 +45,11 @@ def build_pipe():
             # - Meta Entity -
             # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
             # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
-            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), edb_source='hmdb', table_name='edb_tmp'),
+            LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), table_name='edb_tmp', conn=conn),
 
             # - Secondary IDs -
             #CSVSaver("2nd_csv", consumes=(SecondaryID, "2nd_id")),
-            LocalEDBSaver("2nd_dump", consumes=(SecondaryID, "2nd_id"), edb_source='hmdb', table_name='secondary_id'),
+            LocalEDBSaver("2nd_dump", consumes=(SecondaryID, "2nd_id"), table_name='secondary_id', conn=conn),
         ])
         app = pb.build_app()
 
@@ -57,7 +60,13 @@ def build_pipe():
 if __name__ == "__main__":
     from builder_pipe.utils.ding import dingdingding
 
-    app = build_pipe()
+    conn = connect_db(load_config(os.path.dirname(__file__) + 'db.ini'))
+    cur = conn.cursor()
+    cur.execute(f"DELETE FROM edb WHERE edb_source = 'hmdb'")
+    conn.commit()
+    cur.close()
+
+    app = build_pipe(conn)
 
     mute = True
     app.debug = False
@@ -66,6 +75,8 @@ if __name__ == "__main__":
     # draw_pipes_network(pipe, filename='spike', show_queues=True)
     # debug_pipes(pipe)
     asyncio.run(app.run())
+
+    conn.close()
 
     if not app.debug and not mute:
         dingdingding()
