@@ -37,17 +37,20 @@ class ChebiParser(Process):
         if self.app.debug:
             assert_edb_dict(data)
 
-        if math.isnan(data['mass']):
+        if 'mass' in data and math.isnan(data['mass']):
             data['mass'] = None
-        if math.isnan(data['mi_mass']):
+        if 'mi_mass' in data and math.isnan(data['mi_mass']):
             data['mi_mass'] = None
+        if 'charge' in data and math.isnan(data['charge']):
+            data['charge'] = None
 
         if 'chebi_id_alt' in etc and etc['chebi_id_alt']:
             id2nd = list(map(lambda x: x.removeprefix("CHEBI:"), force_list(etc['chebi_id_alt'])))
 
             yield SecondaryID(edb_id=data['chebi_id'], secondary_ids=id2nd, edb_source='chebi'), self.produces[1]
 
+        if self.generated % 1000 == 0:
+            self.app.print_progress(self.generated)
         self.generated += 1
-        self.app.print_progress(self.generated)
 
         yield MetaboliteExternal(edb_source='chebi', **data), self.produces[0]

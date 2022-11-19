@@ -41,8 +41,9 @@ def execute(cur, sql):
 
 
 def main():
-    cfg = load_settings(_p+'/config/db_dump.ini')
-    conn, cur = connect_db(cfg)
+    cfg = load_settings(_p+'/db.ini')
+    conn = connect_db(cfg)
+    cur = conn.cursor()
 
     execute(cur, recreate_tables("edb_tmp"))
 

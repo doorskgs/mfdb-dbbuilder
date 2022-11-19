@@ -26,13 +26,8 @@ class HMDBParser(Process):
     async def produce(self, data: MultiDict):
         _mapping = self.cfg.conf['attribute_mapping']
         important_attr = self.cfg.get('settings.hmdb_attr_etc', cast=set)
-        #flatten_hmdb_children = self.cfg.get('settings.flatten_hmdb_children', cast=bool)
 
         remap_keys(data, _mapping)
-
-        # flattens multi-level HMDB specific XML attributes into a list
-        # if flatten_hmdb_children:
-        #     flatten_hmdb_hierarchies2(data)
 
         preprocess(data)
 
@@ -46,13 +41,15 @@ class HMDBParser(Process):
 
         if 'hmdb_id_alt' in etc and etc['hmdb_id_alt']:
             # strip obvious redundant IDs and only store actual secondaries
-            id2nd = set(map(lambda x: replace_obvious_hmdb_id(x).removeprefix("HMDB").translate(_key_mapping).strip(), force_list(etc['hmdb_id_alt'])))
+            id2nd = set(map(lambda x: x.removeprefix("HMDB").translate(_key_mapping).strip(), force_list(etc['hmdb_id_alt'])))
             id2nd -= {data['hmdb_id'], '', ' ', '  '}
+            id2nd = {replace_obvious_hmdb_id(x) for x in id2nd}
 
             if id2nd:
                 yield SecondaryID(edb_id=data['hmdb_id'], secondary_ids=list(id2nd), edb_source='hmdb'), self.produces[1]
 
+        if self.generated % 1000 == 0:
+            self.app.print_progress(self.generated)
         self.generated += 1
-        self.app.print_progress(self.generated)
 
         yield MetaboliteExternal(edb_source='hmdb', **data), self.produces[0]

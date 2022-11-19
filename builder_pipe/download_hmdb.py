@@ -1,7 +1,7 @@
 import asyncio
 import os
 
-from eme.entities import load_config
+from eme.entities import load_settings
 from eme.pipe import pipe_builder
 from eme.pipe.ProcessImpl import DBSaver as LocalEDBSaver
 
@@ -60,9 +60,11 @@ def build_pipe(conn):
 if __name__ == "__main__":
     from builder_pipe.utils.ding import dingdingding
 
-    conn = connect_db(load_config(os.path.dirname(__file__) + 'db.ini'))
+    dbfile = os.path.dirname(__file__) + '/db.ini'
+    conn = connect_db(load_settings(dbfile))
     cur = conn.cursor()
-    cur.execute(f"DELETE FROM edb WHERE edb_source = 'hmdb'")
+    cur.execute(f"DELETE FROM edb_tmp WHERE edb_source = 'hmdb'")
+    cur.execute(f"DELETE FROM secondary_id WHERE edb_source = 'hmdb'")
     conn.commit()
     cur.close()
 

@@ -38,6 +38,7 @@ class LipidMapsParser(Process):
             assert_edb_dict(data)
 
         self.generated += 1
-        self.app.print_progress(self.generated)
+        if self.generated % 1000 == 0:
+            self.app.print_progress(self.generated)
 
         yield MetaboliteExternal(edb_source='lipmaps', **data)

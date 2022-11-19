@@ -10,8 +10,7 @@ from eme.entities import load_settings
 _SQL_FKEY = """
 ALTER TABLE {table_name} ADD CONSTRAINT fk_{prefix}{fk} FOREIGN KEY({fk}_id) REFERENCES {table_name} (edb_id);"""
 
-_SQL_IDX = """CREATE INDEX ON {table_name} USING btree ({fk}_id);
-"""
+_SQL_IDX = """CREATE INDEX ON {table_name} USING {impl} ({fk}{suffix});"""
 
 _p = os.path.dirname(__file__)
 
@@ -48,7 +47,7 @@ def create_db(table_name):
     return SQL
 
 
-def sql_add_indexes(table_name, tables):
+def sql_add_indexes(table_name, tables, suffix='', impl='btree'):
     """
     Creates an SQL to add indices and foreign keys for EDB source table or Consistent metabolites
     :table_name: table name
@@ -60,6 +59,8 @@ def sql_add_indexes(table_name, tables):
     for key in tables:
         SQL.append(_SQL_IDX.format(
             fk=key,
+            impl=impl,
+            suffix=suffix,
             table_name=table_name
         ))
     return "\n".join(SQL)
@@ -92,8 +93,9 @@ def execute(cur, sql):
 
 
 def main():
-    cfg = load_settings(os.path.dirname(__file__)+'/config/db_dump.ini')
-    conn, cur = connect_db(cfg)
+    dbfile = os.path.dirname(__file__) + '/db.ini'
+    conn = connect_db(load_settings(dbfile))
+    cur = conn.cursor()
 
     # SCHEMA:
     print("Creating tables...")
@@ -106,7 +108,12 @@ def main():
 
     # INDEXES:
     print("Adding indexes and foreign keys...")
-    execute(cur, sql_add_indexes("edb", EDB_SOURCES + EDB_SOURCES_OTHER + {'inchi', 'inchikey', 'smiles'}))
+    execute(cur,
+            sql_add_indexes("edb", EDB_SOURCES | EDB_SOURCES_OTHER, impl='btree', suffix='_id') +
+            sql_add_indexes("edb", {'inchikey'}, impl='btree') +
+            sql_add_indexes("edb", {'inchi', 'smiles'}, impl='hash')
+            #sql_add_indexes("edb", {'smiles'}, impl='gin')
+            )
     #execute(cur, sql_add_foreignkeys("edb", SUPPORTED_BULK))
 
     # CLEANUP

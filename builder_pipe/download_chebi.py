@@ -1,7 +1,7 @@
 import asyncio
 import os
 
-from eme.entities import load_config
+from eme.entities import load_config, load_settings
 from eme.pipe import pipe_builder
 from eme.pipe.ProcessImpl import DBSaver as LocalEDBSaver
 
@@ -41,7 +41,7 @@ def build_pipe(conn):
 
             # - Secondary IDs -
             #CSVSaver("2nd_csv", consumes=(SecondaryID, "2nd_id")),
-            LocalEDBSaver("db_dump", consumes=(SecondaryID, "2nd_id"), table_name='secondary_id', conn=conn),
+            LocalEDBSaver("2nd_dump", consumes=(SecondaryID, "2nd_id"), table_name='secondary_id', conn=conn),
         ])
         app = pb.build_app()
 
@@ -51,16 +51,18 @@ def build_pipe(conn):
 if __name__ == "__main__":
     from builder_pipe.utils.ding import dingdingding
 
-    conn = connect_db(load_config(os.path.dirname(__file__) + 'db.ini'))
+    dbfile = os.path.dirname(__file__) + '/db.ini'
+    conn = connect_db(load_settings(dbfile))
     cur = conn.cursor()
-    cur.execute(f"DELETE FROM edb WHERE edb_source = 'chebi'")
+    cur.execute(f"DELETE FROM edb_tmp WHERE edb_source = 'chebi'")
+    cur.execute(f"DELETE FROM secondary_id WHERE edb_source = 'chebi'")
     conn.commit()
     cur.close()
 
     app = build_pipe(conn)
 
     mute = True
-    app.debug = True
+    app.debug = False
     app.verbose = False
 
     # draw_pipes_network(pipe, filename='spike', show_queues=True)

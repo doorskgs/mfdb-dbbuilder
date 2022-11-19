@@ -38,7 +38,8 @@ class PubchemParser(Process):
         if self.app.debug:
             assert_edb_dict(data)
 
+        if self.generated % 1000 == 0:
+            self.app.print_progress(self.generated)
         self.generated += 1
-        self.app.print_progress(self.generated)
 
         yield MetaboliteExternal(edb_source='pubchem', **data)

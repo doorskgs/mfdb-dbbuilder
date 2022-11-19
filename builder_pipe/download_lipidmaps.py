@@ -1,9 +1,7 @@
 import asyncio
 import os
-import time
-from collections import namedtuple
 
-from eme.entities import load_config
+from eme.entities import load_settings
 from eme.pipe import pipe_builder, Concurrent, debug_pipes, draw_pipes_network, DTYPES
 from eme.pipe.ProcessImpl import DBSaver as LocalEDBSaver
 
@@ -58,16 +56,18 @@ if __name__ == "__main__":
     import sys
     from builder_pipe.utils.ding import dingdingding
 
-    conn = connect_db(load_config(os.path.dirname(__file__) + 'db.ini'))
+    dbfile = os.path.dirname(__file__) + '/db.ini'
+    conn = connect_db(load_settings(dbfile))
     cur = conn.cursor()
-    cur.execute(f"DELETE FROM edb WHERE edb_source = 'lipmaps'")
+    cur.execute(f"DELETE FROM edb_tmp WHERE edb_source = 'lipmaps'")
+    cur.execute(f"DELETE FROM secondary_id WHERE edb_source = 'lipmaps'")
     conn.commit()
     cur.close()
 
     app = build_pipe(conn)
 
     mute = True
-    app.debug = True
+    app.debug = False
     app.verbose = False
 
     # draw_pipes_network(pipe, filename='spike', show_queues=True)
