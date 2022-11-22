@@ -1,4 +1,4 @@
-from metabolite_index.edb_formatting import MultiDict
+from mfdb_parsinglib.edb_formatting import MultiDict
 
 
 def parse_xml_recursive(context, cur_elem=None, tag_path=None, has_xmlns=True):

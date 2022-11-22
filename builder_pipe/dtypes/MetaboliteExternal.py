@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from eme.pipe.elems.AbstractData import AbstractData
 
-from metabolite_index.consistency import MetaboliteConsistent
+from mfdb_parsinglib.consistency import MetaboliteConsistent
 
 from builder_pipe.dtypes.CSVSerializable import CSVSerializable
 
@@ -56,4 +56,4 @@ class MetaboliteExternal(MetaboliteConsistent, CSVSerializable, AbstractData):
         elif self.edb_source == 'chemspider':
             return self.chemspider_id
         else:
-            raise Exception("unsupported source format")
+            raise Exception("unsupported source format: " + str(self.edb_source))

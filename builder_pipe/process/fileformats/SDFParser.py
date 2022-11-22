@@ -4,7 +4,7 @@ from typing import TextIO
 
 from eme.pipe import Process, DTYPE, AbstractData
 from eme.pipe.elems.data_types import repr_dtype
-from metabolite_index.edb_formatting import MultiDict
+from mfdb_parsinglib.edb_formatting import MultiDict
 
 
 class SDFParser(Process):

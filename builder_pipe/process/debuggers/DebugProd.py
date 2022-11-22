@@ -1,5 +1,5 @@
 from eme.pipe import Process
-from metabolite_index.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict
+from mfdb_parsinglib.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.process.bulkparsers.utils import assert_edb_dict

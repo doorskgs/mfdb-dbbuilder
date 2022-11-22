@@ -1,6 +1,6 @@
-from metabolite_index.edb_formatting import MultiDict
-from metabolite_index import COMMON_ATTRIBUTES, EDB_SOURCES
-from metabolite_index.attributes import EDB_SOURCES_OTHER
+from mfdb_parsinglib.edb_formatting import MultiDict
+from mfdb_parsinglib import COMMON_ATTRIBUTES, EDB_SOURCES
+from mfdb_parsinglib.attributes import EDB_SOURCES_OTHER
 
 
 def assert_edb_dict(data: MultiDict | dict):

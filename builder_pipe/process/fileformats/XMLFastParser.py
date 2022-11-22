@@ -1,7 +1,7 @@
 from eme.pipe import Process
 from lxml.etree import Element
 
-from metabolite_index.edb_formatting import MultiDict
+from mfdb_parsinglib.edb_formatting import MultiDict
 from lxml import etree
 
 

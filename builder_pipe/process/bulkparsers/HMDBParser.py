@@ -1,9 +1,8 @@
-from eme.pipe import Process
-from metabolite_index import COMMON_ATTRIBUTES
+import os.path
 
-from metabolite_index.edb_formatting import preprocess, remap_keys, map_to_edb_format, MultiDict
-from metabolite_index.edb_formatting.parsinglib import force_list
-from metabolite_index.edb_formatting.edb_specific import replace_obvious_hmdb_id
+from eme.pipe import Process
+
+from mfdb_parsinglib.edb_formatting import preprocess, remap_keys, map_to_edb_format, MultiDict, force_list, replace_obvious_hmdb_id, mapping_path
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.dtypes.SecondaryID import SecondaryID
@@ -14,6 +13,8 @@ _key_mapping = {
 }
 
 class HMDBParser(Process):
+    CFG_PATH = os.path.join(mapping_path, 'hmdb.ini')
+
     consumes = MultiDict, "edb_obj"
     produces = (
         (MetaboliteExternal, "edb_record"),
@@ -25,7 +26,7 @@ class HMDBParser(Process):
 
     async def produce(self, data: MultiDict):
         _mapping = self.cfg.conf['attribute_mapping']
-        important_attr = self.cfg.get('settings.hmdb_attr_etc', cast=set)
+        important_attr = self.cfg.get('attributes.hmdb_attr_etc', cast=set)
 
         remap_keys(data, _mapping)
 
@@ -47,6 +48,10 @@ class HMDBParser(Process):
 
             if id2nd:
                 yield SecondaryID(edb_id=data['hmdb_id'], secondary_ids=list(id2nd), edb_source='hmdb'), self.produces[1]
+
+        if 'kegg_id' in data:
+            # clean kegg_id of whitespaces as some hmdb has it
+            data['kegg_id'] = data['kegg_id'].strip()
 
         if self.generated % 1000 == 0:
             self.app.print_progress(self.generated)

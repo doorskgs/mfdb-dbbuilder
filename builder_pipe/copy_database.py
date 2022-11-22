@@ -1,7 +1,8 @@
 import os
+from math import isclose
 
-from metabolite_index import EDB_SOURCES
-from metabolite_index.attributes import EDB_SOURCES_OTHER
+from mfdb_parsinglib import EDB_SOURCES
+from mfdb_parsinglib.attributes import EDB_SOURCES_OTHER
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.db import connect_db, disconnect_db
@@ -91,12 +92,32 @@ def execute(cur, sql):
         print(sql)
     cur.execute(sql)
 
+def check_tmp_db(table_name, cur):
+    sql = f"""SELECT edb_source, COUNT(*) as count
+    FROM {table_name}
+    GROUP BY edb_source
+    """
+    cur.execute(sql)
+    edb = {edb_source: count for edb_source, count in cur.fetchall()}
+
+    assert isclose(150300, edb['chebi'], abs_tol=0.1), "chebi not present: "+str(edb['chebi'])
+    assert isclose(218000, edb['hmdb'], abs_tol=0.1), "hmdb not present: "+str(edb['hmdb'])
+    assert isclose(47200, edb['lipmaps'], abs_tol=0.1), "lipmaps not present: "+str(edb['lipmaps'])
+    assert isclose(288000, edb['pubchem'], abs_tol=0.1), "pubchem not present: "+str(edb['pubchem'])
+    assert isclose(19800, edb['kegg'], abs_tol=0.1), "kegg not present: "+str(edb['kegg'])
+    return True
+
 
 def main():
     dbfile = os.path.dirname(__file__) + '/db.ini'
     conn = connect_db(load_settings(dbfile))
     cur = conn.cursor()
 
+    # VALIDATE - GET GREEN LIGHT BEFORE OVERRIDING 'edb'
+    if not check_tmp_db('edb_tmp', cur):
+        print("Please run all the EDB import scripts before running copy database.")
+        exit()
+    exit()
     # SCHEMA:
     print("Creating tables...")
     execute(cur, create_db("edb"))

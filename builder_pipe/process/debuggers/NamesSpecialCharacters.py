@@ -1,6 +1,6 @@
 import collections
 import string
-from metabolite_index.edb_formatting.parsinglib import _REPLACE_CHARS
+from mfdb_parsinglib.edb_formatting.parsinglib import _REPLACE_CHARS
 from eme.pipe import Consumer
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal

@@ -1,2 +1,2 @@
-metabolite_index
+mfdb_parsinglib
 psycopg2

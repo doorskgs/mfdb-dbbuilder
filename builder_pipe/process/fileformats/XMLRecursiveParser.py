@@ -1,7 +1,7 @@
 from eme.pipe import Process
 import xml.etree.ElementTree as ET
 
-from metabolite_index.edb_formatting import MultiDict
+from mfdb_parsinglib.edb_formatting import MultiDict
 
 from .parsing.xml import parse_xml_recursive
 

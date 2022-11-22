@@ -1,28 +1,27 @@
 import math
+import os
 
 from eme.pipe import Process
-from mfdb_parsinglib import COMMON_ATTRIBUTES
-from mfdb_parsinglib.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict
-from mfdb_parsinglib.edb_formatting.parsinglib import force_list
+
+from mfdb_parsinglib.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict, force_list, mapping_path
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.dtypes.SecondaryID import SecondaryID
 from builder_pipe.process.bulkparsers.utils import assert_edb_dict
 
 
-class ChebiParser(Process):
+class KeggParser(Process):
+    CFG_PATH = os.path.join(mapping_path, 'kegg.ini')
+
     consumes = MultiDict, "edb_obj"
-    produces = (
-        (MetaboliteExternal, "edb_record"),
-        (SecondaryID, "2ndid")
-    )
+    produces = MetaboliteExternal, "edb_record"
 
     def initialize(self):
         self.generated = 0
 
     async def produce(self, data: dict):
         _mapping = self.cfg.conf['attribute_mapping']
-        important_attr = self.cfg.get('settings.chebi_attr_etc', cast=set)
+        important_attr = self.cfg.get('attributes.kegg_attr_etc', cast=set)
 
         # strip molfile
         molfile = data.pop(None, None)
