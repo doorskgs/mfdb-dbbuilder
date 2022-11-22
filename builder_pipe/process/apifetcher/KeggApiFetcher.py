@@ -33,8 +33,10 @@ class KeggApiFetcher(Process):
         self.throttling_time = 10
 
         self.url = 'https://rest.kegg.jp/get/'
-        self.ids_left = {}
 
+        self.ids_left = set()
+        self.ids_missing = set()
+        self.ids_weird = set()
 
     async def produce(self, all_kegg_ids):
         # bulk fetch from KEGG api
@@ -45,6 +47,7 @@ class KeggApiFetcher(Process):
         async with aiohttp.ClientSession() as session:
             for i in range(0, len(all_kegg_ids), self.api_split):
                 bulk_ids = all_kegg_ids[i:i + self.api_split]
+                bulk_ids_set = set(bulk_ids)
 
                 async with session.get(self.url + '+'.join(map(lambda x: 'cpd:' + str(x), bulk_ids))) as resp:
 
@@ -55,8 +58,23 @@ class KeggApiFetcher(Process):
                         #continue
 
                     # parse api response
+                    ids_in_query = set()
                     async for data in parse_kegg_async(resp.content):
+                        ids_in_query.add(data['entry'])
                         yield data
+
+                    if self.app.debug:
+                        ids_missing = bulk_ids_set - ids_in_query
+                        if ids_missing:
+                            self.ids_missing.update(ids_missing)
+                        ids_not_asked = ids_in_query - bulk_ids_set
+                        if ids_not_asked:
+                            self.ids_weird.update(ids_not_asked)
+
+                        if data['entry'] not in bulk_ids_set:
+                            self.ids_missing.add(data['entry'])
+
+                        # post verify bulk query
 
                     # mark ids as done
                     self.ids_left -= set(bulk_ids)

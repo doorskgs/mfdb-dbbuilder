@@ -16,19 +16,21 @@ def main(table_name='edb_tmp'):
 
     cur = conn.cursor()
     cur.execute(f"""
-        SELECT {db_source}_id
+        SELECT distinct {db_source}_id
         FROM public.{table_name}
         WHERE {db_source}_id IS NOT NULL;
     """)
     db_ids = [r[0] for r in cur.fetchall()]
 
     cur.execute(f"""
-        SELECT json_array_elements(attr_mul->'{db_source}_id')#>>'{{}}'
+        SELECT distinct json_array_elements(attr_mul->'{db_source}_id')#>>'{{}}'
         FROM public.{table_name}
         WHERE attr_mul->'{db_source}_id' IS NOT NULL
     """)
     db_ids.extend(r[0] for r in cur.fetchall())
     disconnect_db(conn, cur)
+
+    db_ids = set(db_ids)
 
     # save to download query file
     with open(secfile, 'w') as fh:
