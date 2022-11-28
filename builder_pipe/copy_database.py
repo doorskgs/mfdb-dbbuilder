@@ -12,7 +12,6 @@ _SQL_FKEY = """
 ALTER TABLE {table_name} ADD CONSTRAINT fk_{prefix}{fk} FOREIGN KEY({fk}_id) REFERENCES {table_name} (edb_id);"""
 
 _SQL_IDX = """CREATE INDEX ON {table_name} USING {impl} ({fk}{suffix});"""
-
 _p = os.path.dirname(__file__)
 
 
@@ -100,11 +99,11 @@ def check_tmp_db(table_name, cur):
     cur.execute(sql)
     edb = {edb_source: count for edb_source, count in cur.fetchall()}
 
-    assert isclose(150300, edb['chebi'], abs_tol=0.1), "chebi not present: "+str(edb['chebi'])
-    assert isclose(218000, edb['hmdb'], abs_tol=0.1), "hmdb not present: "+str(edb['hmdb'])
-    assert isclose(47200, edb['lipmaps'], abs_tol=0.1), "lipmaps not present: "+str(edb['lipmaps'])
-    assert isclose(288000, edb['pubchem'], abs_tol=0.1), "pubchem not present: "+str(edb['pubchem'])
-    assert isclose(19800, edb['kegg'], abs_tol=0.1), "kegg not present: "+str(edb['kegg'])
+    assert isclose(150300, edb['chebi'], rel_tol=0.1), "chebi not present: "+str(edb['chebi'])
+    assert isclose(218000, edb['hmdb'], rel_tol=0.1), "hmdb not present: "+str(edb['hmdb'])
+    assert isclose(47200, edb['lipmaps'], rel_tol=0.1), "lipmaps not present: "+str(edb['lipmaps'])
+    assert isclose(250322, edb['pubchem'], rel_tol=0.1), "pubchem not present: "+str(edb['pubchem'])
+    assert isclose(10881, edb['kegg'], rel_tol=0.1), "kegg not present: "+str(edb['kegg'])
     return True
 
 
@@ -117,7 +116,7 @@ def main():
     if not check_tmp_db('edb_tmp', cur):
         print("Please run all the EDB import scripts before running copy database.")
         exit()
-    exit()
+
     # SCHEMA:
     print("Creating tables...")
     execute(cur, create_db("edb"))
@@ -132,9 +131,11 @@ def main():
     execute(cur,
             sql_add_indexes("edb", EDB_SOURCES | EDB_SOURCES_OTHER, impl='btree', suffix='_id') +
             sql_add_indexes("edb", {'inchikey'}, impl='btree') +
-            sql_add_indexes("edb", {'inchi', 'smiles'}, impl='hash')
-            #sql_add_indexes("edb", {'smiles'}, impl='gin')
-            )
+            sql_add_indexes("edb", {'inchi', 'smiles'}, impl='hash') +
+            #sql_add_indexes("edb", {'smiles'}, impl='gin') +
+            sql_add_indexes("edb", {'attr_mul'}, impl='gin')
+        )#CREATE INDEX ON edb USING gin(attr_mul);
+
     #execute(cur, sql_add_foreignkeys("edb", SUPPORTED_BULK))
 
     # CLEANUP

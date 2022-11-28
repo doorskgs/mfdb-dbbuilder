@@ -8,7 +8,6 @@ from builder_pipe.dtypes.CSVSerializable import CSVSerializable
 
 @dataclass
 class MetaboliteExternal(MetaboliteConsistent, CSVSerializable, AbstractData):
-    edb_source: str = None
 
     @property
     def __DATAID__(self):
@@ -34,26 +33,3 @@ class MetaboliteExternal(MetaboliteConsistent, CSVSerializable, AbstractData):
     @classmethod
     def to_json(cls):
         return ['names', 'attr_mul', 'attr_other']
-
-    @property
-    def edb_id(self):
-        """
-        Pkey for EDB table and MetaboliteExternal ID
-        :return:
-        """
-        if self.edb_source == 'chebi':
-            return self.chebi_id
-        elif self.edb_source == 'hmdb':
-            return self.hmdb_id
-        elif self.edb_source == 'lipmaps' or self.edb_source == 'lipidmaps':
-            return self.lipmaps_id
-        elif self.edb_source == 'kegg':
-            return self.kegg_id
-        elif self.edb_source == 'pubchem':
-            return self.pubchem_id
-        elif self.edb_source == 'metlin':
-            return self.metlin_id
-        elif self.edb_source == 'chemspider':
-            return self.chemspider_id
-        else:
-            raise Exception("unsupported source format: " + str(self.edb_source))

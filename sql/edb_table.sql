@@ -27,7 +27,7 @@ CREATE {table_opts}TABLE {table_name} (
     names JSON,
     description TEXT,
 
-    attr_mul JSON,
+    attr_mul JSONB,
     attr_other JSON,
 
     {extra_columns}

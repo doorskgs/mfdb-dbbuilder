@@ -1,0 +1,6 @@
+psycopg2~=2.9
+mfdb-parsinglib~=1.0
+eme~=5.3
+lxml~=4.9
+playsound~=1.3
+aiohttp~=3.8
