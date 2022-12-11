@@ -1,6 +1,6 @@
 from eme.pipe import Process
 from mfdb_parsinglib.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict, \
-    replace_esc
+    replace_esc, handle_name
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.process.bulkparsers.utils import assert_edb_dict
@@ -19,7 +19,11 @@ class PubchemParser(Process):
         # strip molfile
         molfile = data.pop(None, None)
 
+        # find IUPAC name
+        iupac_name = data.get('PUBCHEM_IUPAC_NAME', data.get('PUBCHEM_IUPAC_TRADITIONAL_NAME', data.get('PUBCHEM_IUPAC_SYSTEMATIC_NAME')))
+
         remap_keys(data, _mapping)
+        data['pc_iupac_name'] = handle_name(iupac_name) if iupac_name is not None else None
 
         # some records lack names
         if 'names' not in data:

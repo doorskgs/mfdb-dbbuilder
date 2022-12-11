@@ -1,0 +1,96 @@
+None      --> 150345
+ChEBI ID      --> 150345
+ChEBI Name      --> 150345
+Star      --> 150345
+Formulae      --> 150258
+Charge      --> 150160
+PubChem Database Links      --> 149544
+Mass      --> 149339
+Monoisotopic Mass      --> 149314
+SMILES      --> 149188
+InChI      --> 139897
+InChIKey      --> 139897
+IUPAC Names      --> 76034
+Last Modified      --> 63024
+Synonyms      --> 56951
+Definition      --> 47656
+MetaboLights Database Links      --> 36773
+SureChEMBL Database Links      --> 35715
+ChEMBL Database Links      --> 34661
+PubMed citation Links      --> 25751
+Chemspider Database Links      --> 24107
+ACToR Database Links      --> 23349
+CAS Registry Numbers      --> 21211
+CompTox Database Links      --> 21092
+Reaxys Registry Numbers      --> 17135
+HMDB Database Links      --> 15441
+BKMS-react Database Links      --> 15158
+BRENDALigand Database Links      --> 15158
+BRENDA Database Links      --> 14200
+Rhea Database Links      --> 11608
+LIPID MAPS instance Database Links      --> 10665
+GlyTouCan Database Links      --> 10514
+GlyGen Database Links      --> 10467
+KEGG COMPOUND Database Links      --> 10106
+UniProt Database Links      --> 9389
+BindingDB Database Links      --> 9328
+Beilstein Registry Numbers      --> 8599
+Secondary ChEBI ID      --> 6761
+SABIO-RK Database Links      --> 6491
+MetaCyc Database Links      --> 6290
+Patent Database Links      --> 5894
+PDB Database Links      --> 5379
+Wikipedia Database Links      --> 4635
+SwissLipids Database Links      --> 4573
+IntEnz Database Links      --> 4157
+NMRShiftDB Database Links      --> 3910
+EnzymePortal Database Links      --> 3572
+PDBeChem Database Links      --> 3436
+Gmelin Registry Numbers      --> 3313
+DrugBank Database Links      --> 3163
+KEGG DRUG Database Links      --> 3057
+KNApSAcK Database Links      --> 2942
+Reactome Database Links      --> 2144
+Drug Central Database Links      --> 1879
+INN      --> 1817
+LINCS Database Links      --> 1600
+GeneOntology Database Links      --> 1324
+VirtualMetabolicHuman Database Links      --> 1245
+BRAND Names      --> 1047
+PPDB Database Links      --> 789
+BioModels Database Links      --> 767
+KEGG GLYCAN Database Links      --> 765
+Golm Database Links      --> 680
+Agricola citation Links      --> 629
+UM-BBD compID Links      --> 612
+IEDB Database Links      --> 610
+FooDB Database Links      --> 528
+Pesticides Database Links      --> 476
+IntAct Database Links      --> 469
+ArrayExpressAtlas Database Links      --> 323
+MolBase Database Links      --> 290
+MassBank Database Links      --> 232
+CarotenoidsDatabase Database Links      --> 226
+VSDB Database Links      --> 206
+Pubchem Database Links      --> 155
+SMID Database Links      --> 150
+PubMed Central citation Links      --> 125
+WebElements Database Links      --> 110
+YMDB Database Links      --> 100
+Chinese Abstracts citation Links      --> 99
+ECMDB Database Links      --> 98
+RESID Database Links      --> 93
+BPDB Database Links      --> 83
+NURSA Database Links      --> 68
+COMe Database Links      --> 52
+ArrayExpress Database Links      --> 44
+LIPID MAPS class Database Links      --> 13
+ChemIDplus Database Links      --> 9
+CiteXplore citation Links      --> 3
+FAO/WHO standards Database Links      --> 1
+PPR Links      --> 1
+
+
+Finished! 47.38316750526428
+
+Process finished with exit code 0

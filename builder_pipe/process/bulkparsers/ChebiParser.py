@@ -3,7 +3,7 @@ import math
 from eme.pipe import Process
 from mfdb_parsinglib import COMMON_ATTRIBUTES
 from mfdb_parsinglib.edb_formatting import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict
-from mfdb_parsinglib.edb_formatting.parsinglib import force_list
+from mfdb_parsinglib.edb_formatting.parsinglib import force_list, handle_name, force_flatten
 
 from builder_pipe.dtypes.MetaboliteExternal import MetaboliteExternal
 from builder_pipe.dtypes.SecondaryID import SecondaryID
@@ -26,8 +26,10 @@ class ChebiParser(Process):
 
         # strip molfile
         molfile = data.pop(None, None)
+        iupac_names = force_list(data.get('IUPAC Names'))
 
         remap_keys(data, _mapping)
+        data['ch_iupac_name'] = [handle_name(name) for name in iupac_names if name is not None]
 
         preprocess(data)
         sids = split_pubchem_ids(data)
