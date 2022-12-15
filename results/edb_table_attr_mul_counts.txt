@@ -1,0 +1,12 @@
+"inchikey"            2
+"inchi"               2
+"hmdb_id"             9
+"swisslipids_id"      1
+"kegg_id"             107
+"cas_id"              320
+"formula"             838
+"chemspider_id"       5
+"lipmaps_id"          110
+"chebi_id"            957
+"pubchem_id"          29
+"smiles"              250322

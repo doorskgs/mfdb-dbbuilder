@@ -11,7 +11,7 @@ from eme.entities import load_settings
 _SQL_FKEY = """
 ALTER TABLE {table_name} ADD CONSTRAINT fk_{prefix}{fk} FOREIGN KEY({fk}_id) REFERENCES {table_name} (edb_id);"""
 
-_SQL_IDX = """CREATE INDEX ON {table_name} USING {impl} ({fk}{suffix});"""
+_SQL_IDX = """CREATE INDEX {idx_name} ON {table_name} USING {impl} ({fk});"""
 _p = os.path.dirname(__file__)
 
 
@@ -47,7 +47,7 @@ def create_db(table_name):
     return SQL
 
 
-def sql_add_indexes(table_name, tables, suffix='', impl='btree'):
+def sql_add_indexes(table_name, tables, suffix='', impl='btree', add_jsonb_idx=True):
     """
     Creates an SQL to add indices and foreign keys for EDB source table or Consistent metabolites
     :table_name: table name
@@ -58,11 +58,21 @@ def sql_add_indexes(table_name, tables, suffix='', impl='btree'):
 
     for key in tables:
         SQL.append(_SQL_IDX.format(
-            fk=key,
+            idx_name=key+suffix,
+            fk=key+suffix,
             impl=impl,
-            suffix=suffix,
             table_name=table_name
         ))
+
+        if impl == 'btree' and add_jsonb_idx:
+            # add btree index within JSONB (multiple cardinality) ids as well
+            SQL.append(_SQL_IDX.format(
+                idx_name=key+suffix,
+                fk=f"(attr_mul->>'{key}{suffix}'::text) COLLATE pg_catalog.\"default\"",
+                impl=impl,
+                table_name=table_name
+            ))
+
     return "\n".join(SQL)
 
 def sql_add_foreignkeys(table_name, tables):
@@ -112,35 +122,36 @@ def main():
     conn = connect_db(load_settings(dbfile))
     cur = conn.cursor()
 
-    # VALIDATE - GET GREEN LIGHT BEFORE OVERRIDING 'edb'
-    if not check_tmp_db('edb_tmp', cur):
-        print("Please run all the EDB import scripts before running copy database.")
-        exit()
-
-    # SCHEMA:
-    print("Creating tables...")
-    execute(cur, create_db("edb"))
-    #execute(cur, create_db("mdb"))
-
-    # INSERT:
-    print("Copying tables...")
-    execute(cur, copy_from_tmp_table("edb_tmp", "edb"))
+    # # VALIDATE - GET GREEN LIGHT BEFORE OVERRIDING 'edb'
+    # if not check_tmp_db('edb_tmp', cur):
+    #     print("Please run all the EDB import scripts before running copy database.")
+    #     exit()
+    #
+    # # SCHEMA:
+    # print("Creating tables...")
+    # execute(cur, create_db("edb"))
+    # #execute(cur, create_db("mdb"))
+    #
+    # # INSERT:
+    # print("Copying tables...")
+    # execute(cur, copy_from_tmp_table("edb_tmp", "edb"))
 
     # INDEXES:
     print("Adding indexes and foreign keys...")
     execute(cur,
-            sql_add_indexes("edb", EDB_SOURCES | EDB_SOURCES_OTHER, impl='btree', suffix='_id') +
-            sql_add_indexes("edb", {'inchikey'}, impl='btree') +
-            sql_add_indexes("edb", {'inchi', 'smiles'}, impl='hash') +
+            sql_add_indexes("edb", EDB_SOURCES | EDB_SOURCES_OTHER, impl='btree', suffix='_id', add_jsonb_idx=True) +
+            sql_add_indexes("edb", {'inchikey'}, impl='btree', add_jsonb_idx=True) +
+            sql_add_indexes("edb", {'inchi', 'smiles'}, impl='hash', add_jsonb_idx=False) +
+            sql_add_indexes("secondary_id", {'secondary_ids'}, impl='gin', add_jsonb_idx=False)
             #sql_add_indexes("edb", {'smiles'}, impl='gin') +
-            sql_add_indexes("edb", {'attr_mul'}, impl='gin')
-        )#CREATE INDEX ON edb USING gin(attr_mul);
+            #sql_add_indexes("edb", {'attr_mul'}, impl='gin')
+        )
 
-    #execute(cur, sql_add_foreignkeys("edb", SUPPORTED_BULK))
+    # execute(cur, sql_add_foreignkeys("edb", SUPPORTED_BULK))
 
-    # CLEANUP
-    print("Cleaning up")
-    execute(cur, delete_table("edb_tmp"))
+    # # CLEANUP
+    # print("Cleaning up")
+    # execute(cur, delete_table("edb_tmp"))
 
     conn.commit()
     disconnect_db(conn, cur)
