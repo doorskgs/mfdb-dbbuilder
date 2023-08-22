@@ -1,0 +1,21 @@
+[attributes]
+chebi_attr_etc= ['chebi_star']
+
+[attribute_mapping]
+chebiId = 'chebi_id'
+
+chebiAsciiName = 'names'
+Synonyms = 'names'
+IupacNames = 'names'
+
+monoisotopicMass = 'mi_mass'
+entityStar = 'chebi_star'
+Formulae = 'formula'
+inchiKey = 'inchikey'
+InchiKey = 'inchikey'
+
+wikipedia accession = 'wiki_id'
+wikipedia_id = 'wiki_id'
+SecondaryChEBIIds = 'chebi_id_alt'
+kegg compound_id = 'kegg_id'
+

@@ -1,2 +1,0 @@
-mfdb_parsinglib
-psycopg2

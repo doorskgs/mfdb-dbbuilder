@@ -1,0 +1,1629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metabolite>
+  <version>5.0</version>
+  <creation_date>2005-11-16 15:48:42 UTC</creation_date>
+  <update_date>2021-09-14 15:15:56 UTC</update_date>
+  <accession>HMDB0000027</accession>
+  <status>quantified</status>
+  <secondary_accessions>
+    <accession>HMDB0000787</accession>
+    <accession>HMDB0002154</accession>
+    <accession>HMDB00027</accession>
+    <accession>HMDB0059658</accession>
+    <accession>HMDB00787</accession>
+    <accession>HMDB02154</accession>
+    <accession>HMDB59658</accession>
+  </secondary_accessions>
+  <name>Tetrahydrobiopterin</name>
+  <description>Tetrahydrobiopterin (CAS: 17528-72-2), also known as BH4, is an essential cofactor in the synthesis of neurotransmitters and nitric oxide (PMID: 16946131). In fact, it is used by all three human nitric-oxide synthases (NOS) eNOS, nNOS, and iNOS as well as the enzyme glyceryl-ether monooxygenase. It is also essential in the conversion of phenylalanine into tyrosine by the enzyme phenylalanine-4-hydroxylase; the conversion of tyrosine into L-dopa by the enzyme tyrosine hydroxylase; and the conversion of tryptophan into 5-hydroxytryptophan via tryptophan hydroxylase. Specifically, tetrahydrobiopterin is a cofactor for tryptophan 5-hydroxylase 1, tyrosine 3-monooxygenase, and phenylalanine hydroxylase, all of which are essential for the formation of the neurotransmitters dopamine, noradrenaline, and adrenaline. Tetrahydrobiopterin has been proposed to be involved in the promotion of neurotransmitter release in the brain and the regulation of human melanogenesis. A defect in BH4 production and/or a defect in the enzyme dihydropteridine reductase (DHPR) causes phenylketonuria type IV, as well as dopa-responsive dystonias. BH4 is also implicated in Parkinson's disease, Alzheimer's disease, and depression. Tetrahydrobiopterin is present in probably every cell or tissue of higher animals. On the other hand, most bacteria, fungi and plants do not synthesize tetrahydrobiopterin (Wikipedia).</description>
+  <synonyms>
+    <synonym>(-)-(6R)-2-Amino-6-((1R,2S)-1,2-dihydroxypropyl)-5,6,7,8-tetrahydro-4(3H)-pteridinone</synonym>
+    <synonym>(6R)-L-Erythro-5,6,7,8-tetrahydrobiopterin</synonym>
+    <synonym>(6R)-L-Erythro-tetrahydrobiopterin</synonym>
+    <synonym>2-Amino-6-(1,2-dihydroxypropyl)-5,6,7,8-tetrahydoro-4(1H)-pteridinone</synonym>
+    <synonym>5,6,7,8-Tetrahydrobiopterin</synonym>
+    <synonym>6R-5,6,7,8-Tetrahydrobiopterin</synonym>
+    <synonym>6R-BH4</synonym>
+    <synonym>6R-L-5,6,7,8-Tetrahydrobiopterin</synonym>
+    <synonym>R-THBP</synonym>
+    <synonym>Sapropterina</synonym>
+    <synonym>Sapropterinum</synonym>
+    <synonym>Tetrahydrobiopterin</synonym>
+    <synonym>5,6,7,8-erythro-Tetrahydrobiopterin</synonym>
+    <synonym>5,6,7,8-tetrahydro-L-Erythrobiopterin</synonym>
+    <synonym>5,6,7,8-Tetrahydrobiopterin, (S-(r*,s*))-isomer</synonym>
+    <synonym>5,6,7,8-Tetrahydrodictyopterin</synonym>
+    <synonym>6R-L-erythro-5,6,7,8-Tetrahydrobiopterin</synonym>
+    <synonym>BPH4</synonym>
+    <synonym>D-threo-Tetrahydrobiopterin</synonym>
+    <synonym>THBP</synonym>
+    <synonym>Kuvan</synonym>
+    <synonym>Phenylalanine hydroxylase cofactor</synonym>
+    <synonym>Sapropterin dihydrochloride</synonym>
+    <synonym>tetrahydro-6-Biopterin</synonym>
+    <synonym>2',4',5'-Trihydroxybutyrophenone</synonym>
+    <synonym>Sapropterin</synonym>
+    <synonym>Trihydroxybutyrophenone</synonym>
+    <synonym>1-Butanone, 1-(2,4,5-trihydroxyphenyl)</synonym>
+    <synonym>2,4,5-Trihydroxybutyrophenone</synonym>
+    <synonym>(6R)-5,6,7,8-Tetrahydro-L-biopterin</synonym>
+    <synonym>(6R)-5,6,7,8-Tetrahydrobiopterin</synonym>
+    <synonym>(6R)-Tetrahydrobiopterin</synonym>
+    <synonym>2-Amino-6-(1,2-dihydroxypropyl)-5,6,7,8-tetrahydro-4(3H)-pteridinone</synonym>
+    <synonym>6R-Tetrahydro-L-biopterin</synonym>
+    <synonym>6beta-5,6,7,8-Tetrahydro-L-biopterin</synonym>
+    <synonym>L-erythro-Tetrahydrobiopterin</synonym>
+    <synonym>(6R)-2-Amino-6-[(1R,2S)-1,2-dihydroxypropyl]-5,6,7,8-tetrahydro-4(1H)-pteridinone</synonym>
+  </synonyms>
+  <chemical_formula>C9H15N5O3</chemical_formula>
+  <average_molecular_weight>241.2471</average_molecular_weight>
+  <monisotopic_molecular_weight>241.117489371</monisotopic_molecular_weight>
+  <iupac_name>(6R)-2-amino-6-[(1R,2S)-1,2-dihydroxypropyl]-1,4,5,6,7,8-hexahydropteridin-4-one</iupac_name>
+  <traditional_iupac>tetrahydrobiopterin</traditional_iupac>
+  <cas_registry_number>62989-33-7</cas_registry_number>
+  <smiles>[H][C@@]1(CNC2=C(N1)C(=O)N=C(N)N2)[C@@H](O)[C@H](C)O</smiles>
+  <inchi>InChI=1S/C9H15N5O3/c1-3(15)6(16)4-2-11-7-5(12-4)8(17)14-9(10)13-7/h3-4,6,12,15-16H,2H2,1H3,(H4,10,11,13,14,17)/t3-,4+,6-/m0/s1</inchi>
+  <inchikey>FNKQXYHWGSIFBK-RPDRRWSUSA-N</inchikey>
+  <taxonomy>
+    <description> belongs to the class of organic compounds known as biopterins and derivatives. These are coenzymes containing a 2-amino-pteridine-4-one derivative. They are mainly synthesized in several parts of the body, including the pineal gland.</description>
+    <direct_parent>Biopterins and derivatives</direct_parent>
+    <kingdom>Organic compounds</kingdom>
+    <super_class>Organoheterocyclic compounds</super_class>
+    <class>Pteridines and derivatives</class>
+    <sub_class>Pterins and derivatives</sub_class>
+    <molecular_framework>Aromatic heteropolycyclic compounds</molecular_framework>
+    <alternative_parents>
+      <alternative_parent>1,2-aminoalcohols</alternative_parent>
+      <alternative_parent>1,2-diols</alternative_parent>
+      <alternative_parent>1,3-aminoalcohols</alternative_parent>
+      <alternative_parent>Aminopyrimidines and derivatives</alternative_parent>
+      <alternative_parent>Azacyclic compounds</alternative_parent>
+      <alternative_parent>Heteroaromatic compounds</alternative_parent>
+      <alternative_parent>Hydrocarbon derivatives</alternative_parent>
+      <alternative_parent>Organic oxides</alternative_parent>
+      <alternative_parent>Organopnictogen compounds</alternative_parent>
+      <alternative_parent>Primary amines</alternative_parent>
+      <alternative_parent>Pyrimidones</alternative_parent>
+      <alternative_parent>Secondary alcohols</alternative_parent>
+      <alternative_parent>Secondary alkylarylamines</alternative_parent>
+      <alternative_parent>Vinylogous amides</alternative_parent>
+    </alternative_parents>
+    <substituents>
+      <substituent>1,2-aminoalcohol</substituent>
+      <substituent>1,2-diol</substituent>
+      <substituent>1,3-aminoalcohol</substituent>
+      <substituent>Alcohol</substituent>
+      <substituent>Amine</substituent>
+      <substituent>Aminopyrimidine</substituent>
+      <substituent>Aromatic heteropolycyclic compound</substituent>
+      <substituent>Azacycle</substituent>
+      <substituent>Biopterin</substituent>
+      <substituent>Heteroaromatic compound</substituent>
+      <substituent>Hydrocarbon derivative</substituent>
+      <substituent>Organic nitrogen compound</substituent>
+      <substituent>Organic oxide</substituent>
+      <substituent>Organic oxygen compound</substituent>
+      <substituent>Organonitrogen compound</substituent>
+      <substituent>Organooxygen compound</substituent>
+      <substituent>Organopnictogen compound</substituent>
+      <substituent>Primary amine</substituent>
+      <substituent>Pyrimidine</substituent>
+      <substituent>Pyrimidone</substituent>
+      <substituent>Secondary alcohol</substituent>
+      <substituent>Secondary aliphatic/aromatic amine</substituent>
+      <substituent>Secondary amine</substituent>
+      <substituent>Vinylogous amide</substituent>
+    </substituents>
+    <external_descriptors>
+      <external_descriptor>5,6,7,8-tetrahydrobiopterin</external_descriptor>
+      <external_descriptor>Coenzymes</external_descriptor>
+    </external_descriptors>
+  </taxonomy>
+  <ontology>
+    <root>
+      <term>Physiological effect</term>
+      <definition>The effect on an organism physiology, resulting from its exposure to a chemical.</definition>
+      <parent_id/>
+      <level>1</level>
+      <type>parent</type>
+      <descendants>
+        <descendant>
+          <term>Health effect</term>
+          <definition>A health condition or observation associated with a stimuli or with a biological activity of a chemical.</definition>
+          <parent_id>7693</parent_id>
+          <level>2</level>
+          <type>parent</type>
+          <synonyms>
+          </synonyms>
+          <descendants>
+            <descendant>
+              <term>Health condition</term>
+              <definition>A health effect that consists on short or long-term disease, condition, disorder, syndrome or constant abnormality.</definition>
+              <parent_id>7694</parent_id>
+              <level>3</level>
+              <type>parent</type>
+              <synonyms>
+              </synonyms>
+              <descendants>
+                <descendant>
+                  <term>Septic shock</term>
+                  <definition/>
+                  <parent_id>7695</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                    <synonym>Endotoxic shock</synonym>
+                  </synonyms>
+                </descendant>
+                <descendant>
+                  <term>Epilepsy</term>
+                  <definition>A brain disease that is characterized by the occurrance of at least two unprovoked seizures resulting from a persistent epileptogenic abnormality of the brain that is able to spontaneously generate paroxysmal activity and typically manifested by sudden brief episodes of altered or diminished consciousness, involuntary movements, or convulsions. (do).</definition>
+                  <parent_id>7695</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                    <synonym>Epileptic spasms</synonym>
+                  </synonyms>
+                </descendant>
+                <descendant>
+                  <term>Cardiac disorders</term>
+                  <definition>Any disorder that affects the heart.</definition>
+                  <parent_id>7695</parent_id>
+                  <level>4</level>
+                  <type>parent</type>
+                  <synonyms>
+                  </synonyms>
+                  <descendants>
+                    <descendant>
+                      <term>Myocardial infarction</term>
+                      <definition>A disorder characterized by gross necrosis of the myocardium; this is due to an interruption of blood supply to the area. (nci ctcae).</definition>
+                      <parent_id>7698</parent_id>
+                      <level>5</level>
+                      <type>child</type>
+                      <synonyms>
+                        <synonym>Mi</synonym>
+                        <synonym>Ami</synonym>
+                        <synonym>Acute myocardial infarction</synonym>
+                        <synonym>Heart attack</synonym>
+                      </synonyms>
+                    </descendant>
+                  </descendants>
+                </descendant>
+              </descendants>
+            </descendant>
+          </descendants>
+        </descendant>
+      </descendants>
+    </root>
+    <root>
+      <term>Disposition</term>
+      <definition>A concept that describes the origin of a chemical, its location within an organism, or its route of exposure.</definition>
+      <parent_id/>
+      <level>1</level>
+      <type>parent</type>
+      <descendants>
+        <descendant>
+          <term>Source</term>
+          <definition>Natural or synthetic origin of a chemical.</definition>
+          <parent_id>7724</parent_id>
+          <level>2</level>
+          <type>parent</type>
+          <synonyms>
+          </synonyms>
+          <descendants>
+            <descendant>
+              <term>Endogenous</term>
+              <definition/>
+              <parent_id>7735</parent_id>
+              <level>3</level>
+              <type>child</type>
+              <synonyms>
+              </synonyms>
+            </descendant>
+          </descendants>
+        </descendant>
+        <descendant>
+          <term>Biological location</term>
+          <definition>The physiological origin within an organism, including anatomical compnents, biofluids and excreta.</definition>
+          <parent_id>7724</parent_id>
+          <level>2</level>
+          <type>parent</type>
+          <synonyms>
+          </synonyms>
+          <descendants>
+            <descendant>
+              <term>Tissue and substructures</term>
+              <definition>An anatomical organizational level including multiple cells yet not comprising a complete organ .</definition>
+              <parent_id>7725</parent_id>
+              <level>3</level>
+              <type>parent</type>
+              <synonyms>
+              </synonyms>
+              <descendants>
+                <descendant>
+                  <term>All tissues</term>
+                  <definition>All tissues in the body of the organism.</definition>
+                  <parent_id>7729</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                  </synonyms>
+                </descendant>
+              </descendants>
+            </descendant>
+            <descendant>
+              <term>Biofluid and excreta</term>
+              <definition>A liquid, semi-solid or solid material originating in the body.</definition>
+              <parent_id>7725</parent_id>
+              <level>3</level>
+              <type>parent</type>
+              <synonyms>
+              </synonyms>
+              <descendants>
+                <descendant>
+                  <term>Feces</term>
+                  <definition>The material discharged from the bowel during defecation. It consists of undigested food, intestinal mucus, epithelial cells, and bacteria.</definition>
+                  <parent_id>7731</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                    <synonym>Fecal</synonym>
+                    <synonym>Stool</synonym>
+                    <synonym>Faecal</synonym>
+                    <synonym>Faeces</synonym>
+                  </synonyms>
+                </descendant>
+                <descendant>
+                  <term>Blood</term>
+                  <definition>A liquid tissue with the primary function of transporting oxygen and carbon dioxide (nci). it supplies the tissues with nutrients, removes waste products, and contains various components of the immune system defending the body against infection.</definition>
+                  <parent_id>7731</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                  </synonyms>
+                </descendant>
+                <descendant>
+                  <term>Cerebrospinal fluid</term>
+                  <definition>The fluid that is contained within the brain ventricles, the subarachnoid space and the central canal of the spinal cord. (nci).</definition>
+                  <parent_id>7731</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                    <synonym>Csf</synonym>
+                  </synonyms>
+                </descendant>
+              </descendants>
+            </descendant>
+            <descendant>
+              <term>Subcellular</term>
+              <definition>An anatomical organizational level including a component within a biological cell .</definition>
+              <parent_id>7725</parent_id>
+              <level>3</level>
+              <type>parent</type>
+              <synonyms>
+              </synonyms>
+              <descendants>
+                <descendant>
+                  <term>Nucleus</term>
+                  <definition>A body within the cell, surrounded by a membrane, within which lie the chromosomes, one or more nucleoli, combined with proteins, and exhibits mitosis. (NCI)</definition>
+                  <parent_id>7730</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                    <synonym>Cell nucleus</synonym>
+                    <synonym>Nucleic</synonym>
+                  </synonyms>
+                </descendant>
+                <descendant>
+                  <term>Mitochondria</term>
+                  <definition/>
+                  <parent_id>7730</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                  </synonyms>
+                </descendant>
+                <descendant>
+                  <term>Cytoplasm</term>
+                  <definition>The portion of the cell contained within the plasma membrane but excluding the nucleus.</definition>
+                  <parent_id>7730</parent_id>
+                  <level>4</level>
+                  <type>child</type>
+                  <synonyms>
+                    <synonym>Cytoplasma</synonym>
+                  </synonyms>
+                </descendant>
+              </descendants>
+            </descendant>
+          </descendants>
+        </descendant>
+      </descendants>
+    </root>
+    <root>
+      <term>Process</term>
+      <definition>Biological or chemical events, or a series thereof, leading to a known function or end-product.</definition>
+      <parent_id/>
+      <level>1</level>
+      <type>parent</type>
+      <descendants>
+        <descendant>
+          <term>Naturally occurring process</term>
+          <definition>Naturally-occurring molecular events or a series thereof, leading to a known function or end-product.</definition>
+          <parent_id>7659</parent_id>
+          <level>2</level>
+          <type>parent</type>
+          <synonyms>
+          </synonyms>
+          <descendants>
+            <descendant>
+              <term>Biological process</term>
+              <definition>Biological or chemical events or a series thereof, leading to a known function or end-product within an organism.</definition>
+              <parent_id>7660</parent_id>
+              <level>3</level>
+              <type>parent</type>
+              <synonyms>
+              </synonyms>
+              <descendants>
+                <descendant>
+                  <term>Biochemical pathway</term>
+                  <definition>A linked series of chemical reactions that occur in a defined order within or between organism cells, and lead to a known function or end product.</definition>
+                  <parent_id>7661</parent_id>
+                  <level>4</level>
+                  <type>parent</type>
+                  <synonyms>
+                  </synonyms>
+                  <descendants>
+                    <descendant>
+                      <term>Arginine and Proline Metabolism</term>
+                      <definition> arginine is synthesized from citrulline by the sequential action of the cytosolic enzymes argininosuccinate synthetase (ass) and argininosuccinate lyase (asl). citrulline can be derived from ornithine via the catabolism of proline or glutamine/glutamate.</definition>
+                      <parent_id>7662</parent_id>
+                      <level>5</level>
+                      <type>child</type>
+                      <synonyms>
+                      </synonyms>
+                    </descendant>
+                    <descendant>
+                      <term>Disulfiram Action Pathway</term>
+                      <definition> with regards to cocaine addiction, cocaine inhibits dopamine reuptake by blocking dopamine transporter 1 (dat1). this increases dopamine concentrations in the synapse and dopamine binding to its receptors induces euphoria.</definition>
+                      <parent_id>7662</parent_id>
+                      <level>5</level>
+                      <type>child</type>
+                      <synonyms>
+                      </synonyms>
+                    </descendant>
+                    <descendant>
+                      <term>Dopa-responsive dystonia</term>
+                      <definition> the features of this condition range from mild to severe. this form of dystonia is called dopa-responsive dystonia because the signs and symptoms typically improve with sustained use of a medication known as l-dopa.</definition>
+                      <parent_id>7662</parent_id>
+                      <level>5</level>
+                      <type>child</type>
+                      <synonyms>
+                      </synonyms>
+                    </descendant>
+                    <descendant>
+                      <term>Doxorubicin Metabolism Pathway</term>
+                      <definition> the major metabolic route of doxorubicin metabolism is two-electron reduction to doxorubicinol. a second route is one-electron reduction resulting in a doxorubicin-semiquinone, which can be undertaken by nadh dehydrogenases in the sarcoplasmic reticulum or mitochondrion, or nitric oxide synthases, nadph dehydrogenase, or xanthine oxidase.</definition>
+                      <parent_id>7662</parent_id>
+                      <level>5</level>
+                      <type>child</type>
+                      <synonyms>
+                      </synonyms>
+                    </descendant>
+                    <descendant>
+                      <term>Pterine Biosynthesis</term>
+                      <definition> the processes shown in this pathway include transport reactions by which folates are taken up by cells and moved intracellularly, folate conjugation with glutamate (required for folate retention within a cell), as well as the synthesis of pterines, which are used in folate synthesis. two branches are depicted: pterin synthesis and folate biosynthesis.</definition>
+                      <parent_id>7662</parent_id>
+                      <level>5</level>
+                      <type>child</type>
+                      <synonyms>
+                      </synonyms>
+                    </descendant>
+                    <descendant>
+                      <term>Tryptophan Metabolism</term>
+                      <definition> this means that it cannot be synthesized by the organism and therefore must be part of its diet. amino acids, including tryptophan, act as building blocks in protein biosynthesis through the action of tryptophanyl trna synthetase.</definition>
+                      <parent_id>7662</parent_id>
+                      <level>5</level>
+                      <type>child</type>
+                      <synonyms>
+                      </synonyms>
+                    </descendant>
+                    <descendant>
+                      <term>Tyrosine Metabolism</term>
+                      <definition> half of the phenylalanine required goes into the production of tyrosine; if the diet is rich in tyrosine itself, the requirements for phenylalanine are reduced by about 50%. phenylalanine hydroxylase is a mixed-function oxygenase: one atom of oxygen is incorporated into water and the other into the hydroxyl of tyrosine.</definition>
+                      <parent_id>7662</parent_id>
+                      <level>5</level>
+                      <type>child</type>
+                      <synonyms>
+                      </synonyms>
+                    </descendant>
+                  </descendants>
+                </descendant>
+              </descendants>
+            </descendant>
+          </descendants>
+        </descendant>
+      </descendants>
+    </root>
+  </ontology>
+  <state>Solid</state>
+  <experimental_properties>
+    <property>
+      <kind>melting_point</kind>
+      <value>250 - 255 °C (hydrochloride salt)</value>
+      <source></source>
+    </property>
+  </experimental_properties>
+  <predicted_properties>
+    <property>
+      <kind>logp</kind>
+      <value>-1.66</value>
+      <source>ALOGPS</source>
+    </property>
+    <property>
+      <kind>logs</kind>
+      <value>-2.04</value>
+      <source>ALOGPS</source>
+    </property>
+    <property>
+      <kind>solubility</kind>
+      <value>2.03 g/L</value>
+      <source>ALOGPS</source>
+    </property>
+    <property>
+      <kind>logp</kind>
+      <value>-2.7</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>pka_strongest_acidic</kind>
+      <value>13.52</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>pka_strongest_basic</kind>
+      <value>1.58</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>iupac</kind>
+      <value>(6R)-2-amino-6-[(1R,2S)-1,2-dihydroxypropyl]-1,4,5,6,7,8-hexahydropteridin-4-one</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>average_mass</kind>
+      <value>241.2471</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>mono_mass</kind>
+      <value>241.117489371</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>smiles</kind>
+      <value>[H][C@@]1(CNC2=C(N1)C(=O)N=C(N)N2)[C@@H](O)[C@H](C)O</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>formula</kind>
+      <value>C9H15N5O3</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>inchi</kind>
+      <value>InChI=1S/C9H15N5O3/c1-3(15)6(16)4-2-11-7-5(12-4)8(17)14-9(10)13-7/h3-4,6,12,15-16H,2H2,1H3,(H4,10,11,13,14,17)/t3-,4+,6-/m0/s1</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>inchikey</kind>
+      <value>FNKQXYHWGSIFBK-RPDRRWSUSA-N</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>polar_surface_area</kind>
+      <value>132</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>refractivity</kind>
+      <value>68.43</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>polarizability</kind>
+      <value>23.67</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>rotatable_bond_count</kind>
+      <value>2</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>acceptor_count</kind>
+      <value>8</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>donor_count</kind>
+      <value>6</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>physiological_charge</kind>
+      <value>0</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>formal_charge</kind>
+      <value>0</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>number_of_rings</kind>
+      <value>2</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>bioavailability</kind>
+      <value>Yes</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>rule_of_five</kind>
+      <value>No</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>ghose_filter</kind>
+      <value>No</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>veber_rule</kind>
+      <value>No</value>
+      <source>ChemAxon</source>
+    </property>
+    <property>
+      <kind>mddr_like_rule</kind>
+      <value>No</value>
+      <source>ChemAxon</source>
+    </property>
+  </predicted_properties>
+  <spectra>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1999</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>31663</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>35145</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>47846</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>159887</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047073</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047075</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047077</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047079</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047081</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047082</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047084</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047086</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047087</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047088</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047089</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047090</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047091</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047093</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047095</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047097</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047099</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047100</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047102</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::CMs</type>
+      <spectrum_id>1047104</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>25520</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>25521</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>25522</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>32078</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>32079</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>32080</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1473642</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1473643</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1473644</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1473645</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1473646</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1473647</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1473648</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1474434</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1474435</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1474436</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1474437</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1474438</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1475535</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1475536</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1475537</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1475538</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1475539</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1475540</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::MsMs</type>
+      <spectrum_id>1477738</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299625</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299626</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299627</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299628</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299629</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299630</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299631</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299632</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299633</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299634</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299635</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299636</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299637</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299638</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299639</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299640</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299641</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299642</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299643</spectrum_id>
+    </spectrum>
+    <spectrum>
+      <type>Specdb::NmrOneD</type>
+      <spectrum_id>299644</spectrum_id>
+    </spectrum>
+  </spectra>
+  <biological_properties>
+    <cellular_locations>
+      <cellular>Nucleus</cellular>
+    </cellular_locations>
+    <biospecimen_locations>
+      <biospecimen>Blood</biospecimen>
+      <biospecimen>Cerebrospinal Fluid (CSF)</biospecimen>
+      <biospecimen>Feces</biospecimen>
+    </biospecimen_locations>
+    <tissue_locations>
+      <tissue>All Tissues</tissue>
+    </tissue_locations>
+    <pathways>
+      <pathway>
+        <name>Alkaptonuria</name>
+        <smpdb_id>SMP00169</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Arginine and proline metabolism</name>
+        <smpdb_id/>
+        <kegg_map_id>map00330</kegg_map_id>
+      </pathway>
+      <pathway>
+        <name>Arginine: Glycine Amidinotransferase Deficiency (AGAT Deficiency)</name>
+        <smpdb_id>SMP00362</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Aromatic L-Aminoacid Decarboxylase Deficiency</name>
+        <smpdb_id>SMP00170</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Creatine deficiency, guanidinoacetate methyltransferase deficiency</name>
+        <smpdb_id>SMP00504</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Disulfiram Action Pathway</name>
+        <smpdb_id>SMP00429</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Dopa-responsive dystonia</name>
+        <smpdb_id>SMP00486</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Dopamine beta-hydroxylase deficiency</name>
+        <smpdb_id>SMP00498</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Doxorubicin Metabolism Pathway</name>
+        <smpdb_id>SMP00650</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Guanidinoacetate Methyltransferase Deficiency (GAMT Deficiency)</name>
+        <smpdb_id>SMP00188</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Hawkinsinuria</name>
+        <smpdb_id>SMP00190</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Hyperornithinemia with gyrate atrophy (HOGA)</name>
+        <smpdb_id>SMP00505</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Hyperornithinemia-hyperammonemia-homocitrullinuria [HHH-syndrome]</name>
+        <smpdb_id>SMP00506</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Hyperphenylalaniemia due to guanosine triphosphate cyclohydrolase deficiency</name>
+        <smpdb_id>SMP00487</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Hyperphenylalaninemia due to 6-pyruvoyltetrahydropterin synthase deficiency (ptps)</name>
+        <smpdb_id>SMP00488</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Hyperphenylalaninemia due to dhpr-deficiency</name>
+        <smpdb_id>SMP00489</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Hyperprolinemia Type I</name>
+        <smpdb_id>SMP00361</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Hyperprolinemia Type II</name>
+        <smpdb_id>SMP00360</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>L-arginine:glycine amidinotransferase deficiency</name>
+        <smpdb_id>SMP00507</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Monoamine oxidase-a deficiency (MAO-A)</name>
+        <smpdb_id>SMP00533</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Ornithine Aminotransferase Deficiency (OAT Deficiency)</name>
+        <smpdb_id>SMP00363</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Phenylalanine and Tyrosine Metabolism</name>
+        <smpdb_id>SMP00008</smpdb_id>
+        <kegg_map_id>map00360</kegg_map_id>
+      </pathway>
+      <pathway>
+        <name>Phenylketonuria</name>
+        <smpdb_id>SMP00206</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Prolidase Deficiency (PD)</name>
+        <smpdb_id>SMP00207</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Prolinemia Type II</name>
+        <smpdb_id>SMP00208</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Pterine Biosynthesis</name>
+        <smpdb_id>SMP00005</smpdb_id>
+        <kegg_map_id>map00790</kegg_map_id>
+      </pathway>
+      <pathway>
+        <name>Segawa syndrome</name>
+        <smpdb_id>SMP00490</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Sepiapterin reductase deficiency</name>
+        <smpdb_id>SMP00491</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Tryptophan metabolism</name>
+        <smpdb_id/>
+        <kegg_map_id>map00380</kegg_map_id>
+      </pathway>
+      <pathway>
+        <name>Tyrosine hydroxylase deficiency</name>
+        <smpdb_id>SMP00497</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Tyrosine metabolism</name>
+        <smpdb_id/>
+        <kegg_map_id>map00350</kegg_map_id>
+      </pathway>
+      <pathway>
+        <name>Tyrosine metabolism</name>
+        <smpdb_id/>
+        <kegg_map_id>map00350</kegg_map_id>
+      </pathway>
+      <pathway>
+        <name>Tyrosinemia Type 2 (or Richner-Hanhart syndrome)</name>
+        <smpdb_id>SMP00369</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Tyrosinemia Type 3 (TYRO3)</name>
+        <smpdb_id>SMP00370</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Tyrosinemia Type I</name>
+        <smpdb_id>SMP00218</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+      <pathway>
+        <name>Tyrosinemia, transient, of the newborn</name>
+        <smpdb_id>SMP00494</smpdb_id>
+        <kegg_map_id/>
+      </pathway>
+    </pathways>
+  </biological_properties>
+  <normal_concentrations>
+    <concentration>
+      <biospecimen>Blood</biospecimen>
+      <concentration_value>0.0110 +/- 0.0008</concentration_value>
+      <concentration_units>uM</concentration_units>
+      <subject_age>Adult (&gt;18 years old)</subject_age>
+      <subject_sex>Both</subject_sex>
+      <subject_condition>Normal</subject_condition>
+      <references>
+        <reference>
+          <reference_text>Ueda S, Matsuoka H, Miyazaki H, Usui M, Okuda S, Imaizumi T: Tetrahydrobiopterin restores endothelial function in long-term smokers. J Am Coll Cardiol. 2000 Jan;35(1):71-5.</reference_text>
+          <pubmed_id>10636262</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+    <concentration>
+      <biospecimen>Blood</biospecimen>
+      <concentration_value>0.0093 +/- 0.0005</concentration_value>
+      <concentration_units>uM</concentration_units>
+      <subject_age>Adult (&gt;18 years old)</subject_age>
+      <subject_sex>Both</subject_sex>
+      <subject_condition>Normal</subject_condition>
+      <references>
+        <reference>
+          <reference_text>Yada T, Kaji S, Akasaka T, Mochizuki S, Ogasawara Y, Tanemoto K, Yoshida K, Kajiya F: Changes of asymmetric dimethylarginine, nitric oxide, tetrahydrobiopterin, and oxidative stress in patients with acute myocardial infarction by medical treatments. Clin Hemorheol Microcirc. 2007;37(3):269-76.</reference_text>
+          <pubmed_id>17726257</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+    <concentration>
+      <biospecimen>Cerebrospinal Fluid (CSF)</biospecimen>
+      <concentration_value>0.026 (0.014-0.038)</concentration_value>
+      <concentration_units>uM</concentration_units>
+      <subject_age>Adult (&gt;18 years old)</subject_age>
+      <subject_sex>Both</subject_sex>
+      <subject_condition>Normal</subject_condition>
+      <references>
+        <reference>
+          <reference_text>Toda Y, Mori K, Hashimoto T, Miyazaki M, Nozaki S, Watanabe Y, Kuroda Y, Kagami S: Administration of secretin for autism alters dopamine metabolism in the central nervous system. Brain Dev. 2006 Mar;28(2):99-103. Epub 2005 Sep 15.</reference_text>
+          <pubmed_id>16168596</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+  </normal_concentrations>
+  <abnormal_concentrations>
+    <concentration>
+      <biospecimen>Blood</biospecimen>
+      <concentration_value>0.16 (0.0-5.8)</concentration_value>
+      <concentration_units>uM</concentration_units>
+      <patient_age>Adult (&gt;18 years old)</patient_age>
+      <patient_sex>Both</patient_sex>
+      <patient_information>Septic shock</patient_information>
+      <comment>Without renal failure, measured in plasma
+</comment>
+      <references>
+        <reference>
+          <reference_text>Galley HF, Le Cras AE, Yassen K, Grant IS, Webster NR: Circulating tetrahydrobiopterin concentrations in patients with septic shock. Br J Anaesth. 2001 Apr;86(4):578-80.</reference_text>
+          <pubmed_id>11573638</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+    <concentration>
+      <biospecimen>Blood</biospecimen>
+      <concentration_value>1.2 (0.8-14.9)</concentration_value>
+      <concentration_units>uM</concentration_units>
+      <patient_age>Adult (&gt;18 years old)</patient_age>
+      <patient_sex>Both</patient_sex>
+      <patient_information>Septic shock</patient_information>
+      <comment>With renal failure, measured in plasma
+</comment>
+      <references>
+        <reference>
+          <reference_text>Galley HF, Le Cras AE, Yassen K, Grant IS, Webster NR: Circulating tetrahydrobiopterin concentrations in patients with septic shock. Br J Anaesth. 2001 Apr;86(4):578-80.</reference_text>
+          <pubmed_id>11573638</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+    <concentration>
+      <biospecimen>Blood</biospecimen>
+      <concentration_value>0.0099 +/- 0.0008</concentration_value>
+      <concentration_units>uM</concentration_units>
+      <patient_age>Adult (&gt;18 years old)</patient_age>
+      <patient_sex>Both</patient_sex>
+      <patient_information>Smoking</patient_information>
+      <references>
+        <reference>
+          <reference_text>Ueda S, Matsuoka H, Miyazaki H, Usui M, Okuda S, Imaizumi T: Tetrahydrobiopterin restores endothelial function in long-term smokers. J Am Coll Cardiol. 2000 Jan;35(1):71-5.</reference_text>
+          <pubmed_id>10636262</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+    <concentration>
+      <biospecimen>Blood</biospecimen>
+      <concentration_value>0.0044 +/- 0.0007</concentration_value>
+      <concentration_units>uM</concentration_units>
+      <patient_age>Adult (&gt;18 years old)</patient_age>
+      <patient_sex>Both</patient_sex>
+      <patient_information>Myocardial infarction</patient_information>
+      <comment>In plasma, acute myocardial infarction
+</comment>
+      <references>
+        <reference>
+          <reference_text>Yada T, Kaji S, Akasaka T, Mochizuki S, Ogasawara Y, Tanemoto K, Yoshida K, Kajiya F: Changes of asymmetric dimethylarginine, nitric oxide, tetrahydrobiopterin, and oxidative stress in patients with acute myocardial infarction by medical treatments. Clin Hemorheol Microcirc. 2007;37(3):269-76.</reference_text>
+          <pubmed_id>17726257</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+    <concentration>
+      <biospecimen>Cerebrospinal Fluid (CSF)</biospecimen>
+      <concentration_value>14400.0</concentration_value>
+      <concentration_units>uM</concentration_units>
+      <patient_age>Newborn (0-30 days old)</patient_age>
+      <patient_sex>Both</patient_sex>
+      <patient_information>Generalized seizures</patient_information>
+      <references>
+        <reference>
+          <reference_text>Cady EB, Lorek A, Penrice J, Reynolds EO, Iles RA, Burns SP, Coutts GA, Cowan FM: Detection of propan-1,2-diol in neonatal brain by in vivo proton magnetic resonance spectroscopy. Magn Reson Med. 1994 Dec;32(6):764-7.</reference_text>
+          <pubmed_id>7869898</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+    <concentration>
+      <biospecimen>Feces</biospecimen>
+      <concentration_value/>
+      <concentration_units/>
+      <patient_age>Children (1-13 years old)</patient_age>
+      <patient_sex>Both</patient_sex>
+      <patient_information>Enthesitis-related arthritis</patient_information>
+      <references>
+        <reference>
+          <reference_text>Stoll ML, Kumar R, Lefkowitz EJ, Cron RQ, Morrow CD, Barnes S: Fecal metabolomics in pediatric spondyloarthritis implicate decreased metabolic diversity and altered tryptophan metabolism as pathogenic factors. Genes Immun. 2016 Dec;17(7):400-405. doi: 10.1038/gene.2016.38. Epub 2016 Oct 27.</reference_text>
+          <pubmed_id>27786174</pubmed_id>
+        </reference>
+      </references>
+    </concentration>
+  </abnormal_concentrations>
+  <diseases>
+    <disease>
+      <name>Septic shock</name>
+      <omim_id/>
+      <references>
+        <reference>
+          <reference_text>Kaufmann I, Hoelzl A, Schliephake F, Hummel T, Chouker A, Lysenko L, Peter K, Thiel M: Effects of adenosine on functions of polymorphonuclear leukocytes from patients with septic shock. Shock. 2007 Jan;27(1):25-31.</reference_text>
+          <pubmed_id>17172976</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Galley HF, Le Cras AE, Yassen K, Grant IS, Webster NR: Circulating tetrahydrobiopterin concentrations in patients with septic shock. Br J Anaesth. 2001 Apr;86(4):578-80.</reference_text>
+          <pubmed_id>11573638</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Jabs CM, Sigurdsson GH, Neglen P: Plasma levels of high-energy compounds compared with severity of illness in critically ill patients in the intensive care unit. Surgery. 1998 Jul;124(1):65-72.</reference_text>
+          <pubmed_id>9663253</pubmed_id>
+        </reference>
+      </references>
+    </disease>
+    <disease>
+      <name>Smoking</name>
+      <omim_id/>
+      <references>
+        <reference>
+          <reference_text>Ruppert T, Scherer G, Tricker AR, Adlkofer F: trans,trans-muconic acid as a biomarker of non-occupational environmental exposure to benzene. Int Arch Occup Environ Health. 1997;69(4):247-51.</reference_text>
+          <pubmed_id>9137998</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Zuccaro P, Altieri I, Rosa M, Passa AR, Pichini S, Ricciarello G, Pacifici R: Determination of nicotine and four metabolites in the serum of smokers by high-performance liquid chromatography with ultraviolet detection. J Chromatogr. 1993 Nov 24;621(2):257-61.</reference_text>
+          <pubmed_id>8294547</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Ueda S, Matsuoka H, Miyazaki H, Usui M, Okuda S, Imaizumi T: Tetrahydrobiopterin restores endothelial function in long-term smokers. J Am Coll Cardiol. 2000 Jan;35(1):71-5.</reference_text>
+          <pubmed_id>10636262</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Carmella SG, La Voie EJ, Hecht SS: Quantitative analysis of catechol and 4-methylcatechol in human urine. Food Chem Toxicol. 1982 Oct;20(5):587-90.</reference_text>
+          <pubmed_id>6890513</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Moyer TP, Charlson JR, Enger RJ, Dale LC, Ebbert JO, Schroeder DR, Hurt RD: Simultaneous analysis of nicotine, nicotine metabolites, and tobacco alkaloids in serum or urine by tandem mass spectrometry, with clinically relevant metabolic profiles. Clin Chem. 2002 Sep;48(9):1460-71.</reference_text>
+          <pubmed_id>12194923</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Chen HJ, Wu CF, Huang JL: Measurement of urinary excretion of 5-hydroxymethyluracil in human by GC/NICI/MS: correlation with cigarette smoking, urinary TBARS and etheno DNA adduct. Toxicol Lett. 2005 Mar 15;155(3):403-10.</reference_text>
+          <pubmed_id>15649624</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Massadeh AM, Gharaibeh AA, Omari KW: A single-step extraction method for the determination of nicotine and cotinine in Jordanian smokers' blood and urine samples by RP-HPLC and GC-MS. J Chromatogr Sci. 2009 Feb;47(2):170-7.</reference_text>
+          <pubmed_id>19222926</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Orhan H, Coolen S, Meerman JH: Quantification of urinary o,o'-dityrosine, a biomarker for oxidative damage to proteins, by high performance liquid chromatography with triple quadrupole tandem mass spectrometry. A comparison with ion-trap tandem mass spectrometry. J Chromatogr B Analyt Technol Biomed Life Sci. 2005 Nov 15;827(1):104-8.</reference_text>
+          <pubmed_id>15878312</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Schettgen T, Musiol A, Kraus T: Simultaneous determination of mercapturic acids derived from ethylene oxide (HEMA), propylene oxide (2-HPMA), acrolein (3-HPMA), acrylamide (AAMA) and N,N-dimethylformamide (AMCC) in human urine using liquid chromatography/tandem mass spectrometry. Rapid Commun Mass Spectrom. 2008 Sep;22(17):2629-38. doi: 10.1002/rcm.3659.</reference_text>
+          <pubmed_id>18666198</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Li N, Jia X, Chen CY, Blumberg JB, Song Y, Zhang W, Zhang X, Ma G, Chen J: Almond consumption reduces oxidative DNA damage and lipid peroxidation in male smokers. J Nutr. 2007 Dec;137(12):2717-22.</reference_text>
+          <pubmed_id>18029489</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Malkawi AH, Al-Ghananeem AM, de Leon J, Crooks PA: Nicotine exposure can be detected in cerebrospinal fluid of active and passive smokers. J Pharm Biomed Anal. 2009 Jan 15;49(1):129-32. doi: 10.1016/j.jpba.2008.10.003. Epub 2008 Oct 15.</reference_text>
+          <pubmed_id>19036546</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Geigy Scientific Tables, 8th Rev edition, pp. 165-177. Edited by C. Lentner, West Cadwell, N.J.: Medical education Div., Ciba-Geigy Corp., Basel, Switzerland c1981-1992.</reference_text>
+          <pubmed_id/>
+        </reference>
+      </references>
+    </disease>
+    <disease>
+      <name>Myocardial infarction</name>
+      <omim_id></omim_id>
+      <references>
+        <reference>
+          <reference_text>Wannemacher RW Jr, Klainer AS, Dinterman RE, Beisel WR: The significance and mechanism of an increased serum phenylalanine-tyrosine ratio during infection. Am J Clin Nutr. 1976 Sep;29(9):997-1006.</reference_text>
+          <pubmed_id>822705</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Mocatta TJ, Pilbrow AP, Cameron VA, Senthilmohan R, Frampton CM, Richards AM, Winterbourn CC: Plasma concentrations of myeloperoxidase predict mortality after myocardial infarction. J Am Coll Cardiol. 2007 May 22;49(20):1993-2000. Epub 2007 May 4.</reference_text>
+          <pubmed_id>17512353</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Yada T, Kaji S, Akasaka T, Mochizuki S, Ogasawara Y, Tanemoto K, Yoshida K, Kajiya F: Changes of asymmetric dimethylarginine, nitric oxide, tetrahydrobiopterin, and oxidative stress in patients with acute myocardial infarction by medical treatments. Clin Hemorheol Microcirc. 2007;37(3):269-76.</reference_text>
+          <pubmed_id>17726257</pubmed_id>
+        </reference>
+      </references>
+    </disease>
+    <disease>
+      <name>Epilepsy</name>
+      <omim_id/>
+      <references>
+        <reference>
+          <reference_text>Rainesalo S, Keranen T, Palmio J, Peltola J, Oja SS, Saransaari P: Plasma and cerebrospinal fluid amino acids in epileptic patients. Neurochem Res. 2004 Jan;29(1):319-24.</reference_text>
+          <pubmed_id>14992292</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Cady EB, Lorek A, Penrice J, Reynolds EO, Iles RA, Burns SP, Coutts GA, Cowan FM: Detection of propan-1,2-diol in neonatal brain by in vivo proton magnetic resonance spectroscopy. Magn Reson Med. 1994 Dec;32(6):764-7.</reference_text>
+          <pubmed_id>7869898</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Perosa SR, Porcionatto MA, Cukiert A, Martins JR, Amado D, Nader HB, Cavalheiro EA, Leite JP, Naffah-Mazzacoratti MG: Extracellular matrix components are altered in the hippocampus, cortex, and cerebrospinal fluid of patients with mesial temporal lobe epilepsy. Epilepsia. 2002;43 Suppl 5:159-61.</reference_text>
+          <pubmed_id>12121313</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Spanaki MV, Siegel H, Kopylev L, Fazilat S, Dean A, Liow K, Ben-Menachem E, Gaillard WD, Theodore WH: The effect of vigabatrin (gamma-vinyl GABA) on cerebral blood flow and metabolism. Neurology. 1999 Oct 22;53(7):1518-22.</reference_text>
+          <pubmed_id>10534261</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Rating D, Siemes H, Loscher W: Low CSF GABA concentration in children with febrile convulsions, untreated epilepsy, and meningitis. J Neurol. 1983;230(4):217-25.</reference_text>
+          <pubmed_id>6198481</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Botez MI, Young SN: Effects of anticonvulsant treatment and low levels of folate and thiamine on amine metabolites in cerebrospinal fluid. Brain. 1991 Feb;114 ( Pt 1A):333-48.</reference_text>
+          <pubmed_id>1705463</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Kobayashi K, Koide Y, Yoshino K, Shohmori T: [P-hydroxyphenylacetic acid concentrations in cerebrospinal fluid]. No To Shinkei. 1982 Aug;34(8):769-74.</reference_text>
+          <pubmed_id>7126379</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Czarnecka J, Cieslak M, Michal K: Application of solid phase extraction and high-performance liquid chromatography to qualitative and quantitative analysis of nucleotides and nucleosides in human cerebrospinal fluid. J Chromatogr B Analyt Technol Biomed Life Sci. 2005 Aug 5;822(1-2):85-90.</reference_text>
+          <pubmed_id>15993662</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Shaywitz BA, Cohen DJ, Bowers MB: Reduced cerebrospinal fluid 5-hydroxyindoleacetic acid and homovanillic acid in children with epilepsy. Neurology. 1975 Jan;25(1):72-9.</reference_text>
+          <pubmed_id>803305</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Anagnostouli M, Livaniou E, Nyalala JO, Evangelatos G, Zournas C, Ithakissios DS, Papageorgiou C: Cerebrospinal fluid levels of biotin in various neurological disorders. Acta Neurol Scand. 1999 Jun;99(6):387-92.</reference_text>
+          <pubmed_id>10577274</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Romigi A, Bari M, Placidi F, Marciani MG, Malaponti M, Torelli F, Izzi F, Prosperetti C, Zannino S, Corte F, Chiaramonte C, Maccarrone M: Cerebrospinal fluid levels of the endocannabinoid anandamide are reduced in patients with untreated newly diagnosed temporal lobe epilepsy. Epilepsia. 2010 May;51(5):768-72. doi: 10.1111/j.1528-1167.2009.02334.x. Epub 2009 Oct 8.</reference_text>
+          <pubmed_id>19817812</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Hirai K, Seki T: Cerebrospinal fluid somatostatin levels in febrile seizures and epilepsy in children. Neuropeptides. 2000 Feb;34(1):18-24.</reference_text>
+          <pubmed_id>10688964</pubmed_id>
+        </reference>
+        <reference>
+          <reference_text>Peters JG: Dopamine, noradrenaline and serotonin spinal fluid metabolites in temporal lobe epileptic patients with schizophrenic symptomatology. Eur Neurol. 1979;18(1):15-8.</reference_text>
+          <pubmed_id>436860</pubmed_id>
+        </reference>
+      </references>
+    </disease>
+  </diseases>
+  <foodb_id/>
+  <chemspider_id>40270</chemspider_id>
+  <kegg_id>C00272</kegg_id>
+  <drugbank_id>DB00360</drugbank_id>
+  <pubchem_compound_id>44257</pubchem_compound_id>
+  <chebi_id>59560</chebi_id>
+  <pdb_id/>
+  <biocyc_id>CPD-14053</biocyc_id>
+  <phenol_explorer_compound_id/>
+  <knapsack_id/>
+  <bigg_id/>
+  <wikipedia_id>Sapropterin</wikipedia_id>
+  <metlin_id/>
+  <vmh_id/>
+  <fbonto_id/>
+  <synthesis_reference>Steven S. Gross, "Blocking utilization of tetrahydrobiopterin to block induction of nitric oxide synthesis." U.S. Patent US5502050, issued October, 1984.</synthesis_reference>
+  <general_references>
+    <reference>
+      <reference_text>Furukawa Y, Kish SJ, Bebin EM, Jacobson RD, Fryburg JS, Wilson WG, Shimadzu M, Hyland K, Trugman JM: Dystonia with motor delay in compound heterozygotes for GTP-cyclohydrolase I gene mutations. Ann Neurol. 1998 Jul;44(1):10-6.</reference_text>
+      <pubmed_id>9667588</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Curtius HC, Heintel D, Ghisla S, Kuster T, Leimbacher W, Niederwieser A: Tetrahydrobiopterin biosynthesis. Studies with specifically labeled (2H)NAD(P)H and 2H2O and of the enzymes involved. Eur J Biochem. 1985 May 2;148(3):413-9.</reference_text>
+      <pubmed_id>3888618</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Galley HF, Le Cras AE, Yassen K, Grant IS, Webster NR: Circulating tetrahydrobiopterin concentrations in patients with septic shock. Br J Anaesth. 2001 Apr;86(4):578-80.</reference_text>
+      <pubmed_id>11573638</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Kuhn DM, Geddes TJ: Tetrahydrobiopterin prevents nitration of tyrosine hydroxylase by peroxynitrite and nitrogen dioxide. Mol Pharmacol. 2003 Oct;64(4):946-53.</reference_text>
+      <pubmed_id>14500751</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Takikawa S, Curtius HC, Redweik U, Leimbacher W, Ghisla S: Biosynthesis of tetrahydrobiopterin. Purification and characterization of 6-pyruvoyl-tetrahydropterin synthase from human liver. Eur J Biochem. 1986 Dec 1;161(2):295-302.</reference_text>
+      <pubmed_id>3536512</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Walter R, Kaufmann PA, Buck A, Berthold T, Wyss C, von Schulthess GK, Schaffner A, Schoedon G: Tetrahydrobiopterin increases myocardial blood flow in healthy volunteers: a double-blind, placebo-controlled study. Swiss Med Wkly. 2001 Feb 24;131(7-8):91-4.</reference_text>
+      <pubmed_id>11416883</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Hyland K, Gunasekara RS, Munk-Martin TL, Arnold LA, Engle T: The hph-1 mouse: a model for dominantly inherited GTP-cyclohydrolase deficiency. Ann Neurol. 2003;54 Suppl 6:S46-8.</reference_text>
+      <pubmed_id>12891653</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Leeming RJ, Blair JA, Melikian V, O'Gorman DJ: Biopterin derivatives in human body fluids and tissues. J Clin Pathol. 1976 May;29(5):444-51.</reference_text>
+      <pubmed_id>932231</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Schallreuter KU, Moore J, Wood JM, Beazley WD, Peters EM, Marles LK, Behrens-Williams SC, Dummer R, Blau N, Thony B: Epidermal H(2)O(2) accumulation alters tetrahydrobiopterin (6BH4) recycling in vitiligo: identification of a general mechanism in regulation of all 6BH4-dependent processes? J Invest Dermatol. 2001 Jan;116(1):167-74.</reference_text>
+      <pubmed_id>11168813</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Dhondt JL, Cotton RG, Danks DM: Liver enzyme activities in hyperphenylalaninaemia due to a defective synthesis of tetrahydrobiopterin. J Inherit Metab Dis. 1985;8(2):47-8.</reference_text>
+      <pubmed_id>3939528</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Sawabe K, Suetake Y, Nakanishi N, Wakasugi KO, Hasegawa H: Cellular accumulation of tetrahydrobiopterin following its administration is mediated by two different processes; direct uptake and indirect uptake mediated by a methotrexate-sensitive process. Mol Genet Metab. 2005 Dec;86 Suppl 1:S133-8. Epub 2005 Sep 13.</reference_text>
+      <pubmed_id>16165391</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Koch R, Moseley KD, Moats R, Yano S, Matalon R, Guttler F: Danger of high-protein dietary supplements to persons with hyperphenylalaninaemia. J Inherit Metab Dis. 2003;26(4):339-42.</reference_text>
+      <pubmed_id>12971421</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Cady EB, Lorek A, Penrice J, Reynolds EO, Iles RA, Burns SP, Coutts GA, Cowan FM: Detection of propan-1,2-diol in neonatal brain by in vivo proton magnetic resonance spectroscopy. Magn Reson Med. 1994 Dec;32(6):764-7.</reference_text>
+      <pubmed_id>7869898</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Matter H, Kumar HS, Fedorov R, Frey A, Kotsonis P, Hartmann E, Frohlich LG, Reif A, Pfleiderer W, Scheurer P, Ghosh DK, Schlichting I, Schmidt HH: Structural analysis of isoform-specific inhibitors targeting the tetrahydrobiopterin binding site of human nitric oxide synthases. J Med Chem. 2005 Jul 28;48(15):4783-92.</reference_text>
+      <pubmed_id>16033258</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Kaufman S, Kapatos G, Rizzo WB, Schulman JD, Tamarkin L, Van Loon GR: Tetrahydropterin therapy for hyperphenylalaninemia caused by defective synthesis of tetrahydrobiopterin. Ann Neurol. 1983 Sep;14(3):308-15.</reference_text>
+      <pubmed_id>6139056</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Spaapen LJ, Bakker JA, Velter C, Loots W, Rubio-Gozalbo ME, Forget PP, Dorland L, De Koning TJ, Poll-The BT, Ploos van Amstel HK, Bekhof J, Blau N, Duran M: Tetrahydrobiopterin-responsive phenylalanine hydroxylase deficiency in Dutch neonates. J Inherit Metab Dis. 2001 Jun;24(3):352-8.</reference_text>
+      <pubmed_id>11486900</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Toda Y, Mori K, Hashimoto T, Miyazaki M, Nozaki S, Watanabe Y, Kuroda Y, Kagami S: Administration of secretin for autism alters dopamine metabolism in the central nervous system. Brain Dev. 2006 Mar;28(2):99-103. Epub 2005 Sep 15.</reference_text>
+      <pubmed_id>16168596</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Moens AL, Kass DA: Tetrahydrobiopterin and cardiovascular disease. Arterioscler Thromb Vasc Biol. 2006 Nov;26(11):2439-44. Epub 2006 Aug 31.</reference_text>
+      <pubmed_id>16946131</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Komori H, Matsuishi T, Yamada S, Yamashita Y, Ohtaki E, Kato H: Cerebrospinal fluid biopterin and biogenic amine metabolites during oral R-THBP therapy for infantile autism. J Autism Dev Disord. 1995 Apr;25(2):183-93.</reference_text>
+      <pubmed_id>7559284</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Kaufman S: Biopterin-responsive hyperphenylalaninemia. J Nutr Sci Vitaminol (Tokyo). 1992;Spec No:601-6.</reference_text>
+      <pubmed_id>1297822</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Sanford M, Keating GM: Spotlight on sapropterin in primary hyperphenylalaninemia. BioDrugs. 2009;23(3):201-2. doi: 10.2165/00063030-200923030-00007.</reference_text>
+      <pubmed_id>19627172</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>MacDonald A, Ahring K, Dokoupil K, Gokmen-Ozel H, Lammardo AM, Motzfeldt K, Robert M, Rocha JC, van Rijn M, Belanger-Quintana A: Adjusting diet with sapropterin in phenylketonuria: what factors should be considered? Br J Nutr. 2011 Jul;106(2):175-82. doi: 10.1017/S0007114511000298.</reference_text>
+      <pubmed_id>21466737</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Burton BK, Nowacka M, Hennermann JB, Lipson M, Grange DK, Chakrapani A, Trefz F, Dorenbaum A, Imperiale M, Kim SS, Fernhoff PM: Safety of extended treatment with sapropterin dihydrochloride in patients with phenylketonuria: results of a phase 3b study. Mol Genet Metab. 2011 Aug;103(4):315-22. doi: 10.1016/j.ymgme.2011.03.020. Epub 2011 Mar 31.</reference_text>
+      <pubmed_id>21646032</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Utz JR, Lorentz CP, Markowitz D, Rudser KD, Diethelm-Okita B, Erickson D, Whitley CB: START, a double blind, placebo-controlled pharmacogenetic test of responsiveness to sapropterin dihydrochloride in phenylketonuria patients. Mol Genet Metab. 2012 Feb;105(2):193-7. doi: 10.1016/j.ymgme.2011.10.014. Epub 2011 Oct 29.</reference_text>
+      <pubmed_id>22112818</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Gordon P, Thomas JA, Suter R, Jurecki E: Evolving patient selection and clinical benefit criteria for sapropterin dihydrochloride (Kuvan(R)) treatment of PKU patients. Mol Genet Metab. 2012 Apr;105(4):672-6. doi: 10.1016/j.ymgme.2011.12.023. Epub 2012 Jan 8.</reference_text>
+      <pubmed_id>22310224</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Leuret O, Barth M, Kuster A, Eyer D, de Parscau L, Odent S, Gilbert-Dussardier B, Feillet F, Labarthe F: Efficacy and safety of BH4 before the age of 4 years in patients with mild phenylketonuria. J Inherit Metab Dis. 2012 Nov;35(6):975-81. doi: 10.1007/s10545-012-9464-3. Epub  2012 Mar 3.</reference_text>
+      <pubmed_id>22388642</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Ziesch B, Weigel J, Thiele A, Mutze U, Rohde C, Ceglarek U, Thiery J, Kiess W, Beblo S: Tetrahydrobiopterin (BH4) in PKU: effect on dietary treatment, metabolic control, and quality of life. J Inherit Metab Dis. 2012 Nov;35(6):983-92. doi: 10.1007/s10545-012-9458-1. Epub  2012 Mar 6.</reference_text>
+      <pubmed_id>22391997</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Cunningham A, Bausell H, Brown M, Chapman M, DeFouw K, Ernst S, McClure J, McCune H, O'Steen D, Pender A, Skrabal J, Wessel A, Jurecki E, Shediac R, Prasad S, Gillis J, Cederbaum S: Recommendations for the use of sapropterin in phenylketonuria. Mol Genet Metab. 2012 Jul;106(3):269-76. doi: 10.1016/j.ymgme.2012.04.004. Epub 2012 Apr 13.</reference_text>
+      <pubmed_id>22575621</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Shintaku H, Ohwada M: Long-term follow-up of tetrahydrobiopterin therapy in patients with tetrahydrobiopterin deficiency in Japan. Brain Dev. 2013 May;35(5):406-10. doi: 10.1016/j.braindev.2012.06.010. Epub 2012  Jul 24.</reference_text>
+      <pubmed_id>22832064</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Somaraju UR, Merrin M: Sapropterin dihydrochloride for phenylketonuria. Cochrane Database Syst Rev. 2012 Dec 12;12:CD008005. doi: 10.1002/14651858.CD008005.pub3.</reference_text>
+      <pubmed_id>23235653</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Gokmen Ozel H, Lammardo AM, Motzfeldt K, Robert M, Rocha JC, van Rijn M, Ahring K, Belanger-Quintana A, MacDonald A, Dokoupil K: Use of sapropterin in the management of phenylketonuria: seven case reports. Mol Genet Metab. 2013 Feb;108(2):109-11. doi: 10.1016/j.ymgme.2012.11.012. Epub 2012 Nov 28.</reference_text>
+      <pubmed_id>23266371</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Thiele AG, Weigel JF, Ziesch B, Rohde C, Mutze U, Ceglarek U, Thiery J, Muller AS, Kiess W, Beblo S: Nutritional Changes and Micronutrient Supply in Patients with Phenylketonuria Under Therapy with Tetrahydrobiopterin (BH(4)). JIMD Rep. 2013;9:31-40. doi: 10.1007/8904_2012_176. Epub 2012 Oct 17.</reference_text>
+      <pubmed_id>23430545</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Cerone R, Andria G, Giovannini M, Leuzzi V, Riva E, Burlina A: Testing for tetrahydrobiopterin responsiveness in patients with hyperphenylalaninemia due to phenylalanine hydroxylase deficiency. Adv Ther. 2013 Mar;30(3):212-28. doi: 10.1007/s12325-013-0011-x. Epub 2013 Feb 20.</reference_text>
+      <pubmed_id>23436109</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Keil S, Anjema K, van Spronsen FJ, Lambruschini N, Burlina A, Belanger-Quintana A, Couce ML, Feillet F, Cerone R, Lotz-Havla AS, Muntau AC, Bosch AM, Meli CA, Billette de Villemeur T, Kern I, Riva E, Giovannini M, Damaj L, Leuzzi V, Blau N: Long-term follow-up and outcome of phenylketonuria patients on sapropterin: a retrospective study. Pediatrics. 2013 Jun;131(6):e1881-8. doi: 10.1542/peds.2012-3291. Epub 2013 May 20.</reference_text>
+      <pubmed_id>23690520</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Blau N: Sapropterin dihydrochloride for the treatment of hyperphenylalaninemias. Expert Opin Drug Metab Toxicol. 2013 Sep;9(9):1207-18. doi: 10.1517/17425255.2013.804064. Epub 2013 May 27.</reference_text>
+      <pubmed_id>23705856</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Douglas TD, Jinnah HA, Bernhard D, Singh RH: The effects of sapropterin on urinary monoamine metabolites in phenylketonuria. Mol Genet Metab. 2013 Jul;109(3):243-50. doi: 10.1016/j.ymgme.2013.04.017. Epub 2013 May 1.</reference_text>
+      <pubmed_id>23712020</pubmed_id>
+    </reference>
+    <reference>
+      <reference_text>Stanhewicz AE, Alexander LM, Kenney WL: Oral sapropterin acutely augments reflex vasodilation in aged human skin through nitric oxide-dependent mechanisms. J Appl Physiol (1985). 2013 Oct 1;115(7):972-8. doi: 10.1152/japplphysiol.00481.2013. Epub 2013 Jun 6.</reference_text>
+      <pubmed_id>23743404</pubmed_id>
+    </reference>
+  </general_references>
+  <protein_associations>
+    <protein>
+      <protein_accession>HMDBP00087</protein_accession>
+      <name>Tyrosinase</name>
+      <uniprot_id>P14679</uniprot_id>
+      <gene_name>TYR</gene_name>
+      <protein_type>Unknown</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00273</protein_accession>
+      <name>Tyrosine 3-monooxygenase</name>
+      <uniprot_id>P07101</uniprot_id>
+      <gene_name>TH</gene_name>
+      <protein_type>Enzyme</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00280</protein_accession>
+      <name>Phenylalanine-4-hydroxylase</name>
+      <uniprot_id>P00439</uniprot_id>
+      <gene_name>PAH</gene_name>
+      <protein_type>Enzyme</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00435</protein_accession>
+      <name>6-pyruvoyl tetrahydrobiopterin synthase</name>
+      <uniprot_id>Q03393</uniprot_id>
+      <gene_name>PTS</gene_name>
+      <protein_type>Unknown</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00436</protein_accession>
+      <name>Sepiapterin reductase</name>
+      <uniprot_id>P35270</uniprot_id>
+      <gene_name>SPR</gene_name>
+      <protein_type>Enzyme</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00469</protein_accession>
+      <name>Tryptophan 5-hydroxylase 1</name>
+      <uniprot_id>P17752</uniprot_id>
+      <gene_name>TPH1</gene_name>
+      <protein_type>Enzyme</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00471</protein_accession>
+      <name>Tryptophan 5-hydroxylase 2</name>
+      <uniprot_id>Q8IWU9</uniprot_id>
+      <gene_name>TPH2</gene_name>
+      <protein_type>Enzyme</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00545</protein_accession>
+      <name>Dihydropteridine reductase</name>
+      <uniprot_id>P09417</uniprot_id>
+      <gene_name>QDPR</gene_name>
+      <protein_type>Unknown</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00926</protein_accession>
+      <name>Nitric oxide synthase, inducible</name>
+      <uniprot_id>P35228</uniprot_id>
+      <gene_name>NOS2</gene_name>
+      <protein_type>Unknown</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00928</protein_accession>
+      <name>Nitric oxide synthase, brain</name>
+      <uniprot_id>P29475</uniprot_id>
+      <gene_name>NOS1</gene_name>
+      <protein_type>Unknown</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00929</protein_accession>
+      <name>Nitric oxide synthase, endothelial</name>
+      <uniprot_id>P29474</uniprot_id>
+      <gene_name>NOS3</gene_name>
+      <protein_type>Unknown</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP00938</protein_accession>
+      <name>GTP cyclohydrolase 1</name>
+      <uniprot_id>P30793</uniprot_id>
+      <gene_name>GCH1</gene_name>
+      <protein_type>Unknown</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP01961</protein_accession>
+      <name>GTP cyclohydrolase 1 feedback regulatory protein</name>
+      <uniprot_id>P30047</uniprot_id>
+      <gene_name>GCHFR</gene_name>
+      <protein_type>Unknown</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP02872</protein_accession>
+      <name>Pterin-4-alpha-carbinolamine dehydratase</name>
+      <uniprot_id>P61457</uniprot_id>
+      <gene_name>PCBD1</gene_name>
+      <protein_type>Enzyme</protein_type>
+    </protein>
+    <protein>
+      <protein_accession>HMDBP10682</protein_accession>
+      <name>Calcium-calmodulin independent nitric oxide synthase iNOS protein</name>
+      <uniprot_id>Q9UM94</uniprot_id>
+      <gene_name/>
+      <protein_type>Enzyme</protein_type>
+    </protein>
+  </protein_associations>
+</metabolite>

@@ -1,0 +1,13 @@
+version: '2'
+services:
+    postgres:
+        image: postgres:14.4
+        volumes:
+            - ./docker/postgresql:/var/lib/postgresql
+        # faster & ephemeral volumes
+        tmpfs:
+            - /var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_PASSWORD=postgres

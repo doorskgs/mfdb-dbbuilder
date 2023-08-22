@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
 
-from ..consistency import get_discovery_attribute_consistencies, ConsistencyClass
+#from ..consistency import get_discovery_attribute_consistencies, ConsistencyClass
 from ..edb_formatting.structs import repr_set, AlmostEqualSet, TrimSet, MultiDict
 from ..edb_formatting import strip_attr, pad_id
-from eme.mapper import map_to
+#from eme.mapper import map_to
 
 
 

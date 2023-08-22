@@ -1,0 +1,13 @@
+[attribute_mapping]
+pubchem_attr_etc = ['logp']
+
+[important_attr]
+#InChIKey = inchikey,sval
+#InChI = inchi,sval
+
+"IUPAC Name" = ['names','sval']
+"Molecular Formula" = ['formula','sval']
+
+"Molecular Weight" = ['mass','fval']
+Mass = ['mi_mass','fval']
+"Log P" = ['logp','fval']

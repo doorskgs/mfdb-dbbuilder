@@ -10,5 +10,4 @@ lxml~=4.9
 
 playsound~=1.3
 
-# mfdb-parsinglib~=1.0
-# eme~=5.3
+
