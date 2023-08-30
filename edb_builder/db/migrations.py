@@ -71,7 +71,7 @@ def delete_table(table_name):
     return f"DROP TABLE {table_name}"
 
 
-def create_db(table_name, opts=None):
+def create_table(table_name, opts=None):
     # Create tmp table
     SQL = "DROP TABLE IF EXISTS {table_name};\n"
     with open(_p+'/sql/edb_table.sql') as fh:
@@ -85,7 +85,7 @@ def create_db(table_name, opts=None):
 
     SQL = SQL.format(
         table_name=table_name,
-        table_opts=opts,
+        table_opts=opts or "",
         extra_columns=extra_cols
     )
     return SQL
@@ -122,20 +122,22 @@ def migrate_db(*args, close=True, debug=True, **kwargs):
     tables = set(args or ['mdb', 'edb', 'edb_tmp'])
 
     if 'edb_tmp' in tables:
-        execute(cur, create_db("edb_tmp", opts="UNLOGGED ", debug=debug))
+        execute(cur, create_table("edb_tmp", opts="UNLOGGED "), debug=debug)
         execute(cur, create_secondary(), debug=debug)
 
     if 'edb' in tables:
-        execute(cur, create_db("edb"), debug=debug)
+        execute(cur, create_table("edb"), debug=debug)
 
     if 'mdb' in tables:
-        execute(cur, create_db("mdb"), debug=debug)
+        execute(cur, create_table("mdb"), debug=debug)
 
     conn.commit()
 
     if close:
         cur.close()
         conn.close()
+
+    return conn
 
 
 def copy_database(*args, close=True, clean_tmp=True, debug=True, **kwargs):

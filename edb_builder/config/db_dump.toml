@@ -1,0 +1,4 @@
+
+[batch]
+size = 1000
+size_debug = 40

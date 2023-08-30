@@ -21,19 +21,19 @@ class PipeAppBuilder:
         self.processes = []
         self.runner = None
 
-    def add_processes(self, processes):
+    def add_processes(self, processes, cfg_path=None):
         self.processes.extend(processes)
+
+        if not cfg_path:
+            cfg_path = self.cfg_path or ''
 
         for process in processes:
             if hasattr(process, 'cfg'):
-                cfg_path = process.CFG_PATH if hasattr(process, 'CFG_PATH') else self.cfg_path + '/' + process.__PROCESSID__ + '.toml'
-
-                if cfg_path == 'local':
-                    # config path is the same as the file source.
-                    # useful for specific processes
-                    cfg_path = os.path.dirname(process.__file__) + '/' + process.__PROCESSID__ + '.toml'
-
-                process.cfg = SettingWrapper(toml.load(cfg_path))
+                cfg_file_path = os.path.join(cfg_path, process.__PROCESSID__ + '.toml')
+                try:
+                    process.cfg = SettingWrapper(toml.load(cfg_file_path))
+                except toml.decoder.TomlDecodeError as e:
+                    raise Exception(f"Error parsing Process config: {cfg_file_path} - {e}")
 
     def set_runner(self, rid):
         if 'serial' == rid:

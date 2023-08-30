@@ -23,14 +23,15 @@ def build_pipe(conn):
         downloads.download_file(BULK_URL, BULK_FILE)
 
     with pipe_builder() as pb:
-        pb.cfg_path = os.path.join(os.path.dirname(__file__), 'config')
         pb.set_runner('serial')
 
         pb.add_processes([
             SDFParser("sdf_chebi", consumes="chebi_dump", produces="raw_chebi"),
 
-            ChebiParser("chebi", consumes="raw_chebi", produces=("edb_dump", "2nd_id")),
+            ChebiParser("parse_chebi", consumes="raw_chebi", produces=("edb_dump", "2nd_id")),
+        ], cfg_path=os.path.dirname(__file__))
 
+        pb.add_processes([
             # - Meta Entity -
             # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
             # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
@@ -39,7 +40,7 @@ def build_pipe(conn):
             # - Secondary IDs -
             #CSVSaver("2nd_csv", consumes=(SecondaryID, "2nd_id")),
             LocalEDBSaver("2nd_dump", consumes=(SecondaryID, "2nd_id"), table_name='secondary_id', conn=conn),
-        ])
+        ], cfg_path=os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'edb_builder', 'config')))
         app = pb.build_app()
 
     app.start_flow(BULK_FILE, (str, "chebi_dump"))

@@ -2,7 +2,7 @@ import os
 from enum import Enum
 
 
-EDB_SOURCES = list(map(lambda x: x[4:], filter(lambda x: x.startswith('edb_'), os.listdir('.'))))
+EDB_SOURCES = list(map(lambda x: x[4:], filter(lambda x: x.startswith('edb_'), os.listdir(os.path.dirname(__file__)))))
 
 
 class EDBSource(Enum):

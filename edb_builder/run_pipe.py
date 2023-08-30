@@ -25,9 +25,7 @@ def run_pipe(module_name, *, clear_db=False, mute=False, debug=False, verbose=Fa
             raise e
 
         print(f"Database not found. Create new database with DSN: {dbcfg['dbconn']}? Y/n")
-        if input() == 'Y':
-            # todo: itt: detect if DB doesn't exist or tables don't?
-            #            & which table?
+        if True or input().lower() == 'y':
             conn = migrations.migrate_db(close=False, **dbcfg['dbconn'])
         else:
             print("Exiting. Please create database")
