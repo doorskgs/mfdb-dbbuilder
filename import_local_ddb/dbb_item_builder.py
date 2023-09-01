@@ -10,8 +10,9 @@ from import_local_ddb.utils import iter_sol
 MULABLE_ATTR = (EDB_ID | EDB_ID_OTHER | {'smiles', 'inchikey'}) - {'swisslipids_id'}
 RANGE_ATTR = {'mass', 'mi_mass', 'charge', 'logp'}
 OTHER_ATTR = {'inchi', "names", "formula", "pname"}
-ATTR_OTHER_MAPPING = { "logp", "chebi_star", "state" }
+ATTR_OTHER_MAPPING = {"logp", "chebi_star", "state"}
 
+#
 attr_prefix = {
     'pubchem_id': 'P', 'chebi_id': 'C', 'hmdb_id': 'H', 'kegg_id': 'K', 'lipmaps_id': 'L',
     'inchikey': 'I', 'inchi': 'Iv', 'smiles': 'S', 'pname': 'N',

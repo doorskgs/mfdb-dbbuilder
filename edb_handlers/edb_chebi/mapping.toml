@@ -1,3 +1,6 @@
+[meta]
+tags = ['api', 'mapping']
+
 [attributes]
 chebi_attr_etc= ['chebi_star']
 

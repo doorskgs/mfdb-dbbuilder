@@ -1,3 +1,6 @@
+[meta]
+tags = ['api', 'mapping']
+
 [attribute_mapping]
 pubchem_attr_etc = ['logp']
 

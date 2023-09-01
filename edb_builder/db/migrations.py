@@ -1,5 +1,7 @@
 import os
 import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
 
 from ..dtypes import MetaboliteExternal
 from .provision import check_db_counts
@@ -111,11 +113,23 @@ def execute(cur, sql, debug=False):
     cur.execute(sql)
 
 
+def create_db(**kwargs):
+    db_name = kwargs.pop('database')
+    conn = psycopg2.connect(**kwargs)
+    conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT);
+
+    cur = conn.cursor()
+
+    execute(cur, f"CREATE DATABASE {db_name}", debug=True)
+
+    cur.close()
+    conn.close()
+
+
 def migrate_db(*args, close=True, debug=True, **kwargs):
     if 'conn' in kwargs:
         conn = kwargs.pop('conn')
     else:
-        kwargs.pop('database')
         conn = psycopg2.connect(**kwargs)
 
     cur = conn.cursor()

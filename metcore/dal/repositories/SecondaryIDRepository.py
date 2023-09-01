@@ -2,7 +2,7 @@ import asyncpg
 
 from ..ctx import Repository
 from .RepositoryBase import RepositoryBase
-from ...views.SecondaryID import SecondaryID
+from ...dal_sqlalchemy.entities import SecondaryID
 
 
 @Repository(SecondaryID)

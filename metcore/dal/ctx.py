@@ -1,16 +1,17 @@
 import json
+import toml
 import os.path
-
 import asyncpg
-from eme.entities import load_settings, declare_service_type, iter_services
 
-Repository, get_repo = declare_service_type('Repo', 'T')
+from .. import srv
 
+Repository, get_repo = srv.declare_service_type('Repo', 'T')
 
-config = load_settings(os.path.dirname(__file__)+"/ctx.ini")
+config = toml.load(os.path.dirname(__file__)+"/ctx.ini")
 
 single_connection = True
 pool: asyncpg.Pool | None = None
+
 
 async def setup_conn(conn):
     def _encoder(value):
@@ -20,11 +21,12 @@ async def setup_conn(conn):
     await conn.set_type_codec('jsonb', encoder=_encoder, decoder=_decoder, schema='pg_catalog', format='binary')
     await conn.set_type_codec('json', encoder=json.dumps, decoder=json.loads, schema='pg_catalog', format='text')
 
-    for repo in iter_services('Repo'):
+    for repo in srv.iter_services('Repo'):
         if single_connection:
             repo.conn = conn
             # single connection
         #connections.append(conn)
+
 
 async def initialize_db(pool_size=None):
     global pool, single_connection
@@ -32,21 +34,21 @@ async def initialize_db(pool_size=None):
         # already initialized
         return
 
-    db = config.get('db.dbhandler')
+    db = config['db']['dbhandler']
 
-    min_size, max_size = pool_size if pool_size else config.get(f'{db}.pool_size', cast=lambda x: map(int, x), default=(10, 10))
-    single_connection = config.get(f'{db}.single_connection', cast=bool, default=True)
+    min_size, max_size = pool_size or config[db].get('pool_size') or (10, 10)
+    single_connection = config[db].get('single_connection', True)
 
     pool = await asyncpg.create_pool(
-        config.get(f'{db}.dsn'),
+        config[db]['dsn'],
         min_size=min_size,
         max_size=max_size,
-        max_queries=config.get(f'{db}.max_queries', cast=int, default=50000),
-        max_inactive_connection_lifetime=config.get(f'{db}.max_inactive_connection_lifetime', cast=float, default=300.0),
+        max_queries=config[db].get('max_queries', default=50000),
+        max_inactive_connection_lifetime=config[db].get('max_inactive_connection_lifetime', default=300.0),
 
         # conn kwargs
-        max_cached_statement_lifetime=config.get(f'{db}.max_cached_statement_lifetime', cast=float, default=0),
-        statement_cache_size=config.get(f'{db}.statement_cache_size', cast=int, default=100),
+        max_cached_statement_lifetime=config[db].get('max_cached_statement_lifetime', default=0),
+        statement_cache_size=config[db].get('statement_cache_size', default=100),
         init=setup_conn,
 
         server_settings={
@@ -55,7 +57,7 @@ async def initialize_db(pool_size=None):
     )
 
     if not single_connection:
-        for repo in iter_services('Repo'):
+        for repo in srv.iter_services('Repo'):
             repo.pool = pool
 
 # async def create_connection(dbtype=None):
@@ -77,6 +79,7 @@ async def close_db():
         #     await conn.close()
         #
         # connections.clear()
+
 
 async def get_conn():
     #return connections[0]

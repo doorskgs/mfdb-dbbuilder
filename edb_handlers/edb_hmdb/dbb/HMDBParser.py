@@ -2,7 +2,7 @@ import os.path
 
 from pipebro import Process
 
-from metcore.parsinglib import preprocess, remap_keys, map_to_edb_format, MultiDict, force_list, mapping_path
+from metcore.parsinglib import preprocess, remap_keys, map_to_edb_format, MultiDict, force_list
 
 from .parselib import replace_obvious_hmdb_id
 from edb_builder.utils.verify_edb_dict import assert_edb_dict
@@ -15,8 +15,6 @@ _key_mapping = {
 
 
 class HMDBParser(Process):
-    CFG_PATH = os.path.join(mapping_path, 'hmdb.ini')
-
     consumes = MultiDict, "edb_obj"
     produces = (
         (MetaboliteExternal, "edb_record"),

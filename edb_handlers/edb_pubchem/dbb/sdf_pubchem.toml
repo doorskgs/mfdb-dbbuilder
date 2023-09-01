@@ -1,0 +1,5 @@
+[meta]
+tags = ['parser', 'sdf']
+
+[debug]
+stop_after = 40

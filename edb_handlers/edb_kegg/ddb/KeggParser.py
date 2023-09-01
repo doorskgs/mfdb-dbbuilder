@@ -1,17 +1,12 @@
-import math
-import os
-
 from pipebro import Process
-from mfdb_parsinglib import EDB_SOURCES, EDB_SOURCES_OTHER
-from metcore.parsinglib import preprocess, remap_keys, split_pubchem_ids, map_to_edb_format, MultiDict, force_list, mapping_path
 
+from metcore.parsinglib import preprocess, remap_keys, map_to_edb_format, MultiDict, force_list
+
+from edb_handlers import EDB_SOURCES_OTHER, EDB_SOURCES
 from edb_builder.dtypes.MetaboliteExternal import MetaboliteExternal
-from edb_builder.process.bulkparsers.utils import assert_edb_dict
 
 
 class KeggParser(Process):
-    CFG_PATH = os.path.join(mapping_path, 'kegg.ini')
-
     consumes = MultiDict, "edb_obj"
     produces = MetaboliteExternal, "edb_record"
 

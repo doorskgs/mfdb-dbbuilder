@@ -1,0 +1,5 @@
+[meta]
+tags = ['parser', 'json']
+
+[settings]
+filename = 'db_dumps/kegg_dump.json'

@@ -3,7 +3,7 @@ import os
 from pipebro import pipe_builder
 from pipebro.ProcessImpl import DBSaver as LocalEDBSaver, JSONLinesParser
 
-
+from edb_builder.utils import PIPECFG_PATH
 from edb_builder.dtypes import MetaboliteExternal, SecondaryID
 
 from .KeggParser import KeggParser
@@ -27,10 +27,12 @@ def build_pipe(conn):
         pb.add_processes([
             JSONLinesParser("json_kegg", consumes="kegg_dump", produces=(dict, "raw_kegg")),
 
-            KeggParser("kegg", consumes=(dict, "raw_kegg"), produces=(MetaboliteExternal, "edb_dump")),
+            KeggParser("parse_kegg", consumes=(dict, "raw_kegg"), produces=(MetaboliteExternal, "edb_dump")),
+        ], cfg_path=os.path.dirname(__file__))
 
+        pb.add_processes([
             LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), table_name='edb_tmp', conn=conn),
-        ])
+        ], cfg_path=PIPECFG_PATH)
         app = pb.build_app()
 
     app.start_flow(BULK_FILE, (str, "kegg_dump"))

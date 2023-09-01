@@ -1,0 +1,11 @@
+[meta]
+tags = ['parser', 'dbsave', 'api', 'mapping']
+
+[attributes]
+
+[attribute_mapping]
+name = 'names'
+exact_mass = 'mi_mass'
+mol_weight = 'mass'
+entry = 'kegg_id'
+lipidmaps = 'lipmaps_id'

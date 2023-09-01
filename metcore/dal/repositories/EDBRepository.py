@@ -1,10 +1,8 @@
 import time
-from typing import Generator, Iterable, AsyncGenerator
 import collections
 import asyncpg
 
 from ..ctx import Repository
-from ...attributes import EDB_SOURCES
 from .RepositoryBase import RepositoryBase
 from ...views.MetaboliteConsistent import MetaboliteConsistent
 

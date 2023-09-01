@@ -37,7 +37,6 @@ def try_flatten(arr: list):
     return arr
 
 
-
 def force_flatten(arr, store_in: list):
     """
     Flattens collections regardless of size
@@ -54,6 +53,7 @@ def force_flatten(arr, store_in: list):
     # scalar
     return arr
 
+
 def force_list(coll):
     """
     Forces value to be a list of element 1
@@ -61,6 +61,7 @@ def force_list(coll):
     if isinstance(coll, (list, tuple, set)):
         return list(coll)
     return [coll]
+
 
 def remap_keys(v, _mapping: dict):
     for k in set(v) & set(_mapping):
@@ -80,17 +81,18 @@ def remap_keys(v, _mapping: dict):
             else:
                 v[new_key].append(val)
 
+
 _REPLACE_CHARS = {
     # normalized quotations chr(8221) chr(96)
     ord('"'): '”',
-    8243: '”', #″
-    8221: '”', #”
-    8217: "'", #’
-    8242: "'", #′
-    8216: "'", #‘
-    96: "'", #`
+    8243: '”',  # ″
+    8221: '”',  # ”
+    8217: "'",  # ’
+    8242: "'",  # ′
+    8216: "'",  # ‘
+    96: "'",  # `
     # normalized dash
-    173: '-', # ­
+    173: '-',  # ­
     8211: '-',  # –
     8209: '-',  # ‑
     # special representation that are converted back frontend side
@@ -98,10 +100,11 @@ _REPLACE_CHARS = {
     # manual input errors that are post-corrected (+tab, NL characters)
     160: ' ',  #  
     65279: ' ',  # ﻿
-    8203: ' ', #​
-    65533: ' ',  #�
+    8203: ' ',  # ​
+    65533: ' ',   # �
     8201: ' ',  #
 } | {i: ' ' for i in range(1, 32)}
+
 
 def strip_esc_ad(txt):
     if '\\d' in txt:
@@ -110,27 +113,30 @@ def strip_esc_ad(txt):
         txt = txt.replace('\\a', 'a')
     return txt
 
+
 def handle_names(data: dict):
     if not isinstance(data['names'], (tuple, list, set)):
         data['names'] = [handle_name(data['names'])]
     else:
         data['names'] = list(set(handle_name(n) for n in data['names'] if n is not None))
 
+
 def handle_name(name: str):
     return strip_esc_ad(name).translate(_REPLACE_CHARS)
+
 
 def handle_masses(me: dict):
     try:
         me['mass'] = float(me['mass'])
-    except:
+    except (TypeError, KeyError, ValueError):
         me['mass'] = None
     try:
         me['mi_mass'] = float(me['mi_mass'])
-    except:
+    except (TypeError, KeyError, ValueError):
         me['mi_mass'] = None
     try:
         me['charge'] = float(me['charge'])
-    except:
+    except (TypeError, KeyError, ValueError):
         me['charge'] = None
 
 

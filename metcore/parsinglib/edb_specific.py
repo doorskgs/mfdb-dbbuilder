@@ -2,8 +2,7 @@ from .padding import strip_prefixes
 from .parsinglib import force_flatten, try_flatten, handle_names, flatten, handle_masses
 from .structs import MultiDict
 
-from edb_handlers import EDB_SOURCES, EDB_ID_OTHER
-from metcore.mapping import COMMON_ATTRIBUTES
+from edb_handlers import EDB_SOURCES, EDB_ID_OTHER, COMMON_ATTRIBUTES
 
 EDB_IDS = set(map(lambda x:x+'_id', EDB_SOURCES))
 

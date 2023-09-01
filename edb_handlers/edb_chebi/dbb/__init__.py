@@ -5,7 +5,7 @@ from pipebro.ProcessImpl import DBSaver as LocalEDBSaver
 
 from edb_builder.dtypes import MetaboliteExternal, SecondaryID
 from edb_builder.process.fileformats.SDFParser import SDFParser
-from edb_builder.utils import downloads
+from edb_builder.utils import downloads, PIPECFG_PATH
 
 from .ChebiParser import ChebiParser
 
@@ -40,8 +40,9 @@ def build_pipe(conn):
             # - Secondary IDs -
             #CSVSaver("2nd_csv", consumes=(SecondaryID, "2nd_id")),
             LocalEDBSaver("2nd_dump", consumes=(SecondaryID, "2nd_id"), table_name='secondary_id', conn=conn),
-        ], cfg_path=os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'edb_builder', 'config')))
+        ], cfg_path=PIPECFG_PATH)
         app = pb.build_app()
 
     app.start_flow(BULK_FILE, (str, "chebi_dump"))
+
     return app

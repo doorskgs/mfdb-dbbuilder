@@ -1,2 +1,2 @@
 from .MetaboliteConsistent import MetaboliteConsistent
-#from .MetaboliteDiscovery import MetaboliteDiscovery
+from .MetaboliteDiscovery import MetaboliteDiscovery

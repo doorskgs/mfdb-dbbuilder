@@ -1,5 +1,4 @@
-from edb_handlers import EDB_SOURCES, EDB_SOURCES_OTHER
-from metcore.mapping import COMMON_ATTRIBUTES
+from edb_handlers import EDB_SOURCES, EDB_SOURCES_OTHER, COMMON_ATTRIBUTES
 from metcore.parsinglib import MultiDict
 
 

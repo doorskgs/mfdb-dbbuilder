@@ -3,28 +3,31 @@ import os
 from pipebro import pipe_builder
 from pipebro.ProcessImpl import DBSaver as LocalEDBSaver
 
-from .HMDBParser import HMDBParser
 
 from edb_builder.dtypes import MetaboliteExternal, SecondaryID
-from edb_builder.process.fileformats.XMLFastParser import XMLFastParser
+from edb_builder.process.fileformats.SDFParser import SDFParser
 from edb_builder.utils import downloads, PIPECFG_PATH
 
+from .LipidmapsParser import LipidMapsParser
+
 DUMP_DIR = 'db_dumps/'
-BULK_URL = 'https://hmdb.ca/system/downloads/current/hmdb_metabolites.zip'
-BULK_FILE = os.path.join(DUMP_DIR, 'hmdb_metabolites.xml')
+BULK_URL = 'https://www.lipidmaps.org/files/?file=LMSD&ext=sdf.zip'
+BULK_FILE = os.path.join(DUMP_DIR, 'lipidmaps.sdf')
 
 
 def build_pipe(conn):
 
     if not os.path.exists(BULK_FILE):
-        bulk_zip = os.path.join(DUMP_DIR, os.path.basename(BULK_URL))
+        bulk_zip = os.path.join(DUMP_DIR, 'LMSD.sdf.zip')
 
         if not os.path.exists(bulk_zip):
             # download file first
-            print(f"Downloading HMDB dump file...")
+            print(f"Downloading Lipidmaps dump file...")
             downloads.download_file(BULK_URL, bulk_zip)
 
         downloads.uncompress_hierarchy(bulk_zip)
+        os.rename(os.path.join(DUMP_DIR, 'structures.sdf'), BULK_FILE)
+
         os.unlink(bulk_zip)
 
     with pipe_builder() as pb:
@@ -32,9 +35,9 @@ def build_pipe(conn):
         pb.set_runner('serial')
 
         pb.add_processes([
-            XMLFastParser("xml_hmdb", consumes="hmdb_dump", produces="raw_hmdb"),
+            SDFParser("sdf_lipmaps", consumes="lipmaps_dump", produces="raw_lipmaps"),
 
-            HMDBParser("parse_hmdb", consumes="raw_hmdb", produces=("edb_dump", "2nd_id")),
+            LipidMapsParser("parse_lipmaps", consumes="raw_lipmaps", produces="edb_dump"),
         ], cfg_path=os.path.dirname(__file__))
 
         pb.add_processes([
@@ -42,14 +45,9 @@ def build_pipe(conn):
             # CSVSaver("edb_csv", consumes=(MetaboliteExternal, "edb_dump")),
             # Debug("debug_names", consumes=(MetaboliteExternal, "edb_dump")),
             LocalEDBSaver("db_dump", consumes=(MetaboliteExternal, "edb_dump"), table_name='edb_tmp', conn=conn),
-
-            # - Secondary IDs -
-            #CSVSaver("2nd_csv", consumes=(SecondaryID, "2nd_id")),
-            LocalEDBSaver("2nd_dump", consumes=(SecondaryID, "2nd_id"), table_name='secondary_id', conn=conn),
         ], cfg_path=PIPECFG_PATH)
-
         app = pb.build_app()
 
-    app.start_flow(BULK_FILE, (str, "hmdb_dump"))
+    app.start_flow(BULK_FILE, (str, "lipmaps_dump"), debug=False, verbose=False)
 
     return app

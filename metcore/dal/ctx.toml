@@ -1,0 +1,12 @@
+[db]
+dbhandler = 'postgresql'
+
+[sqlite]
+dsn = 'sqlite:///mfdb_discovery.db'
+
+[postgresql]
+dsn = 'postgres://postgres:postgres@localhost/mfdb'
+pool_size = [10, 10]
+single_connection = false
+max_cached_statement_lifetime = 0
+statement_cache_size = 0 #300
