@@ -1,6 +1,5 @@
-# from .edb_formatting import depad_id
-# from .views.MetaboliteConsistent import MetaboliteConsistent
-# from .views.MetaboliteDiscovery import MetaboliteDiscovery
+from metcore.parsinglib import depad_id
+from metcore.views import MetaboliteConsistent, MetaboliteDiscovery
 
 
 def get_mdb_id(mdb: dict | MetaboliteDiscovery | MetaboliteConsistent, level=3):

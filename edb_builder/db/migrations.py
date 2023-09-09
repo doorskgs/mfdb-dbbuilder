@@ -199,5 +199,10 @@ def copy_database(*args, close=True, clean_tmp=True, debug=True, **kwargs):
         conn.close()
 
 
+def clear_database():
+    pass
+    #execute(cur, delete_table("mdb"), debug=debug)
+
+
 if __name__ == "__main__":
     migrate_db()

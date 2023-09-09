@@ -26,7 +26,6 @@ def get_inequal_attributes(disco_group, attr_to_validate_on):
     #         yield attr
 
 
-
 def iter_sol(meta, attr):
     v = meta.get(attr)
 

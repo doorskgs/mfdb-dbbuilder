@@ -107,8 +107,7 @@ class DiscoveryAlg:
             found_new = True
         return found_new
 
-    def enqueue(self, edb_ref: EDB_REF, edb_src: EDB_REF):
-
+    def enqueue(self, edb_ref: EDB_REF, edb_src: str | EDB_REF):
         if not edb_ref not in self.discoverable_attributes:
             # unsupported EDB source, no need to enqueue because it can't be resolved by the manager
             self.undiscovered.add((edb_ref, edb_src))

@@ -8,7 +8,7 @@ from .DiscoveryAlg import DiscoveryAlg
 from .DiscoveryOptions import DiscoveryOptions
 
 
-def build_discovery(cfg: str | dict | SettingWrapper = None, verbose = False) -> DiscoveryAlg:
+def build_discovery(cfg: str | dict | SettingWrapper = None, verbose=False) -> DiscoveryAlg:
     if isinstance(cfg, str):
         _, ext = os.path.splitext(cfg)
         if ext == '.toml':

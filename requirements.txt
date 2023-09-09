@@ -6,6 +6,10 @@ psycopg2~=2.9
 aiohttp~=3.8
 asyncpg~=0.27
 
+# Dal
+sqlalchemy==2.0.20
+
+# Data formats
 lxml~=4.9
 
 playsound~=1.3

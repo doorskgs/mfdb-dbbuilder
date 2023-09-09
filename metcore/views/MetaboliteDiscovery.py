@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
 
-#from ..consistency import get_discovery_attribute_consistencies, ConsistencyClass
-from ..edb_formatting.structs import repr_set, AlmostEqualSet, TrimSet, MultiDict
-from ..edb_formatting import strip_attr, pad_id
-#from eme.mapper import map_to
-
+from mdb_builder.discovery.consistency import get_discovery_attribute_consistencies, \
+    ConsistencyClass
+from ..parsinglib import strip_attr, pad_id
+from ..parsinglib.structs import repr_set, AlmostEqualSet, TrimSet, MultiDict
+from .. import mercy
 
 
 @dataclass
@@ -47,7 +47,7 @@ class MetaboliteDiscovery:
                 getattr(self, attr).update(getattr(other, attr))
         else:
             # try to map obj to MetaboliteDiscovery and then merge
-            mapped_obj = map_to(other, cls_dest=MetaboliteDiscovery)
+            mapped_obj = mercy.map_to(other, cls_dest=MetaboliteDiscovery)
             return self.merge(mapped_obj)
 
     def to_dict(self):
