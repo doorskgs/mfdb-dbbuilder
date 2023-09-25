@@ -4,9 +4,9 @@ from io import StringIO, BytesIO
 
 from lxml import etree
 
-from .ApiClientBase import ApiClientBase
-from ..edb_formatting import pad_id, preprocess, remap_keys, map_to_edb_format, replace_obvious_hmdb_id, MultiDict
-from ..views.MetaboliteConsistent import MetaboliteConsistent
+from edb_handlers.core.ApiClientBase import ApiClientBase
+from metcore.parsinglib import pad_id, map_to_edb_format, preprocess, remap_keys, MultiDict
+from metcore.views import MetaboliteConsistent
 
 
 class HMDBClient(ApiClientBase):

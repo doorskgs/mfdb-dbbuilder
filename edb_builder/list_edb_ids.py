@@ -1,9 +1,6 @@
 import os
 import sys
 
-from eme.entities import load_settings
-
-from edb_builder.db import connect_db, disconnect_db
 
 db_source = sys.argv[1]
 

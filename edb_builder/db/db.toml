@@ -1,9 +1,0 @@
-[dbconn]
-host = 'localhost'
-user = 'postgres'
-password = 'postgres'
-
-database = 'mfdb'
-
-[db]
-autocommit = 'no'

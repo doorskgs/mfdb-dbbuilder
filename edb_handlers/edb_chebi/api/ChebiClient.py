@@ -1,17 +1,19 @@
+import os.path
 from io import BytesIO
 from lxml import etree
 
 import requests
 
-from .ApiClientBase import ApiClientBase
-from ..attributes import EDB_SOURCES_OTHER, EDB_SOURCES
-from ..edb_formatting import pad_id, MultiDict, remap_keys, preprocess, map_to_edb_format, split_pubchem_ids
-from ..views.MetaboliteConsistent import MetaboliteConsistent
-from ..views.MetaboliteDiscovery import MetaboliteDiscovery
+from edb_handlers.core.ApiClientBase import ApiClientBase
+from edb_handlers.edb_pubchem.parselib import split_pubchem_ids
 
+from metcore.parsinglib import pad_id, MultiDict, remap_keys, preprocess, map_to_edb_format
+from metcore.views import MetaboliteConsistent
 
 
 class ChebiClient(ApiClientBase):
+    MAPPING_FILE = os.path.join(os.path.dirname(__file__), '..', 'mapping.toml')
+
     _reverse = (
         'pubchem_id', 'kegg_id', 'hmdb_id', 'lipmaps_id',
     )

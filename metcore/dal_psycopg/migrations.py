@@ -2,8 +2,8 @@ import os
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
+from edb_builder.dtypes import MetaboliteExternal
 
-from ..dtypes import MetaboliteExternal
 from .provision import check_db_counts
 
 _p = os.path.dirname(__file__)
@@ -114,9 +114,13 @@ def execute(cur, sql, debug=False):
 
 
 def create_db(**kwargs):
-    db_name = kwargs.pop('database')
+    if 'database' in kwargs:
+        db_name = kwargs.pop('database')
+    elif 'dsn' in kwargs:
+        db_name = kwargs.get('dsn').split('/')[-1]
+        kwargs['dsn'] = kwargs['dsn'].removesuffix(f'/{db_name}')
     conn = psycopg2.connect(**kwargs)
-    conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT);
+    conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
     cur = conn.cursor()
 

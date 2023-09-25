@@ -4,8 +4,12 @@ import sys
 import argparse
 import csv
 
+import toml
+
+from metcore.dal_psycopg import db
 from mdb_builder.discovery.config import build_discovery
 from mdb_builder.discovery import consistency as cons
+from pipebro import SettingWrapper
 
 
 async def discovery(edb_tuples, config=None, file=None, csv_kwargs=None, verbose=None):
@@ -63,7 +67,13 @@ async def main():
     parser.add_argument('--verbose', type=bool)
     parser.add_argument('edb_tuples', nargs='*', type=str)
 
-    args = parser.parse_args(sys.argv)
+    args = parser.parse_args(sys.argv[1:])
+
+    # TODO: refactor DB to where?
+    # todo: auto-migrate DB if needed
+    dbcfg = SettingWrapper(toml.load(os.path.dirname(__file__) + '/../../db.toml'))
+    conn = db.try_connect(dbcfg)
+    db.disconnect_db(conn)
 
     await discovery(**vars(args))
 

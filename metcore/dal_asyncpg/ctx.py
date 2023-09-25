@@ -7,7 +7,7 @@ from .. import srv
 
 Repository, get_repo = srv.declare_service_type('Repo', 'T')
 
-config = toml.load(os.path.dirname(__file__)+"/ctx.ini")
+dbcfg = toml.load(os.path.dirname(__file__)+"/../../db.toml")
 
 single_connection = True
 pool: asyncpg.Pool | None = None
@@ -34,21 +34,25 @@ async def initialize_db(pool_size=None):
         # already initialized
         return
 
-    db = config['db']['dbhandler']
+    dbopts = dbcfg['driver_asyncpg']
+    conncfg = dbcfg[f'conn_{dbcfg["db"]["conn"]}']
 
-    min_size, max_size = pool_size or config[db].get('pool_size') or (10, 10)
-    single_connection = config[db].get('single_connection', True)
+    if 'dsn' not in conncfg:
+        conncfg['dsn'] = f'{dbcfg.get("db.conn")}://{conncfg.pop("username")}:{conncfg.pop("password")}@{conncfg.pop("host")}/{conncfg.pop("database")}'
+
+    min_size, max_size = pool_size or dbopts.get('pool_size') or (10, 10)
+    single_connection = dbopts.get('single_connection', True)
 
     pool = await asyncpg.create_pool(
-        config[db]['dsn'],
+        **conncfg,
         min_size=min_size,
         max_size=max_size,
-        max_queries=config[db].get('max_queries', default=50000),
-        max_inactive_connection_lifetime=config[db].get('max_inactive_connection_lifetime', default=300.0),
+        max_queries=dbopts.get('max_queries', 50000),
+        max_inactive_connection_lifetime=dbopts.get('max_inactive_connection_lifetime', 300.0),
 
         # conn kwargs
-        max_cached_statement_lifetime=config[db].get('max_cached_statement_lifetime', default=0),
-        statement_cache_size=config[db].get('statement_cache_size', default=100),
+        max_cached_statement_lifetime=dbopts.get('max_cached_statement_lifetime', 0),
+        statement_cache_size=dbopts.get('statement_cache_size', 100),
         init=setup_conn,
 
         server_settings={

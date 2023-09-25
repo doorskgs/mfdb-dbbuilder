@@ -1,8 +1,7 @@
 from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy import Column, String
 
 from .sqlbase import EntityBase
-
-from sqlalchemy import Column, String
 
 
 class SecondaryID(EntityBase):

@@ -1,0 +1,21 @@
+[db]
+autocommit = 'no'
+conn = 'postgresql'
+
+[driver_asyncpg]
+pool_size = [10, 10]
+single_connection = false
+max_cached_statement_lifetime = 0
+statement_cache_size = 0 #300
+
+[driver_psycopg]
+
+[driver_sqlalchemy]
+
+[driver_sqlite]
+
+[conn_postgresql]
+dsn = 'postgres://postgres:postgres@localhost/mfdb'
+
+[conn_sqlite]
+dsn = 'sqlite:///mfdb_discovery.db'

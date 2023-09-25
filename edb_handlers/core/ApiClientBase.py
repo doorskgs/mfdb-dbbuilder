@@ -1,24 +1,24 @@
+import toml
 import os.path
 from abc import ABCMeta, abstractmethod
 
-from eme.entities import load_settings
-
-from ..views.MetaboliteConsistent import MetaboliteConsistent
+from metcore.views import MetaboliteConsistent
+from pipebro import SettingWrapper
 
 
 class ApiClientBase(metaclass=ABCMeta):
+    MAPPING_FILE: str = None
 
     _mapping: dict
     _reverse: tuple | set
     _important_attr: set
 
     def load_mapping(self, edb_source):
-        # load ini mapping files
-        mapping_file = os.path.join(os.path.dirname(__file__), '..','mapping','content', edb_source+'.ini')
+        # load mapping files
+        s = SettingWrapper(toml.load(self.MAPPING_FILE))
 
-        s = load_settings(mapping_file)
         self._mapping = s['attribute_mapping']
-        self._important_attr = s.get('attributes.'+edb_source+'_attr_etc', default=set(), cast=set)
+        self._important_attr = set(s.get('attributes', {}).get(f'{edb_source}_attr_etc', []))
 
         return s
 

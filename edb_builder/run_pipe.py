@@ -3,10 +3,9 @@ import os
 import sys
 from importlib import import_module
 
-import psycopg2
 import toml
 
-from edb_builder.db import db
+from metcore.dal_psycopg import db
 from edb_builder.utils import (
     dingdingding
 )
@@ -16,7 +15,7 @@ from pipebro import SettingWrapper
 def run_pipe(module_name, *, clear_db=False, mute=False, debug=False, verbose=False, stdout=None):
     m = import_module(module_name)
 
-    dbcfg = SettingWrapper(toml.load(os.path.dirname(__file__) + '/db/db.toml'))
+    dbcfg = SettingWrapper(toml.load(os.path.dirname(__file__) + '/../db.toml'))
     conn = db.try_connect(dbcfg)
 
     if clear_db:

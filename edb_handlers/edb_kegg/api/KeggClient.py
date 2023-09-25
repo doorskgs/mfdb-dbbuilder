@@ -1,10 +1,10 @@
 import requests
 
-from .ApiClientBase import ApiClientBase
-from .api_parsers.keggparser import parse_kegg
-from ..attributes import EDB_SOURCES, EDB_SOURCES_OTHER
-from ..edb_formatting import pad_id, remap_keys, preprocess, map_to_edb_format
-from ..views.MetaboliteConsistent import MetaboliteConsistent
+from edb_handlers import EDB_SOURCES, EDB_SOURCES_OTHER
+from edb_handlers.core.ApiClientBase import ApiClientBase
+from edb_handlers.edb_kegg.ddb.parselib import parse_kegg
+from metcore.parsinglib import pad_id, remap_keys, preprocess, map_to_edb_format
+from metcore.views import MetaboliteConsistent
 
 
 class KeggClient(ApiClientBase):
@@ -19,7 +19,7 @@ class KeggClient(ApiClientBase):
         super().__init__()
 
         self.load_mapping('kegg')
-        self._mapping.update((edb_tag, edb_tag+'_id') for edb_tag in (EDB_SOURCES|EDB_SOURCES_OTHER))
+        self._mapping.update((edb_tag, edb_tag+'_id') for edb_tag in (EDB_SOURCES | EDB_SOURCES_OTHER))
 
 
     async def fetch_api(self, edb_id):

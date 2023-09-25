@@ -1,4 +1,4 @@
-from .ApiClientBase import ApiClientBase
+from edb_handlers.core.ApiClientBase import ApiClientBase
 
 
 class SwisslipidsClient(ApiClientBase):

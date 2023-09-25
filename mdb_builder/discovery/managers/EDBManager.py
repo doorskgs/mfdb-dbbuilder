@@ -1,21 +1,18 @@
 import time
+from importlib import import_module
 
-from edb_handlers.edb_hmdb.dbb.parselib import replace_obvious_hmdb_id
+from metcore.parsinglib import pad_id
 from metcore.views import MetaboliteConsistent
 
+from metcore.dal_asyncpg import get_repo, initialize_db
+from metcore.dal_asyncpg.repositories.EDBRepository import EDBRepository
+from metcore.dal_asyncpg.repositories.SecondaryIDRepository import SecondaryIDRepository
 
-# from ..apihandlers.ApiClientBase import ApiClientBase
-# from ..apihandlers.ChebiClient import ChebiClient
-# from ..apihandlers.KeggClient import KeggClient
-# from ..apihandlers.PubchemClient import PubchemClient
-# from ..apihandlers.HMDBClient import HMDBClient
-# from ..apihandlers.LipidmapsClient import LipidmapsClient
-# from ..dal import initialize_db, get_repo, EDBRepository, SecondaryIDRepository
-#
-# from ..edb_formatting import pad_id, depad_id, replace_obvious_hmdb_id
-# from ..views.MetaboliteConsistent import MetaboliteConsistent
-# from ..views.MetaboliteDiscovery import MetaboliteDiscovery
-# from ..views.SecondaryID import SecondaryID
+from edb_builder.dtypes import SecondaryID
+
+from edb_handlers.core.ApiClientBase import ApiClientBase
+from edb_handlers import EDB_SOURCES
+from edb_handlers.edb_hmdb.dbb.parselib import replace_obvious_hmdb_id
 
 
 class EDBManager:
@@ -26,12 +23,17 @@ class EDBManager:
         :param secondary_ids:
         """
         self.apis: dict[str, ApiClientBase] = {
-            'chebi': ChebiClient(),
-            'kegg': KeggClient(),
-            'pubchem': PubchemClient(),
-            'hmdb': HMDBClient(),
-            'lipmaps': LipidmapsClient()
+            # 'chebi': ChebiClient(),
+            # 'kegg': KeggClient(),
+            # 'pubchem': PubchemClient(),
+            # 'hmdb': HMDBClient(),
+            # 'lipmaps': LipidmapsClient()
         }
+
+        # dynamically import Api Client from each EDB Source
+        for EDB_SOURCE in EDB_SOURCES:
+            m = import_module(f'edb_handlers.edb_{EDB_SOURCE}.api')
+            self.apis[EDB_SOURCE] = m.client
 
         self.repo_edb: EDBRepository = get_repo(MetaboliteConsistent)
         self.repo_2nd: SecondaryIDRepository = get_repo(SecondaryID)

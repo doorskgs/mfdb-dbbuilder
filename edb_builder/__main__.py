@@ -1,11 +1,10 @@
-import asyncio
 import os
 import sys
 from multiprocessing import Process
 
 import toml
 
-from edb_builder.db import db, migrations
+from metcore.dal_psycopg import db, migrations
 from edb_builder.run_pipe import run_pipe
 from edb_builder.utils.ding import dingdingding
 from edb_handlers import EDB_SOURCES
@@ -26,7 +25,7 @@ if __name__ == "__main__":
     allowed_dbs = set(sys.argv[1:])
     needs_allow = {'pubchem', 'kegg'}
 
-    dbcfg = SettingWrapper(toml.load(os.path.dirname(__file__) + '/db/db.toml'))
+    dbcfg = SettingWrapper(toml.load(os.path.dirname(__file__) + '/../db.toml'))
     conn = db.try_connect(dbcfg)
     db.clear_database(conn)
     db.disconnect_db(conn)

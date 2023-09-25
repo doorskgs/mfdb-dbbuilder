@@ -1,8 +1,8 @@
 import asyncpg
 
+from edb_builder.dtypes import SecondaryID
 from ..ctx import Repository
 from .RepositoryBase import RepositoryBase
-from ...dal_sqlalchemy.entities import SecondaryID
 
 
 @Repository(SecondaryID)

@@ -2,10 +2,11 @@ from collections import defaultdict
 
 import requests
 
-from .ApiClientBase import ApiClientBase
-from .api_parsers.pubchemparser import parse_pubchem
-from ..edb_formatting import preprocess, map_to_edb_format, remap_keys
-from ..views.MetaboliteConsistent import MetaboliteConsistent
+from edb_handlers.core.ApiClientBase import ApiClientBase
+from edb_handlers.edb_pubchem.parselib import parse_pubchem
+
+from metcore.parsinglib import remap_keys, preprocess, map_to_edb_format
+from metcore.views import MetaboliteConsistent
 
 
 class PubchemClient(ApiClientBase):
