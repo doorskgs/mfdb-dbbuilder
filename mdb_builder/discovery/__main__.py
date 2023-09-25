@@ -39,6 +39,8 @@ async def discovery(edb_tuples, config=None, file=None, csv_kwargs=None, verbose
         raise NotImplementedError("Only single row of EDB entry is implemented.")
 
     disco = build_discovery(config, verbose=verbose)
+    disco.log_level = 'DEBUG'
+    disco.log_file = f'../../discover_{edb_tuples[0][0]}_{edb_tuples[0][1]}.log'
 
     await disco.mgr.initialize()
     meta = disco.add_scalar_input(*edb_tuples[0])

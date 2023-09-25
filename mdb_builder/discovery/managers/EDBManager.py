@@ -1,3 +1,4 @@
+import logging
 import time
 from importlib import import_module
 
@@ -13,6 +14,8 @@ from edb_builder.dtypes import SecondaryID
 from edb_handlers.core.ApiClientBase import ApiClientBase
 from edb_handlers import EDB_SOURCES
 from edb_handlers.edb_hmdb.dbb.parselib import replace_obvious_hmdb_id
+
+logger = logging.getLogger('disco')
 
 
 class EDBManager:
@@ -33,7 +36,8 @@ class EDBManager:
         # dynamically import Api Client from each EDB Source
         for EDB_SOURCE in EDB_SOURCES:
             m = import_module(f'edb_handlers.edb_{EDB_SOURCE}.api')
-            self.apis[EDB_SOURCE] = m.client
+            self.apis[EDB_SOURCE] = m.client()
+            logger.debug(f"Adding API client for {EDB_SOURCE} ({m.client})")
 
         self.repo_edb: EDBRepository = get_repo(MetaboliteConsistent)
         self.repo_2nd: SecondaryIDRepository = get_repo(SecondaryID)
@@ -61,25 +65,46 @@ class EDBManager:
         edb_source = edb_tag.removesuffix('_id')
         opts = self.opts.get_opts(edb_source)
 
+        logger.debug(f"GET: {edb_source}[{edb_id}]")
+
         if edb_source == 'hmdb':
             # pad hmdb id with 00, so that obvious secondary IDs are also found in DB
             #       (both formats are guaranteed for api fetch)
+            logger.debug(f"Secondary ID {edb_source}[{edb_id}] -> (HMDB obvious 00 padding)")
             edb_id = replace_obvious_hmdb_id(edb_id)
 
         if opts.cache_enabled:
             # find by edb table
             edb_records = await self.repo_edb.get_by(edb_source, edb_id)
 
+            if edb_records:
+                logger.debug(f"Cache hit: {edb_source}[{edb_id}]")
+
         if not edb_records:
+            # todo: make option to turn secondary ID resolve off
+            #       -- this can optimize discoveries that dont rely on bulk filled cache
             # find primary ID from secondary id
-            if edb_id := await self.resolve_secondary_id(edb_source, edb_id):
+            if edb_id_2nd := await self.resolve_secondary_id(edb_source, edb_id):
+                logger.debug(f"Secondary ID {edb_source}[{edb_id}] -> {edb_source}[{edb_id_2nd}]")
+
                 # query again
                 edb_records = await self.repo_edb.get_by(edb_source, edb_id)
 
-        if not edb_records and opts.api_enabled:
-            edb_record = await self.fetch_api(edb_source, edb_id, save_in_cache=opts.cache_upsert)
-            if edb_record:
-                edb_records = [edb_record]
+                if not edb_records:
+                    logger.debug(f"Secondary ID {edb_source}[{edb_id}] -> {edb_source}[{edb_id_2nd}] was not cached in EDB table!")
+
+        if not edb_records:
+            if opts.api_enabled:
+                if edb_record := await self.fetch_api(edb_source, edb_id, save_in_cache=opts.cache_upsert):
+                    #logger.debug(f"API response for {edb_source}[{edb_id}]: {edb_record}")
+                    edb_records = [edb_record]
+            else:
+                logger.warning(f"Record {edb_source}[{edb_id}] was not cached in bulk EDB database, "
+                               f"and API fetching is disabled for {edb_source}."
+                               f"You sould enable API fetching in options")
+
+        if not edb_records:
+            logger.debug(f"GET: {edb_source}[{edb_id}] failed")
 
         return edb_records
 
@@ -94,8 +119,10 @@ class EDBManager:
         now = time.time()
 
         edb_id_padded = pad_id(edb_id, edb_tag)
-        print(f"  Fetching {edb_tag} API: {edb_id_padded} - {now-self.t1}")
+
+        logger.info(f"Fetching API: {edb_tag}[{edb_id_padded}]")
         edb_record: MetaboliteConsistent = await self.apis[edb_tag].fetch_api(edb_id_padded)
+        logger.debug(f"Fetching API: {edb_tag}[{edb_id_padded}] took {(time.time())-now}")
 
         self.t1 = now
 
@@ -105,9 +132,15 @@ class EDBManager:
         # edb_record.edb_id = edb_id
         # edb_record.edb_source = edb_tag.removesuffix('_id')
 
-        if edb_record and save_in_cache:
-            # cache api results to table
-            await self.repo_edb.create(edb_record)
+        if edb_record:
+            if save_in_cache:
+                logger.debug(f"Caching API result in: {edb_tag}[{edb_id}]")
+                # cache api results to table
+
+                # TODO: $ITT: implement repo create
+                await self.repo_edb.create(edb_record)
+        else:
+            logger.info(f"API 404 for {edb_tag}[{edb_id}]")
 
         return edb_record
 
@@ -121,7 +154,7 @@ class EDBManager:
         primary_id = await self.repo_2nd.get_primary_id(edb_source, edb_id)
 
         if not primary_id:
-            return edb_id
+            return None
         else:
             edb_tag = edb_source + '_id'
             self.secondary_ids.add((edb_tag, edb_id))

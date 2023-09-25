@@ -3,6 +3,12 @@ tags = ['api', 'mapping']
 
 [attribute_mapping]
 pubchem_attr_etc = ['logp']
+"iupac name" = 'names'
+"molecular formula" = 'formula'
+"molecular weight" = 'mass'
+"mass" = 'mi_mass'
+"log p" = 'logp'
+
 
 [important_attr]
 #InChIKey = inchikey,sval
@@ -12,5 +18,5 @@ pubchem_attr_etc = ['logp']
 "Molecular Formula" = ['formula','sval']
 
 "Molecular Weight" = ['mass','fval']
-Mass = ['mi_mass','fval']
+"Mass" = ['mi_mass','fval']
 "Log P" = ['logp','fval']

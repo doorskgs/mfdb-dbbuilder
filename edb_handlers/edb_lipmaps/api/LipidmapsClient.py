@@ -1,3 +1,4 @@
+import os
 import requests
 
 from edb_handlers.core.ApiClientBase import ApiClientBase
@@ -5,6 +6,8 @@ from metcore.parsinglib import pad_id
 
 
 class LipidmapsClient(ApiClientBase):
+    MAPPING_FILE = os.path.join(os.path.dirname(__file__), '..', 'mapping.toml')
+
     def __init__(self):
         super().__init__()
 

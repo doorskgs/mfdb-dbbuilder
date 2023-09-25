@@ -6,12 +6,16 @@ from metcore.parsinglib import depad_id, pad_id
 from metcore.views import MetaboliteConsistent, MetaboliteDiscovery
 from metcore.mercy import map_to
 
-
 from .managers.EDBManager import EDBManager
 from .managers.OptionsManager import OptionsManager
 
 EDB_REF = tuple[str, str]
 QUEUE_ITEM = tuple[EDB_REF, EDB_REF]
+
+from .logger import init_logging
+from logging import getLogger
+
+logger = getLogger("disco")
 
 
 class DiscoveryAlg:
@@ -42,7 +46,8 @@ class DiscoveryAlg:
 
     def __init__(self):
         # Discovery options defined for each EDB source
-        self.verbose = False
+        self.log_level = 'DEBUG'
+        self.log_file = None
         self.discoverable_attributes: set[str] = set()
 
         # Data sets and state variables used for the algorithm
@@ -65,21 +70,30 @@ class DiscoveryAlg:
         Using a queue,
         :return:
         """
+        init_logging(self.log_level, self.log_file)
+        logger.info('Starting discovery.')
+        logger.debug("Settings:" +
+        f"Discoverable attributes: {', '.join(self.discoverable_attributes)}" +
+        f"EDB apis: {', '.join(self.mgr.apis.keys())}" +
+        f"EDB cache: @TODO..." +
+        "\n".join(map(str, self.opts.opts.values())))
 
         while not self.Q.empty():
             edb_ref, edb_src = self.Q.get()
 
             # Query metabolite record from local database or web api
-            if self.verbose:
-                print(f"  {edb_src[0]}[{edb_src[1]}] -> {edb_ref[0]}[{edb_ref[1]}]")
+            logger.debug(f"{edb_src[0]}[{edb_src[1]}] -> {edb_ref[0]}[{edb_ref[1]}]")
 
             # todo: @ITT: BUG edb_id is the SOURCE id not the explorable one!!!!!
             edb_records = await self.mgr.get_metabolite(*edb_ref)
 
             if not edb_records:
+                logger.debug(f'[UNDISCOVERED] Manager returned None for EDB ref: {edb_ref[0]}[{edb_ref[1]}]')
+
                 self.undiscovered.add((edb_ref, edb_src))
                 continue
 
+            logger.info(f"[DISCOVERED] {edb_src[0]}[{edb_src[1]}] -> {edb_ref[0]}[{edb_ref[1]}]")
             self.discovered.add(edb_ref)
 
             for edb_record in edb_records:
@@ -103,19 +117,28 @@ class DiscoveryAlg:
 
         # find novel EDB IDs and attribute references within this view
         for edb_new in self.iter_discoverable(edb_record):
+            logger.debug(f'Found novel ID: {edb_ref[0]}[{edb_ref[1]}] from {edb_record}')
+
             self.enqueue(edb_new, edb_ref)
             found_new = True
+
         return found_new
 
     def enqueue(self, edb_ref: EDB_REF, edb_src: str | EDB_REF):
+
         if not edb_ref not in self.discoverable_attributes:
+            logger.debug(f'[UNDISCOVERED] Attribute {edb_ref[0]} is not discoverable by config: {edb_ref[0]}[{edb_ref[1]}]')
+
             # unsupported EDB source, no need to enqueue because it can't be resolved by the manager
             self.undiscovered.add((edb_ref, edb_src))
             return False
         elif edb_ref not in self.been_in_queue and edb_ref != edb_src:
+            logger.debug(f'Enqueue: {edb_src[0]}[{edb_src[1]}] -> {edb_ref[0]}[{edb_ref[1]}]')
+
             # enqueue for exploration, but only if it hasn't occurred before
             self.Q.put((edb_ref, edb_src))
             self.been_in_queue.add(edb_ref)
+
         return True
 
     def add_input(self, meta: MetaboliteDiscovery | MetaboliteConsistent, edb_source: EDBSource = None):
@@ -136,7 +159,7 @@ class DiscoveryAlg:
         elif isinstance(meta, MetaboliteConsistent):
             self.meta = map_to(meta, MetaboliteDiscovery)
         else:
-            raise ValueError()
+            raise TypeError(str(type(meta)))
 
         return self.meta
 
@@ -184,8 +207,7 @@ class DiscoveryAlg:
         # todo: @later: clear and return an object representing all the data
         #self.clear()
 
-        if self.verbose:
-            print("\nDiscovery finished!\n---------------------------------\n")
+        logger.info("Discovery finished!\n--------------------------------------")
 
     def clear(self):
         self.Q = queue.Queue()

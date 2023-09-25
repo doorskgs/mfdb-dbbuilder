@@ -1,13 +1,16 @@
+import os.path
 import requests
 
 from edb_handlers import EDB_SOURCES, EDB_SOURCES_OTHER
 from edb_handlers.core.ApiClientBase import ApiClientBase
-from edb_handlers.edb_kegg.ddb.parselib import parse_kegg
+from edb_handlers.edb_kegg.dbb.parselib import parse_kegg
 from metcore.parsinglib import pad_id, remap_keys, preprocess, map_to_edb_format
 from metcore.views import MetaboliteConsistent
 
 
 class KeggClient(ApiClientBase):
+    MAPPING_FILE = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', 'dbb', 'parse_kegg.toml'))
+
     url_base = 'https://rest.kegg.jp/get/'
     _reverse = (
         'chebi_id',

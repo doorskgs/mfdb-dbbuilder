@@ -1,5 +1,6 @@
 import requests
 
+import os.path
 from io import StringIO, BytesIO
 
 from lxml import etree
@@ -10,12 +11,13 @@ from metcore.views import MetaboliteConsistent
 
 
 class HMDBClient(ApiClientBase):
+    MAPPING_FILE = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', 'dbb', 'parse_hmdb.toml'))
+
     _reverse = (
         'pubchem_id', 'kegg_id', 'chebi_id',
     )
 
     explore_children = {'secondary_accessions','synonyms'}
-
 
     def __init__(self):
         super().__init__()

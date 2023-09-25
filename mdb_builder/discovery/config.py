@@ -35,7 +35,9 @@ def build_discovery(cfg: str | dict | SettingWrapper = None, verbose=False) -> D
         else:
             raise NotImplementedError(f"{ext} files are not supported for config!")
     elif cfg is None:
-        cfg = _default_settings.copy()
+        raise NotImplementedError("Default config not yet implemented")
+        #cfg = _default_settings.copy()
+        # TODO: implement & use config's defaults
 
     if not isinstance(cfg, SettingWrapper):
         cfg = SettingWrapper(cfg)
@@ -51,17 +53,17 @@ def build_discovery(cfg: str | dict | SettingWrapper = None, verbose=False) -> D
         attr_name = attr if attr in COMMON_ATTRIBUTES else attr + '_id'
 
         # if cfg.get(f'{a
-        if cfg.get(f'{attr}.discoverable', cast=bool, default=False):
+        if cfg.get(f'{attr}.discoverable', cast=bool, default=cfg.get('default.discoverable', default=False)):
             _discoverable_attributes.add(attr_name)
 
     # Setup EDB options
     for edb_source in EDB_SOURCES:
         opts = disco.opts.opts[edb_source]
 
-        opts.api_enabled = cfg.get(f'{edb_source}.fetch_api', cast=bool, default=False)
-        opts.cache_enabled = cfg.get(f'{edb_source}.cache_enabled', cast=bool, default=False)
-        opts.cache_predump = cfg.get(f'{edb_source}.cache_prefilled', cast=bool)
-        opts.cache_upsert = cfg.get(f'{edb_source}.cache_api_result', cast=bool, default=opts.cache_enabled)
+        opts.api_enabled = cfg.get(f'{edb_source}.fetch_api', cast=bool, default=cfg.get('default.fetch_api', default=False))
+        opts.cache_enabled = cfg.get(f'{edb_source}.cache_enabled', cast=bool, default=cfg.get('default.cache_enabled', default=False))
+        opts.cache_predump = cfg.get(f'{edb_source}.cache_prefilled', cast=bool, default=cfg.get('default.cache_prefilled', default=False))
+        opts.cache_upsert = cfg.get(f'{edb_source}.cache_api_result', cast=bool, default=cfg.get('default.cache_api_result', default=opts.cache_enabled))
 
     # setup discovery
     disco.verbose = cfg.get('discovery.verbose', cast=bool, default=verbose)

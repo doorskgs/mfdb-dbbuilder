@@ -17,18 +17,19 @@ def parse_pubchem(edb_id, content, cont_refs, _mapping):
     data = MultiDict()
 
     # parse xrefs:
-    _links = cont_refs['InformationList']['Information'][0]['SBURL']
+    if cont_refs:
+        _links = cont_refs['InformationList']['Information'][0]['SBURL']
 
-    # guess xref IDs
-    for link in _links:
-        link = link.lower()
+        # guess xref IDs
+        for link in _links:
+            link = link.lower()
 
-        db_id, api_db_tag = get_id_from_url(link)
+            db_id, api_db_tag = get_id_from_url(link)
 
-        if db_id is None:
-            # unrecognized XREF
-            continue
-        data.append(api_db_tag+'_id', db_id)
+            if db_id is None:
+                # unrecognized XREF
+                continue
+            data.append(api_db_tag+'_id', db_id)
 
 
     _resp = content['PC_Compounds'][0]
