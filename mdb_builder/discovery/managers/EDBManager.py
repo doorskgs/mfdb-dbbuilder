@@ -138,7 +138,7 @@ class EDBManager:
                 # cache api results to table
 
                 # TODO: $ITT: implement repo create
-                await self.repo_edb.create(edb_record)
+                #await self.repo_edb.create(edb_record)
         else:
             logger.info(f"API 404 for {edb_tag}[{edb_id}]")
 

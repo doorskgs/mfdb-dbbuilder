@@ -5,6 +5,7 @@ from edb_handlers import EDBSource, is_edb
 from metcore.parsinglib import depad_id, pad_id
 from metcore.views import MetaboliteConsistent, MetaboliteDiscovery
 from metcore.mercy import map_to
+from ..mapping import * # noqa
 
 from .managers.EDBManager import EDBManager
 from .managers.OptionsManager import OptionsManager
@@ -117,7 +118,10 @@ class DiscoveryAlg:
 
         # find novel EDB IDs and attribute references within this view
         for edb_new in self.iter_discoverable(edb_record):
-            logger.debug(f'Found novel ID: {edb_ref[0]}[{edb_ref[1]}] from {edb_record}')
+            if edb_new == edb_ref:
+                continue
+
+            logger.debug(f'Found novel ID: {edb_new[0]}[{edb_new[1]}] from {edb_ref[0]}[{edb_ref[1]}]')
 
             self.enqueue(edb_new, edb_ref)
             found_new = True

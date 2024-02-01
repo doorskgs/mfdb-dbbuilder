@@ -7,8 +7,7 @@ import csv
 import toml
 
 from metcore.dal_psycopg import db
-from mdb_builder.discovery.config import build_discovery
-from mdb_builder.discovery import consistency as cons
+from mdb_builder.discovery import consistency as cons, build_discovery
 from pipebro import SettingWrapper
 
 

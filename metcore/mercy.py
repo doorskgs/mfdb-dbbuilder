@@ -20,7 +20,7 @@ def map_to(obj: object, cls_dest: type, cls_src: type= None):
     mapping: dict[str, str | Callable] = profiles_fn.get((cls_src, cls_dest))# profiles_fn.get((cls_dest, cls_src)))
 
     if mapping is None:
-        raise Exception(f"No mapping profile found for {cls_src}->{cls_dest}")
+        raise Exception(f"No mapping profile found for {cls_src}==>{cls_dest}")
 
     # todo: @later: use class.ForMember style chaining syntax to create mapping dict
     # todo: @later: inject args and kwargs of cls_targ when there's no default constructor? should be nice in python

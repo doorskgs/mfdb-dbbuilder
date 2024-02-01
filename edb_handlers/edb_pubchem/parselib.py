@@ -31,10 +31,9 @@ def parse_pubchem(edb_id, content, cont_refs, _mapping):
                 continue
             data.append(api_db_tag+'_id', db_id)
 
-
     _resp = content['PC_Compounds'][0]
     props = _resp.pop('props')
-    data.append('pubchem_id',  _resp['id']['id']['cid'])
+    data.append('pubchem_id', str(_resp['id']['id']['cid']))
 
     hat_geci = []
 

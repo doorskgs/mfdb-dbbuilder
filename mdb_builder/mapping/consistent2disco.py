@@ -1,7 +1,6 @@
+from metcore import mercy
 from metcore.parsinglib import force_flatten
 from metcore.views import MetaboliteConsistent, MetaboliteDiscovery
-
-from .. import mercy
 
 
 def trim_attr_mul(opt, dst):

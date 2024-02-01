@@ -36,17 +36,16 @@ class PubchemClient(ApiClientBase):
         r2 = requests.get(url=f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{edb_id}/xrefs/SBURL/json')
 
         xref_data = None
-        if r2.status_code == 404:
-            try:
-                xref_data = r2.json()
-            except:
-                pass
+        try:
+            xref_data = r2.json()
+        except:
+            pass
 
-        if r2.status_code != 200 and r2.status_code != 304:
-            if xref_data.get('Fault', {}).get('Code') != 'PUGREST.NotFound' and r2.status_code != 404:
-                return None
-            else:
+        if r2.status_code > 304:
+            if r2.status_code == 404 and xref_data.get('Fault', {}).get('Code') == 'PUGREST.NotFound':
                 xref_data = None
+            else:
+                return None
 
         # todo: remake this as it's shady
         data = parse_pubchem(edb_id, r.json(), xref_data, self._mapping)

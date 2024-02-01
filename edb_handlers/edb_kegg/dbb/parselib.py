@@ -22,6 +22,9 @@ def parse_kegg(stream):
 
     line: str
     for line in stream:
+        if isinstance(line, bytes):
+            line = line.decode('utf8')
+
         new_entry, state = parse_kegg_line(line, state, data)
 
         if new_entry:

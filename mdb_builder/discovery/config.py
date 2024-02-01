@@ -8,6 +8,10 @@ from .DiscoveryAlg import DiscoveryAlg
 from .DiscoveryOptions import DiscoveryOptions
 
 
+DISCOVERY_TURNED_OFF_BY_DEFAULT = COMMON_ATTRIBUTES.copy()
+DISCOVERY_TURNED_OFF_BY_DEFAULT.remove('inchikey')
+
+
 def build_discovery(cfg: str | dict | SettingWrapper = None, verbose=False) -> DiscoveryAlg:
     if isinstance(cfg, str):
         _, ext = os.path.splitext(cfg)
@@ -52,8 +56,17 @@ def build_discovery(cfg: str | dict | SettingWrapper = None, verbose=False) -> D
 
         attr_name = attr if attr in COMMON_ATTRIBUTES else attr + '_id'
 
-        # if cfg.get(f'{a
-        if cfg.get(f'{attr}.discoverable', cast=bool, default=cfg.get('default.discoverable', default=False)):
+        # by default all attributes are set to be discoverable
+        # but some for attributes matching doesn't make sense
+        # because there's too much redundancy or false positive hits
+        is_discoverable = cfg.get(f'{attr}.discoverable', cast=bool)
+        if is_discoverable is None:
+            if attr_name in DISCOVERY_TURNED_OFF_BY_DEFAULT:
+                is_discoverable = False
+            else:
+                is_discoverable = cfg.get('default.discoverable', default=False)
+
+        if is_discoverable:
             _discoverable_attributes.add(attr_name)
 
     # Setup EDB options
